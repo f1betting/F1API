@@ -376,7 +376,7 @@ def custom_openapi():
     openapi_schema = get_openapi(
         title="F1 API",
         version="1.0.0",
-        description="An easier way to use the [ergast.com]() F1 API, with correct types!",
+        description="An easier way to use the [ergast.com](https://ergast.com/mrd/) F1 API, with correct types!",
         routes=app.routes,
     )
 
