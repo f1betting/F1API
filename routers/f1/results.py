@@ -2,11 +2,11 @@ import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from classes.constructor_standing import ConstructorStanding, ConstructorStandings, ConstructorStandingsExample
-from classes.driver_standing import DriverStanding, DriverStandings, DriverStandingsExample
-from classes.message import Message
-from classes.qualifying_result import QualifyingResult, QualifyingResults, QualifyingResultExample
-from classes.race_result import RaceResult, RaceResults, RaceResultExample
+from classes.f1.constructor_standing import ConstructorStanding, ConstructorStandings, ConstructorStandingsExample
+from classes.f1.driver_standing import DriverStanding, DriverStandings, DriverStandingsExample
+from classes.general.message import Message
+from classes.f1.qualifying_result import QualifyingResult, QualifyingResults, QualifyingResultExample
+from classes.f1.race_result import RaceResult, RaceResults, RaceResultExample
 
 router = APIRouter(
     prefix="/results",

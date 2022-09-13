@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
-from classes.circuit import Circuit
-from classes.internal.session import Session
+from classes.f1.circuit import Circuit
+from classes.f1.internal.session import Session
 
 
 class Event(BaseModel):

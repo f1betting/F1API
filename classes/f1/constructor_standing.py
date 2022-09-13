@@ -1,6 +1,5 @@
 from pydantic import BaseModel
-from classes.constructor import Constructor
-from classes.driver import Driver
+from classes.f1.constructor import Constructor
 
 
 class ConstructorStanding(BaseModel):

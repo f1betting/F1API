@@ -1,6 +1,6 @@
 from pydantic import BaseModel
-from classes.internal.time import Time
-from classes.internal.average_speed import AverageSpeed
+from classes.f1.internal.time import Time
+from classes.f1.internal.average_speed import AverageSpeed
 
 
 class FastestLap(BaseModel):

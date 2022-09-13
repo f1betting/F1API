@@ -2,8 +2,8 @@ import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from classes.driver import Driver, Drivers, DriverExample
-from classes.message import Message
+from classes.f1.driver import Driver, Drivers, DriverExample
+from classes.general.message import Message
 
 router = APIRouter(
     tags=["Drivers"],

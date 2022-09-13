@@ -2,8 +2,8 @@ import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from classes.circuit import Circuit, Circuits, CircuitExample
-from classes.message import Message
+from classes.f1.circuit import Circuit, Circuits, CircuitExample
+from classes.general.message import Message
 
 router = APIRouter(
     tags=["Circuits"]

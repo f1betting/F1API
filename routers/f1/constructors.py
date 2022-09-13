@@ -2,8 +2,8 @@ import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from classes.constructor import Constructor, Constructors, ConstructorExample
-from classes.message import Message
+from classes.f1.constructor import Constructor, Constructors, ConstructorExample
+from classes.general.message import Message
 
 router = APIRouter(
     tags=["Constructors"],

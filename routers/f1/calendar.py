@@ -2,8 +2,8 @@ import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from classes.event import Event, Calendar, CalendarExample
-from classes.message import Message
+from classes.f1.event import Event, Calendar, CalendarExample
+from classes.general.message import Message
 
 router = APIRouter(
     prefix="/calendar",
