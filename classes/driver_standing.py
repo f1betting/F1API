@@ -1,9 +1,9 @@
 from pydantic import BaseModel
-from Classes.Constructor import Constructor
-from Classes.Driver import Driver
+from classes.constructor import Constructor
+from classes.driver import Driver
 
 
-class Standing(BaseModel):
+class DriverStanding(BaseModel):
     position: int
     positionText: str
     points: int
@@ -12,7 +12,7 @@ class Standing(BaseModel):
     Constructors: list[Constructor]
 
 
-StandingsExample = {
+DriverStandingsExample = {
     "position": 1,
     "positionText": "1",
     "points": 335,

@@ -1,6 +1,6 @@
 from pydantic import BaseModel
-from Classes.Constructor import Constructor
-from Classes.Driver import Driver
+from classes.constructor import Constructor
+from classes.driver import Driver
 
 
 class QualifyingResult(BaseModel):

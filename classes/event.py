@@ -1,6 +1,6 @@
 from pydantic import BaseModel
-from Classes.Circuit import Circuit
-from Classes.Internal.Session import Session
+from classes.circuit import Circuit
+from classes.internal.session import Session
 
 
 class Event(BaseModel):
