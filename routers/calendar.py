@@ -2,7 +2,7 @@ import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from classes.event import Event, CalendarExample
+from classes.event import Event, Calendar, CalendarExample
 from classes.message import Message
 
 router = APIRouter(
@@ -15,7 +15,7 @@ router = APIRouter(
 
 @router.get("/{season}",
             tags=["Season"],
-            response_model=list[Event],
+            response_model=Calendar,
             responses={
                 404: {"model": Message, "description": "Calendar not found"},
                 200: {"model": Event, "content": {

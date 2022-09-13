@@ -2,7 +2,7 @@ import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from classes.circuit import Circuit, CircuitExample
+from classes.circuit import Circuit, Circuits, CircuitExample
 from classes.message import Message
 
 router = APIRouter(
@@ -10,14 +10,11 @@ router = APIRouter(
 )
 
 
-# CALENDAR
-# https://ergast.com/mrd/methods/schedule/
-
 # CIRCUITS
 # https://ergast.com/mrd/methods/circuits/
 
 @router.get("/circuits",
-            response_model=list[Circuit],
+            response_model=Circuits,
             responses={
                 404: {"model": Message, "description": "Circuits not found"},
                 200: {"model": Circuit, "content": {
@@ -42,7 +39,7 @@ async def get_circuits():
 
 @router.get("/circuits/{season}",
             tags=["Season"],
-            response_model=list[Circuit],
+            response_model=Circuits,
             responses={
                 404: {"model": Message, "description": "Circuits not found"},
                 200: {"model": Circuit, "content": {

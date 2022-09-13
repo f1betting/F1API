@@ -2,7 +2,7 @@ import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from classes.driver import Driver, DriverExample
+from classes.driver import Driver, Drivers, DriverExample
 from classes.message import Message
 
 router = APIRouter(
@@ -14,7 +14,7 @@ router = APIRouter(
 # https://ergast.com/mrd/methods/drivers/
 
 @router.get("/drivers",
-            response_model=list[Driver],
+            response_model=Drivers,
             responses={
                 404: {"model": Message, "description": "Drivers not found"},
                 200: {"model": Driver, "content": {
@@ -39,7 +39,7 @@ async def get_drivers():
 
 @router.get("/drivers/{season}",
             tags=["Season"],
-            response_model=list[Driver],
+            response_model=Drivers,
             responses={
                 404: {"model": Message, "description": "Drivers not found"},
                 200: {"model": Driver, "content": {

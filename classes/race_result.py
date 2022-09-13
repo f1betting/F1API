@@ -19,6 +19,10 @@ class RaceResult(BaseModel):
     FastestLap: FastestLap | None
 
 
+class RaceResults(list[RaceResult]):
+    pass
+
+
 RaceResultExample = {
     "number": 1,
     "position": 1,

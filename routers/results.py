@@ -2,11 +2,11 @@ import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from classes.constructor_standing import ConstructorStanding, ConstructorStandingsExample
-from classes.driver_standing import DriverStanding, DriverStandingsExample
+from classes.constructor_standing import ConstructorStanding, ConstructorStandings, ConstructorStandingsExample
+from classes.driver_standing import DriverStanding, DriverStandings, DriverStandingsExample
 from classes.message import Message
-from classes.qualifying_result import QualifyingResult, QualifyingResultExample
-from classes.race_result import RaceResult, RaceResultExample
+from classes.qualifying_result import QualifyingResult, QualifyingResults, QualifyingResultExample
+from classes.race_result import RaceResult, RaceResults, RaceResultExample
 
 router = APIRouter(
     prefix="/results",
@@ -18,7 +18,7 @@ router = APIRouter(
 # https://ergast.com/mrd/methods/results/
 
 @router.get("/race/{season}/{race}",
-            response_model=list[RaceResult],
+            response_model=RaceResults,
             responses={
                 404: {"model": Message, "description": "Race results not found"},
                 200: {"model": RaceResult, "content": {
@@ -48,7 +48,7 @@ async def get_race_results(season: int, race: int):
 # https://ergast.com/mrd/methods/qualifying/
 
 @router.get("/qualifying/{season}/{race}",
-            response_model=list[QualifyingResult],
+            response_model=QualifyingResults,
             responses={
                 404: {"model": Message, "description": "Qualifying results not found"},
                 200: {"model": QualifyingResult, "content": {
@@ -79,7 +79,7 @@ def get_qualifying_results(season: int, race: int):
 
 @router.get("/standings/drivers/{season}",
             tags=["Season"],
-            response_model=list[DriverStanding],
+            response_model=DriverStandings,
             responses={
                 404: {"model": Message, "description": "Standings not found"},
                 200: {"model": DriverStanding, "content": {
@@ -107,7 +107,7 @@ async def get_driver_standings_by_season(season: int):
 
 @router.get("/standings/constructors/{season}",
             tags=["Season"],
-            response_model=list[ConstructorStanding],
+            response_model=ConstructorStandings,
             responses={
                 404: {"model": Message, "description": "Standings not found"},
                 200: {"model": ConstructorStanding, "content": {

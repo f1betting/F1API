@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+
 from classes.circuit import Circuit
 from classes.internal.session import Session
 
@@ -15,6 +16,10 @@ class Event(BaseModel):
     SecondPractice: Session | None
     ThirdPractice: Session | None
     Qualifying: Session | None
+
+
+class Calendar(list[Event]):
+    pass
 
 
 CalendarExample = {

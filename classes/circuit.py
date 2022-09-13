@@ -15,6 +15,10 @@ class Circuit(BaseModel):
     Location: Location
 
 
+class Circuits(list[Circuit]):
+    pass
+
+
 CircuitExample = {
     "circuitId": "zandvoort",
     "url": "http://en.wikipedia.org/wiki/Circuit_Zandvoort",

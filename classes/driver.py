@@ -12,6 +12,10 @@ class Driver(BaseModel):
     code: str | None
 
 
+class Drivers(list[Driver]):
+    pass
+
+
 DriverExample = {
     "driverId": "max_verstappen",
     "url": "http://en.wikipedia.org/wiki/Max_Verstappen",

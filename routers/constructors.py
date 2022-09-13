@@ -2,7 +2,7 @@ import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from classes.constructor import Constructor, ConstructorExample
+from classes.constructor import Constructor, Constructors, ConstructorExample
 from classes.message import Message
 
 router = APIRouter(
@@ -14,7 +14,7 @@ router = APIRouter(
 # https://ergast.com/mrd/methods/constructors/
 
 @router.get("/constructors",
-            response_model=list[Constructor],
+            response_model=Constructors,
             responses={
                 404: {"model": Message, "description": "Constructors not found"},
                 200: {"model": Constructor, "content": {
@@ -39,7 +39,7 @@ async def get_constructors():
 
 @router.get("/constructors/{season}",
             tags=["Season"],
-            response_model=list[Constructor],
+            response_model=Constructors,
             responses={
                 404: {"model": Message, "description": "Constructors not found"},
                 200: {"model": Constructor, "content": {

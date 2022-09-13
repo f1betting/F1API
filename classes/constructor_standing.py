@@ -11,6 +11,10 @@ class ConstructorStanding(BaseModel):
     Constructor: Constructor
 
 
+class ConstructorStandings(list[ConstructorStanding]):
+    pass
+
+
 ConstructorStandingsExample = {
     "position": "1",
     "positionText": "1",
