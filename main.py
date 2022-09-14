@@ -1,37 +1,17 @@
-from dotenv import dotenv_values
 from fastapi import FastAPI
 from fastapi.openapi.utils import get_openapi
 from fastapi.routing import APIRoute
-from pymongo import MongoClient
 
-from routers.betting import user, bets
-from routers.f1 import constructors, results, drivers, calendar, circuits
+from routers import constructors, calendar, drivers, circuits, results
 
 app = FastAPI()
 
 # Include routers
-app.include_router(calendar.router, prefix="/f1")
-app.include_router(circuits.router, prefix="/f1")
-app.include_router(constructors.router, prefix="/f1")
-app.include_router(drivers.router, prefix="/f1")
-app.include_router(results.router, prefix="/f1")
-
-app.include_router(user.router, prefix="/betting")
-app.include_router(bets.router, prefix="/betting")
-
-
-@app.on_event("startup")
-def startup_database():
-    config = dotenv_values(".env")
-
-    app.mongodb_client = MongoClient(config["DB_URI"])
-    app.database = app.mongodb_client[config["DB_NAME"]]
-    print("Connected to the MongoDB database!")
-
-
-@app.on_event("shutdown")
-def shutdown_database():
-    app.mongodb_client.close()
+app.include_router(calendar.router)
+app.include_router(circuits.router)
+app.include_router(constructors.router)
+app.include_router(drivers.router)
+app.include_router(results.router)
 
 
 # CUSTOMIZE OPENAPI
