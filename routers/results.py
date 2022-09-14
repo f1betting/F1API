@@ -18,7 +18,7 @@ router = APIRouter(
 # https://ergast.com/mrd/methods/results/
 
 @router.get("/race/{season}/{race}",
-            response_model=list[RaceResult],
+            response_model=RaceResults,
             responses={
                 404: {"model": Message, "content": {
                     "application/json": {
