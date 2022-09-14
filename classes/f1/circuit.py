@@ -15,8 +15,8 @@ class Circuit(BaseModel):
     Location: Location
 
 
-class Circuits(list[Circuit]):
-    pass
+class Circuits(BaseModel):
+    circuits: list[Circuit]
 
 
 CircuitExample = {

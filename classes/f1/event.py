@@ -18,8 +18,13 @@ class Event(BaseModel):
     Qualifying: Session | None
 
 
-class Calendar(list[Event]):
-    pass
+class Calendar(BaseModel):
+    events: list[Event]
+
+
+class NextEvent(BaseModel):
+    season: int
+    round: int
 
 
 CalendarExample = {
@@ -56,4 +61,9 @@ CalendarExample = {
         "date": "2022-03-19",
         "time": "15:00:00Z"
     }
+}
+
+NextEventExample = {
+    "season": 2022,
+    "round": 17,
 }

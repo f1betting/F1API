@@ -8,8 +8,8 @@ class Constructor(BaseModel):
     nationality: str
 
 
-class Constructors(list[Constructor]):
-    pass
+class Constructors(BaseModel):
+    constructors: list[Constructor]
 
 
 ConstructorExample = {

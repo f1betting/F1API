@@ -12,8 +12,8 @@ class DriverStanding(BaseModel):
     Constructors: list[Constructor]
 
 
-class DriverStandings(list[DriverStanding]):
-    pass
+class DriverStandings(BaseModel):
+    standings: list[DriverStanding]
 
 
 DriverStandingsExample = {

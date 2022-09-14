@@ -1,8 +1,9 @@
 from pydantic import BaseModel
+
 from classes.f1.constructor import Constructor
 from classes.f1.driver import Driver
-from classes.f1.internal.time import Time
 from classes.f1.internal.fastest_lap import FastestLap
+from classes.f1.internal.time import Time
 
 
 class RaceResult(BaseModel):
@@ -19,8 +20,8 @@ class RaceResult(BaseModel):
     FastestLap: FastestLap | None
 
 
-class RaceResults(list[RaceResult]):
-    pass
+class RaceResults(BaseModel):
+    results: list[RaceResult]
 
 
 RaceResultExample = {

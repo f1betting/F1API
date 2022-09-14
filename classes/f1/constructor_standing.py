@@ -10,15 +10,15 @@ class ConstructorStanding(BaseModel):
     Constructor: Constructor
 
 
-class ConstructorStandings(list[ConstructorStanding]):
-    pass
+class ConstructorStandings(BaseModel):
+    standings: list[ConstructorStanding]
 
 
 ConstructorStandingsExample = {
-    "position": "1",
+    "position": 1,
     "positionText": "1",
-    "points": "545",
-    "wins": "12",
+    "points": 545,
+    "wins": 12,
     "Constructor": {
         "constructorId": "red_bull",
         "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",

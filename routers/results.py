@@ -18,7 +18,7 @@ router = APIRouter(
 # https://ergast.com/mrd/methods/results/
 
 @router.get("/race/{season}/{race}",
-            response_model=RaceResults,
+            response_model=list[RaceResult],
             responses={
                 404: {"model": Message, "content": {
                     "application/json": {
@@ -27,9 +27,11 @@ router = APIRouter(
                 }},
                 200: {"model": RaceResult, "content": {
                     "application/json": {
-                        "example": [
-                            RaceResultExample
-                        ]
+                        "example": {
+                            "results": [
+                                RaceResultExample
+                            ]
+                        }
                     }
                 }}
             })
@@ -45,7 +47,7 @@ async def get_race_results(season: int, race: int):
     if race_results:
         race_results = race_results[0]["Results"]
 
-    return race_results
+    return {"results": race_results}
 
 
 # QUALIFYING RESULTS
@@ -61,9 +63,11 @@ async def get_race_results(season: int, race: int):
                 }},
                 200: {"model": QualifyingResult, "content": {
                     "application/json": {
-                        "example": [
-                            QualifyingResultExample
-                        ]
+                        "example": {
+                            "results": [
+                                QualifyingResultExample
+                            ]
+                        }
                     }
                 }}
             })
@@ -79,7 +83,7 @@ def get_qualifying_results(season: int, race: int):
     if qualifying_results:
         qualifying_results = qualifying_results[0]["QualifyingResults"]
 
-    return qualifying_results
+    return {"results": qualifying_results}
 
 
 # STANDINGS
@@ -96,13 +100,15 @@ def get_qualifying_results(season: int, race: int):
                 }},
                 200: {"model": DriverStanding, "content": {
                     "application/json": {
-                        "example": [
-                            DriverStandingsExample
-                        ]
+                        "example": {
+                            "standings": [
+                                DriverStandingsExample
+                            ]
+                        }
                     }
                 }}
             })
-async def get_driver_standings_by_season(season: int):
+def get_driver_standings_by_season(season: int):
     url = f"https://ergast.com/api/f1/{season}/driverStandings.json"
     res = requests.get(url)
     data = res.json()
@@ -114,7 +120,7 @@ async def get_driver_standings_by_season(season: int):
     if standings:
         standings = standings[0]["DriverStandings"]
 
-    return standings
+    return {"standings": standings}
 
 
 @router.get("/standings/constructors/{season}",
@@ -128,13 +134,15 @@ async def get_driver_standings_by_season(season: int):
                 }},
                 200: {"model": ConstructorStanding, "content": {
                     "application/json": {
-                        "example": [
-                            ConstructorStandingsExample
-                        ]
+                        "example": {
+                            "standings": [
+                                ConstructorStandingsExample
+                            ]
+                        }
                     }
                 }}
             })
-async def get_constructor_standings_by_season(season: int):
+def get_constructor_standings_by_season(season: int):
     url = f"https://ergast.com/api/f1/{season}/constructorStandings.json"
     res = requests.get(url)
     data = res.json()
@@ -146,4 +154,4 @@ async def get_constructor_standings_by_season(season: int):
     if standings:
         standings = standings[0]["ConstructorStandings"]
 
-    return standings
+    return {"standings": standings}

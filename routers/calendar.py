@@ -2,18 +2,16 @@ import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from classes.f1.event import Event, Calendar, CalendarExample
+from classes.f1.event import Event, Calendar, CalendarExample, NextEvent, NextEventExample
 from classes.general.message import Message, create_message
 
-router = APIRouter(
-    prefix="/calendar",
-)
+router = APIRouter()
 
 
 # CALENDAR
 # https://ergast.com/mrd/methods/schedule/
 
-@router.get("/{season}",
+@router.get("/calendar/{season}",
             tags=["Season"],
             response_model=Calendar,
             responses={
@@ -24,19 +22,47 @@ router = APIRouter(
                 }},
                 200: {"model": Event, "content": {
                     "application/json": {
-                        "example": [
-                            CalendarExample
-                        ]
+                        "example": {
+                            "events": [
+                                CalendarExample
+                            ]
+                        }
                     }
                 }}
             })
-async def get_calendar_by_season(season: int):
+def get_calendar_by_season(season: int):
     url = f"https://ergast.com/api/f1/{season}.json"
     res = requests.get(url)
     data = res.json()
     calendar = data["MRData"]["RaceTable"]["Races"]
 
     if not calendar:
-        return JSONResponse(status_code=404, content={"message": "Calendar not found"})
+        return JSONResponse(status_code=404, content=create_message("Calendar not found"))
 
-    return calendar
+    return {"events": calendar}
+
+
+@router.get("/event/next",
+            response_model=NextEvent,
+            responses={
+                404: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Event not found")
+                    }
+                }},
+                200: {"model": NextEvent, "content": {
+                    "application/json": {
+                        "example": NextEventExample
+                    }
+                }}
+            })
+def get_next_race():
+    url = f"https://ergast.com/api/f1/current/next/results.json"
+    res = requests.get(url)
+    data = res.json()
+    event_data = data["MRData"]["RaceTable"]
+
+    if not event_data:
+        return JSONResponse(status_code=404, content=create_message("Event not found"))
+
+    return event_data

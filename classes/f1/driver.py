@@ -12,8 +12,8 @@ class Driver(BaseModel):
     code: str | None
 
 
-class Drivers(list[Driver]):
-    pass
+class Drivers(BaseModel):
+    drivers: list[Driver]
 
 
 DriverExample = {

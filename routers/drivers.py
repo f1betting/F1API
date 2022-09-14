@@ -23,9 +23,11 @@ router = APIRouter(
                 }},
                 200: {"model": Driver, "content": {
                     "application/json": {
-                        "example": [
-                            DriverExample
-                        ]
+                        "example": {
+                            "drivers": [
+                                DriverExample
+                            ]
+                        }
                     }
                 }}
             })
@@ -36,9 +38,9 @@ async def get_drivers():
     drivers = data["MRData"]["DriverTable"]["Drivers"]
 
     if not drivers:
-        return JSONResponse(status_code=404, content={"message": "Drivers not found"})
+        return JSONResponse(status_code=404, content=create_message("Drivers not found"))
 
-    return drivers
+    return {"drivers": drivers}
 
 
 @router.get("/drivers/{season}",
@@ -52,9 +54,11 @@ async def get_drivers():
                 }},
                 200: {"model": Driver, "content": {
                     "application/json": {
-                        "example": [
-                            DriverExample
-                        ]
+                        "example": {
+                            "drivers": [
+                                DriverExample
+                            ]
+                        }
                     }
                 }}
             })
@@ -65,9 +69,9 @@ async def get_drivers_by_season(season: str):
     drivers = data["MRData"]["DriverTable"]["Drivers"]
 
     if not drivers:
-        return JSONResponse(status_code=404, content={"message": "Drivers not found"})
+        return JSONResponse(status_code=404, content=create_message("Drivers not found"))
 
-    return drivers
+    return {"drivers": drivers}
 
 
 @router.get("/driver/{driver_id}",
@@ -91,6 +95,6 @@ async def get_driver_by_id(driver_id: str):
     driver = data["MRData"]["DriverTable"]["Drivers"]
 
     if not driver:
-        return JSONResponse(status_code=404, content={"message": "Driver not found"})
+        return JSONResponse(status_code=404, content=create_message("Driver not found"))
 
     return driver[0]

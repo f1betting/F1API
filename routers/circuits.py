@@ -23,9 +23,11 @@ router = APIRouter(
                 }},
                 200: {"model": Circuit, "content": {
                     "application/json": {
-                        "example": [
-                            CircuitExample
-                        ]
+                        "example": {
+                            "circuits": [
+                                CircuitExample
+                            ]
+                        }
                     }
                 }}
             })
@@ -36,9 +38,9 @@ async def get_circuits():
     circuits = data["MRData"]["CircuitTable"]["Circuits"]
 
     if not circuits:
-        return JSONResponse(status_code=404, content={"message": "Circuits not found"})
+        return JSONResponse(status_code=404, content=create_message("Circuits not found"))
 
-    return circuits
+    return {"circuits": circuits}
 
 
 @router.get("/circuits/{season}",
@@ -52,9 +54,11 @@ async def get_circuits():
                 }},
                 200: {"model": Circuit, "content": {
                     "application/json": {
-                        "example": [
-                            CircuitExample
-                        ]
+                        "example": {
+                            "circuits": [
+                                CircuitExample
+                            ]
+                        }
                     }
                 }}
             })
@@ -65,9 +69,9 @@ async def get_circuits_by_season(season: str):
     circuits = data["MRData"]["CircuitTable"]["Circuits"]
 
     if not circuits:
-        return JSONResponse(status_code=404, content={"message": "Circuits not found"})
+        return JSONResponse(status_code=404, content=create_message("Circuits not found"))
 
-    return circuits
+    return {"circuits": circuits}
 
 
 @router.get("/circuit/{circuit_id}",
@@ -91,6 +95,6 @@ async def get_circuit_by_id(circuit_id: str):
     circuit = data["MRData"]["CircuitTable"]["Circuits"]
 
     if not circuit:
-        return JSONResponse(status_code=404, content={"message": "Circuit not found"})
+        return JSONResponse(status_code=404, content=create_message("Circuit not found"))
 
     return circuit[0]
