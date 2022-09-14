@@ -16,8 +16,8 @@ app.include_router(constructors.router, prefix="/f1")
 app.include_router(drivers.router, prefix="/f1")
 app.include_router(results.router, prefix="/f1")
 
-app.include_router(user.router, prefix="/users")
-app.include_router(bets.router, prefix="/bet")
+app.include_router(user.router, prefix="/betting")
+app.include_router(bets.router, prefix="/betting")
 
 
 @app.on_event("startup")

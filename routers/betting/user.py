@@ -9,6 +9,7 @@ from classes.betting.user import UserExample, BaseUser, FullUser, Users
 from classes.general.message import Message, create_message
 
 router = APIRouter(
+    prefix="/users",
     tags=["Users"],
 )
 

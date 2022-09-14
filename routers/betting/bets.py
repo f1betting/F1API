@@ -7,6 +7,7 @@ from classes.betting.bet import BetExample, BaseBet, FullBet
 from classes.general.message import Message, create_message
 
 router = APIRouter(
+    prefix="/bet",
     tags=["Bet"],
 )
 
