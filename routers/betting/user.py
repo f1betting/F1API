@@ -6,10 +6,9 @@ from fastapi.responses import JSONResponse
 
 import main
 from classes.betting.user import UserExample, BaseUser, FullUser, Users
-from classes.general.message import Message
+from classes.general.message import Message, create_message
 
 router = APIRouter(
-    prefix="/users",
     tags=["Users"],
 )
 
@@ -17,7 +16,11 @@ router = APIRouter(
 @router.get("/",
             response_model=Users,
             responses={
-                404: {"model": Message, "description": "Users not found"},
+                404: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Users not found")
+                    }
+                }},
                 200: {"model": Users, "content": {
                     "application/json": {
                         "example": [
@@ -25,13 +28,12 @@ router = APIRouter(
                         ]
                     }
                 }}
-            }
-            )
+            })
 def get_all_users():
     users = list(main.app.database["Users"].find())
 
     if not users:
-        return JSONResponse(status_code=404, content={"message": "Users not found"})
+        return JSONResponse(status_code=404, content=create_message("Users not found"))
 
     for user in users:
         del user["_id"]
@@ -39,21 +41,25 @@ def get_all_users():
     return users
 
 
-@router.get("/{user_uuid}",
+@router.get("/{username}",
             response_model=FullUser,
             responses={
-                404: {"model": Message, "description": "User not found"},
+                404: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("User not found")
+                    }
+                }},
                 200: {"model": FullUser, "content": {
                     "application/json": {
                         "example": UserExample
                     }
                 }}
             })
-def get_user_by_uuid(user_uuid: str):
-    user = main.app.database["Users"].find_one({"uuid": user_uuid})
+def get_user_by_username(username: str):
+    user = main.app.database["Users"].find_one({"username": username})
 
     if not user:
-        return JSONResponse(status_code=404, content={"message": "User not found"})
+        return JSONResponse(status_code=404, content=create_message("User not found"))
 
     return user
 
@@ -61,6 +67,11 @@ def get_user_by_uuid(user_uuid: str):
 @router.post("/",
              response_model=FullUser,
              responses={
+                 409: {"model": Message, "content": {
+                     "application/json": {
+                         "example": create_message("User already exists")
+                     }
+                 }},
                  200: {"model": FullUser, "content": {
                      "application/json": {
                          "example": UserExample
@@ -68,12 +79,15 @@ def get_user_by_uuid(user_uuid: str):
                  }}
              })
 def create_user(user: BaseUser):
-    user.first_name = user.first_name.lower()
-    user.last_name = user.last_name.lower()
+    user.username = user.username.lower()
 
     user = jsonable_encoder(user)
 
+    user["points"] = 0
     user["uuid"] = str(uuid.uuid4())
+
+    if list(main.app.database["Users"].find({"username": user["username"]})):
+        return JSONResponse(status_code=409, content=create_message("User already exists"))
 
     new_user = main.app.database["Users"].insert_one(user)
 

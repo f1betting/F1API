@@ -3,7 +3,7 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
 from classes.f1.driver import Driver, Drivers, DriverExample
-from classes.general.message import Message
+from classes.general.message import Message, create_message
 
 router = APIRouter(
     tags=["Drivers"],
@@ -16,7 +16,11 @@ router = APIRouter(
 @router.get("/drivers",
             response_model=Drivers,
             responses={
-                404: {"model": Message, "description": "Drivers not found"},
+                404: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Drivers not found")
+                    }
+                }},
                 200: {"model": Driver, "content": {
                     "application/json": {
                         "example": [
@@ -41,7 +45,11 @@ async def get_drivers():
             tags=["Season"],
             response_model=Drivers,
             responses={
-                404: {"model": Message, "description": "Drivers not found"},
+                404: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Drivers not found")
+                    }
+                }},
                 200: {"model": Driver, "content": {
                     "application/json": {
                         "example": [
@@ -65,7 +73,11 @@ async def get_drivers_by_season(season: str):
 @router.get("/driver/{driver_id}",
             response_model=Driver,
             responses={
-                404: {"model": Message, "description": "Driver not found"},
+                404: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Driver not found")
+                    }
+                }},
                 200: {"model": Driver, "content": {
                     "application/json": {
                         "example": DriverExample

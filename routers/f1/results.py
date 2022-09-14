@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse
 
 from classes.f1.constructor_standing import ConstructorStanding, ConstructorStandings, ConstructorStandingsExample
 from classes.f1.driver_standing import DriverStanding, DriverStandings, DriverStandingsExample
-from classes.general.message import Message
+from classes.general.message import Message, create_message
 from classes.f1.qualifying_result import QualifyingResult, QualifyingResults, QualifyingResultExample
 from classes.f1.race_result import RaceResult, RaceResults, RaceResultExample
 
@@ -20,7 +20,11 @@ router = APIRouter(
 @router.get("/race/{season}/{race}",
             response_model=RaceResults,
             responses={
-                404: {"model": Message, "description": "Race results not found"},
+                404: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Race results not found")
+                    }
+                }},
                 200: {"model": RaceResult, "content": {
                     "application/json": {
                         "example": [
@@ -50,7 +54,11 @@ async def get_race_results(season: int, race: int):
 @router.get("/qualifying/{season}/{race}",
             response_model=QualifyingResults,
             responses={
-                404: {"model": Message, "description": "Qualifying results not found"},
+                404: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Qualifying results not found")
+                    }
+                }},
                 200: {"model": QualifyingResult, "content": {
                     "application/json": {
                         "example": [
@@ -81,7 +89,11 @@ def get_qualifying_results(season: int, race: int):
             tags=["Season"],
             response_model=DriverStandings,
             responses={
-                404: {"model": Message, "description": "Standings not found"},
+                404: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Standings not found")
+                    }
+                }},
                 200: {"model": DriverStanding, "content": {
                     "application/json": {
                         "example": [
@@ -109,7 +121,11 @@ async def get_driver_standings_by_season(season: int):
             tags=["Season"],
             response_model=ConstructorStandings,
             responses={
-                404: {"model": Message, "description": "Standings not found"},
+                404: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Standings not found")
+                    }
+                }},
                 200: {"model": ConstructorStanding, "content": {
                     "application/json": {
                         "example": [

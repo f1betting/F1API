@@ -4,12 +4,12 @@ from pydantic import BaseModel
 
 
 class BaseUser(BaseModel):
-    first_name: str
-    last_name: str
+    username: str
 
 
 class FullUser(BaseUser):
     uuid: str
+    points: int
 
 
 class Users(list[FullUser]):
@@ -17,7 +17,11 @@ class Users(list[FullUser]):
 
 
 UserExample = {
-    "first_name": "Niek",
-    "last_name": "Verstappen",
-    "id": uuid.uuid4()
+    "username": "Niek",
+    "uuid": uuid.uuid4(),
+    "points": 0
+}
+
+UserCreateExample = {
+    "username": "Niek",
 }

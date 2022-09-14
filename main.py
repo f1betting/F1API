@@ -3,9 +3,8 @@ from fastapi import FastAPI
 from fastapi.openapi.utils import get_openapi
 from fastapi.routing import APIRoute
 from pymongo import MongoClient
-from pymongo.server_api import ServerApi
 
-from routers.betting import user
+from routers.betting import user, bets
 from routers.f1 import constructors, results, drivers, calendar, circuits
 
 app = FastAPI()
@@ -17,7 +16,8 @@ app.include_router(constructors.router, prefix="/f1")
 app.include_router(drivers.router, prefix="/f1")
 app.include_router(results.router, prefix="/f1")
 
-app.include_router(user.router, prefix="/betting")
+app.include_router(user.router, prefix="/users")
+app.include_router(bets.router, prefix="/bet")
 
 
 @app.on_event("startup")

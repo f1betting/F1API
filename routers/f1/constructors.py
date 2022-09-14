@@ -3,7 +3,7 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
 from classes.f1.constructor import Constructor, Constructors, ConstructorExample
-from classes.general.message import Message
+from classes.general.message import Message, create_message
 
 router = APIRouter(
     tags=["Constructors"],
@@ -16,7 +16,11 @@ router = APIRouter(
 @router.get("/constructors",
             response_model=Constructors,
             responses={
-                404: {"model": Message, "description": "Constructors not found"},
+                404: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Constructors not found")
+                    }
+                }},
                 200: {"model": Constructor, "content": {
                     "application/json": {
                         "example": [
@@ -41,7 +45,11 @@ async def get_constructors():
             tags=["Season"],
             response_model=Constructors,
             responses={
-                404: {"model": Message, "description": "Constructors not found"},
+                404: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Constructors not found")
+                    }
+                }},
                 200: {"model": Constructor, "content": {
                     "application/json": {
                         "example": [
@@ -65,7 +73,11 @@ async def get_constructors_by_season(season: str):
 @router.get("/constructor/{constructor_id}",
             response_model=Constructor,
             responses={
-                404: {"model": Message, "description": "Constructor not found"},
+                404: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Constructor not found")
+                    }
+                }},
                 200: {"model": Constructor, "content": {
                     "application/json": {
                         "example": ConstructorExample

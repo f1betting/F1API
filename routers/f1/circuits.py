@@ -3,7 +3,7 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
 from classes.f1.circuit import Circuit, Circuits, CircuitExample
-from classes.general.message import Message
+from classes.general.message import Message, create_message
 
 router = APIRouter(
     tags=["Circuits"]
@@ -16,7 +16,11 @@ router = APIRouter(
 @router.get("/circuits",
             response_model=Circuits,
             responses={
-                404: {"model": Message, "description": "Circuits not found"},
+                404: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Circuits not found")
+                    }
+                }},
                 200: {"model": Circuit, "content": {
                     "application/json": {
                         "example": [
@@ -41,7 +45,11 @@ async def get_circuits():
             tags=["Season"],
             response_model=Circuits,
             responses={
-                404: {"model": Message, "description": "Circuits not found"},
+                404: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Circuits not found")
+                    }
+                }},
                 200: {"model": Circuit, "content": {
                     "application/json": {
                         "example": [
@@ -65,7 +73,11 @@ async def get_circuits_by_season(season: str):
 @router.get("/circuit/{circuit_id}",
             response_model=Circuit,
             responses={
-                404: {"model": Message, "description": "Circuit not found"},
+                404: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Circuit not found")
+                    }
+                }},
                 200: {"model": Circuit, "content": {
                     "application/json": {
                         "example": CircuitExample
