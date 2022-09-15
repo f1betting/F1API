@@ -2,8 +2,8 @@ import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from classes.f1.circuit import Circuit, Circuits, CircuitExample
-from classes.general.message import Message, create_message
+from internal.models.f1.circuit import Circuit, Circuits, CircuitExample
+from internal.models.general.message import Message, create_message
 
 router = APIRouter(
     tags=["Circuits"]
@@ -21,7 +21,7 @@ router = APIRouter(
                         "example": create_message("Circuits not found")
                     }
                 }},
-                200: {"model": Circuit, "content": {
+                200: {"model": Circuits, "content": {
                     "application/json": {
                         "example": {
                             "circuits": [
@@ -52,7 +52,7 @@ async def get_circuits():
                         "example": create_message("Circuits not found")
                     }
                 }},
-                200: {"model": Circuit, "content": {
+                200: {"model": Circuits, "content": {
                     "application/json": {
                         "example": {
                             "circuits": [

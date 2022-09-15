@@ -2,8 +2,8 @@ import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from classes.f1.event import Event, Calendar, CalendarExample, NextEvent, NextEventExample
-from classes.general.message import Message, create_message
+from internal.models.f1.event import Calendar, CalendarExample, NextEvent, NextEventExample
+from internal.models.general.message import Message, create_message
 
 router = APIRouter()
 
@@ -20,7 +20,7 @@ router = APIRouter()
                         "example": create_message("Calendar not found")
                     }
                 }},
-                200: {"model": Event, "content": {
+                200: {"model": Calendar, "content": {
                     "application/json": {
                         "example": {
                             "events": [

@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from classes.f1.constructor import Constructor
+from internal.models.f1.constructor import Constructor
 
 
 class ConstructorStanding(BaseModel):

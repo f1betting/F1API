@@ -2,8 +2,8 @@ import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from classes.f1.driver import Driver, Drivers, DriverExample
-from classes.general.message import Message, create_message
+from internal.models.f1.driver import Driver, Drivers, DriverExample
+from internal.models.general.message import Message, create_message
 
 router = APIRouter(
     tags=["Drivers"],
@@ -21,7 +21,7 @@ router = APIRouter(
                         "example": create_message("Drivers not found")
                     }
                 }},
-                200: {"model": Driver, "content": {
+                200: {"model": Drivers, "content": {
                     "application/json": {
                         "example": {
                             "drivers": [
@@ -52,7 +52,7 @@ async def get_drivers():
                         "example": create_message("Drivers not found")
                     }
                 }},
-                200: {"model": Driver, "content": {
+                200: {"model": Drivers, "content": {
                     "application/json": {
                         "example": {
                             "drivers": [

@@ -2,8 +2,8 @@ import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from classes.f1.constructor import Constructor, Constructors, ConstructorExample
-from classes.general.message import Message, create_message
+from internal.models.f1.constructor import Constructor, Constructors, ConstructorExample
+from internal.models.general.message import Message, create_message
 
 router = APIRouter(
     tags=["Constructors"],
@@ -21,7 +21,7 @@ router = APIRouter(
                         "example": create_message("Constructors not found")
                     }
                 }},
-                200: {"model": Constructor, "content": {
+                200: {"model": Constructors, "content": {
                     "application/json": {
                         "example": {
                             "constructors": [
@@ -52,7 +52,7 @@ async def get_constructors():
                         "example": create_message("Constructors not found")
                     }
                 }},
-                200: {"model": Constructor, "content": {
+                200: {"model": Constructors, "content": {
                     "application/json": {
                         "example": {
                             "constructors": [

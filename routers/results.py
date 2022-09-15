@@ -2,11 +2,12 @@ import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from classes.f1.constructor_standing import ConstructorStanding, ConstructorStandings, ConstructorStandingsExample
-from classes.f1.driver_standing import DriverStanding, DriverStandings, DriverStandingsExample
-from classes.general.message import Message, create_message
-from classes.f1.qualifying_result import QualifyingResult, QualifyingResults, QualifyingResultExample
-from classes.f1.race_result import RaceResult, RaceResults, RaceResultExample
+from internal.models.f1.constructor_standing import ConstructorStandings, \
+    ConstructorStandingsExample
+from internal.models.f1.driver_standing import DriverStandings, DriverStandingsExample
+from internal.models.f1.qualifying_result import QualifyingResults, QualifyingResultExample
+from internal.models.f1.race_result import RaceResults, RaceResultExample
+from internal.models.general.message import Message, create_message
 
 router = APIRouter(
     prefix="/results",
@@ -25,7 +26,7 @@ router = APIRouter(
                         "example": create_message("Race results not found")
                     }
                 }},
-                200: {"model": RaceResult, "content": {
+                200: {"model": RaceResults, "content": {
                     "application/json": {
                         "example": {
                             "results": [
@@ -61,7 +62,7 @@ async def get_race_results(season: int, race: int):
                         "example": create_message("Qualifying results not found")
                     }
                 }},
-                200: {"model": QualifyingResult, "content": {
+                200: {"model": QualifyingResults, "content": {
                     "application/json": {
                         "example": {
                             "results": [
@@ -98,7 +99,7 @@ def get_qualifying_results(season: int, race: int):
                         "example": create_message("Standings not found")
                     }
                 }},
-                200: {"model": DriverStanding, "content": {
+                200: {"model": DriverStandings, "content": {
                     "application/json": {
                         "example": {
                             "standings": [
@@ -132,7 +133,7 @@ def get_driver_standings_by_season(season: int):
                         "example": create_message("Standings not found")
                     }
                 }},
-                200: {"model": ConstructorStanding, "content": {
+                200: {"model": ConstructorStandings, "content": {
                     "application/json": {
                         "example": {
                             "standings": [
