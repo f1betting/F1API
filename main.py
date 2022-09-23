@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
 from fastapi.routing import APIRoute
 
@@ -12,6 +13,15 @@ app.include_router(circuits.router)
 app.include_router(constructors.router)
 app.include_router(drivers.router)
 app.include_router(results.router)
+
+# Allow all origins
+origins = ["*"]
+
+app.add_middleware(CORSMiddleware,
+                   allow_origins=origins,
+                   allow_credentials=True,
+                   allow_methods=["*"],
+                   allow_headers=["*"])
 
 
 # CUSTOMIZE OPENAPI
