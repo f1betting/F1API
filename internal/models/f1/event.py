@@ -27,7 +27,7 @@ class NextEvent(BaseModel):
     round: int
 
 
-CalendarExample = {
+EventExample = {
     "season": 2022,
     "round": 1,
     "url": "http://en.wikipedia.org/wiki/2022_Bahrain_Grand_Prix",

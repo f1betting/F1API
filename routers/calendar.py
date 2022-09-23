@@ -2,7 +2,7 @@ import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from internal.models.f1.event import Calendar, CalendarExample, NextEvent, NextEventExample
+from internal.models.f1.event import Calendar, EventExample, NextEvent, NextEventExample, Event
 from internal.models.general.message import Message, create_message
 
 router = APIRouter()
@@ -24,7 +24,7 @@ router = APIRouter()
                     "application/json": {
                         "example": {
                             "events": [
-                                CalendarExample
+                                EventExample
                             ]
                         }
                     }
@@ -43,6 +43,7 @@ def get_calendar_by_season(season: int):
 
 
 @router.get("/event/next",
+            tags=["Events"],
             response_model=NextEvent,
             responses={
                 404: {"model": Message, "content": {
@@ -61,6 +62,35 @@ def get_next_race():
     res = requests.get(url)
     data = res.json()
     event_data = data["MRData"]["RaceTable"]
+
+    if not event_data:
+        return JSONResponse(status_code=404, content=create_message("Event not found"))
+
+    return event_data
+
+
+@router.get("/event/{season}/{round}",
+            tags=["Events"],
+            response_model=Event,
+            responses={
+                404: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Event not found")
+                    }
+                }},
+                200: {"model": Event, "content": {
+                    "application/json": {
+                        "example": EventExample
+                    }
+                }}
+            })
+def get_event_details(season: int, round: int):
+    url = f"https://ergast.com/api/f1/{season}/{round}.json"
+    res = requests.get(url)
+    data = res.json()
+    event_data = data["MRData"]["RaceTable"]["Races"][0]
+
+    print(event_data)
 
     if not event_data:
         return JSONResponse(status_code=404, content=create_message("Event not found"))
