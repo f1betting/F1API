@@ -90,8 +90,6 @@ def get_event_details(season: int, round: int):
     data = res.json()
     event_data = data["MRData"]["RaceTable"]["Races"][0]
 
-    print(event_data)
-
     if not event_data:
         return JSONResponse(status_code=404, content=create_message("Event not found"))
 
