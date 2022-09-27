@@ -62,7 +62,7 @@ async def get_drivers():
                     }
                 }}
             })
-async def get_drivers_by_season(season: str):
+async def get_drivers_by_season(season: int):
     url = f"https://ergast.com/api/f1/{season}/drivers.json?limit=1000"
     res = requests.get(url)
     data = res.json()
