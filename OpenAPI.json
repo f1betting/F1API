@@ -1,0 +1,1724 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "F1 API",
+    "description": "An easier way to use the [ergast.com](https://ergast.com/mrd/) F1 API, with correct types!",
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/niek-o/F1API/blob/main/LICENSE.md"
+    },
+    "version": "1.0.0",
+    "x-logo": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f2/New_era_F1_logo.png"
+    }
+  },
+  "paths": {
+    "/calendar/{season}": {
+      "get": {
+        "tags": [
+          "Season"
+        ],
+        "summary": "Get Calendar By Season",
+        "operationId": "get_calendar_by_season",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Season",
+              "type": "integer"
+            },
+            "name": "season",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Calendar"
+                },
+                "example": {
+                  "events": [
+                    {
+                      "season": 2022,
+                      "round": 1,
+                      "url": "http://en.wikipedia.org/wiki/2022_Bahrain_Grand_Prix",
+                      "raceName": "Bahrain Grand Prix",
+                      "Circuit": {
+                        "circuitId": "bahrain",
+                        "url": "http://en.wikipedia.org/wiki/Bahrain_International_Circuit",
+                        "circuitName": "Bahrain International Circuit",
+                        "Location": {
+                          "lat": 26.0325,
+                          "long": 50.5106,
+                          "locality": "Sakhir",
+                          "country": "Bahrain"
+                        }
+                      },
+                      "date": "2022-03-20",
+                      "time": "15:00:00Z",
+                      "FirstPractice": {
+                        "date": "2022-03-18",
+                        "time": "12:00:00Z"
+                      },
+                      "SecondPractice": {
+                        "date": "2022-03-18",
+                        "time": "15:00:00Z"
+                      },
+                      "ThirdPractice": {
+                        "date": "2022-03-19",
+                        "time": "12:00:00Z"
+                      },
+                      "Qualifying": {
+                        "date": "2022-03-19",
+                        "time": "15:00:00Z"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Calendar not found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/event/next": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Get Next Race",
+        "operationId": "get_next_race",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NextEvent"
+                },
+                "example": {
+                  "season": 2022,
+                  "round": 17
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Event not found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/event/{season}/{round}": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Get Event Details",
+        "operationId": "get_event_details",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Season",
+              "type": "integer"
+            },
+            "name": "season",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Round",
+              "type": "integer"
+            },
+            "name": "round",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                },
+                "example": {
+                  "season": 2022,
+                  "round": 1,
+                  "url": "http://en.wikipedia.org/wiki/2022_Bahrain_Grand_Prix",
+                  "raceName": "Bahrain Grand Prix",
+                  "Circuit": {
+                    "circuitId": "bahrain",
+                    "url": "http://en.wikipedia.org/wiki/Bahrain_International_Circuit",
+                    "circuitName": "Bahrain International Circuit",
+                    "Location": {
+                      "lat": 26.0325,
+                      "long": 50.5106,
+                      "locality": "Sakhir",
+                      "country": "Bahrain"
+                    }
+                  },
+                  "date": "2022-03-20",
+                  "time": "15:00:00Z",
+                  "FirstPractice": {
+                    "date": "2022-03-18",
+                    "time": "12:00:00Z"
+                  },
+                  "SecondPractice": {
+                    "date": "2022-03-18",
+                    "time": "15:00:00Z"
+                  },
+                  "ThirdPractice": {
+                    "date": "2022-03-19",
+                    "time": "12:00:00Z"
+                  },
+                  "Qualifying": {
+                    "date": "2022-03-19",
+                    "time": "15:00:00Z"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Event not found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/circuits": {
+      "get": {
+        "tags": [
+          "Circuits"
+        ],
+        "summary": "Get Circuits",
+        "operationId": "get_circuits",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Circuits"
+                },
+                "example": {
+                  "circuits": [
+                    {
+                      "circuitId": "zandvoort",
+                      "url": "http://en.wikipedia.org/wiki/Circuit_Zandvoort",
+                      "circuitName": "Circuit Park Zandvoort",
+                      "Location": {
+                        "lat": 52.3888,
+                        "long": 4.54092,
+                        "locality": "Zandvoort",
+                        "country": "Netherlands"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Circuits not found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/circuits/{season}": {
+      "get": {
+        "tags": [
+          "Circuits",
+          "Season"
+        ],
+        "summary": "Get Circuits By Season",
+        "operationId": "get_circuits_by_season",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Season",
+              "type": "string"
+            },
+            "name": "season",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Circuits"
+                },
+                "example": {
+                  "circuits": [
+                    {
+                      "circuitId": "zandvoort",
+                      "url": "http://en.wikipedia.org/wiki/Circuit_Zandvoort",
+                      "circuitName": "Circuit Park Zandvoort",
+                      "Location": {
+                        "lat": 52.3888,
+                        "long": 4.54092,
+                        "locality": "Zandvoort",
+                        "country": "Netherlands"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Circuits not found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/circuit/{circuit_id}": {
+      "get": {
+        "tags": [
+          "Circuits"
+        ],
+        "summary": "Get Circuit By Id",
+        "operationId": "get_circuit_by_id",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Circuit Id",
+              "type": "string"
+            },
+            "name": "circuit_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Circuit"
+                },
+                "example": {
+                  "circuitId": "zandvoort",
+                  "url": "http://en.wikipedia.org/wiki/Circuit_Zandvoort",
+                  "circuitName": "Circuit Park Zandvoort",
+                  "Location": {
+                    "lat": 52.3888,
+                    "long": 4.54092,
+                    "locality": "Zandvoort",
+                    "country": "Netherlands"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Circuit not found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/constructors": {
+      "get": {
+        "tags": [
+          "Constructors"
+        ],
+        "summary": "Get Constructors",
+        "operationId": "get_constructors",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Constructors"
+                },
+                "example": {
+                  "constructors": [
+                    {
+                      "constructorId": "red_bull",
+                      "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
+                      "name": "Red Bull",
+                      "nationality": "Austrian"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Constructors not found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/constructors/{season}": {
+      "get": {
+        "tags": [
+          "Constructors",
+          "Season"
+        ],
+        "summary": "Get Constructors By Season",
+        "operationId": "get_constructors_by_season",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Season",
+              "type": "string"
+            },
+            "name": "season",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Constructors"
+                },
+                "example": {
+                  "constructors": [
+                    {
+                      "constructorId": "red_bull",
+                      "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
+                      "name": "Red Bull",
+                      "nationality": "Austrian"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Constructors not found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/constructor/{constructor_id}": {
+      "get": {
+        "tags": [
+          "Constructors"
+        ],
+        "summary": "Get Constructor By Id",
+        "operationId": "get_constructor_by_id",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Constructor Id",
+              "type": "string"
+            },
+            "name": "constructor_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Constructor"
+                },
+                "example": {
+                  "constructorId": "red_bull",
+                  "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
+                  "name": "Red Bull",
+                  "nationality": "Austrian"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Constructor not found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/drivers": {
+      "get": {
+        "tags": [
+          "Drivers"
+        ],
+        "summary": "Get Drivers",
+        "operationId": "get_drivers",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Drivers"
+                },
+                "example": {
+                  "drivers": [
+                    {
+                      "driverId": "max_verstappen",
+                      "url": "http://en.wikipedia.org/wiki/Max_Verstappen",
+                      "givenName": "Max",
+                      "familyName": "Verstappen",
+                      "dateOfBirth": "1997-09-30",
+                      "nationality": "Dutch",
+                      "permanentNumber": 33,
+                      "code": "VER"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Drivers not found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/drivers/{season}": {
+      "get": {
+        "tags": [
+          "Drivers",
+          "Season"
+        ],
+        "summary": "Get Drivers By Season",
+        "operationId": "get_drivers_by_season",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Season",
+              "type": "integer"
+            },
+            "name": "season",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Drivers"
+                },
+                "example": {
+                  "drivers": [
+                    {
+                      "driverId": "max_verstappen",
+                      "url": "http://en.wikipedia.org/wiki/Max_Verstappen",
+                      "givenName": "Max",
+                      "familyName": "Verstappen",
+                      "dateOfBirth": "1997-09-30",
+                      "nationality": "Dutch",
+                      "permanentNumber": 33,
+                      "code": "VER"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Drivers not found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/driver/{driver_id}": {
+      "get": {
+        "tags": [
+          "Drivers"
+        ],
+        "summary": "Get Driver By Id",
+        "operationId": "get_driver_by_id",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Driver Id",
+              "type": "string"
+            },
+            "name": "driver_id",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Driver"
+                },
+                "example": {
+                  "driverId": "max_verstappen",
+                  "url": "http://en.wikipedia.org/wiki/Max_Verstappen",
+                  "givenName": "Max",
+                  "familyName": "Verstappen",
+                  "dateOfBirth": "1997-09-30",
+                  "nationality": "Dutch",
+                  "permanentNumber": 33,
+                  "code": "VER"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Driver not found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/results/race/{season}/{race}": {
+      "get": {
+        "tags": [
+          "Results"
+        ],
+        "summary": "Get Race Results",
+        "operationId": "get_race_results",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Season",
+              "type": "integer"
+            },
+            "name": "season",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Race",
+              "type": "integer"
+            },
+            "name": "race",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RaceResults"
+                },
+                "example": {
+                  "results": [
+                    {
+                      "number": 1,
+                      "position": 1,
+                      "positionText": "1",
+                      "points": 26,
+                      "Driver": {
+                        "driverId": "max_verstappen",
+                        "url": "http://en.wikipedia.org/wiki/Max_Verstappen",
+                        "givenName": "Max",
+                        "familyName": "Verstappen",
+                        "dateOfBirth": "1997-09-30",
+                        "nationality": "Dutch",
+                        "permanentNumber": 33,
+                        "code": "VER"
+                      },
+                      "Constructor": {
+                        "constructorId": "red_bull",
+                        "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
+                        "name": "Red Bull",
+                        "nationality": "Austrian"
+                      },
+                      "grid": 1,
+                      "laps": 72,
+                      "status": "Finished",
+                      "Time": {
+                        "time": "1:36:42.773",
+                        "millis": "5802773"
+                      },
+                      "FastestLap": {
+                        "rank": 1,
+                        "lap": 62,
+                        "Time": {
+                          "time": "1:13.652"
+                        },
+                        "AverageSpeed": {
+                          "units": "kph",
+                          "speed": 208.173
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Race results not found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/results/qualifying/{season}/{race}": {
+      "get": {
+        "tags": [
+          "Results"
+        ],
+        "summary": "Get Qualifying Results",
+        "operationId": "get_qualifying_results",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Season",
+              "type": "integer"
+            },
+            "name": "season",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Race",
+              "type": "integer"
+            },
+            "name": "race",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Response 200 Get Qualifying Results Results Qualifying  Season   Race  Get",
+                  "type": "array",
+                  "items": {}
+                },
+                "example": {
+                  "results": [
+                    {
+                      "number": 1,
+                      "position": 1,
+                      "Driver": {
+                        "driverId": "max_verstappen",
+                        "url": "http://en.wikipedia.org/wiki/Max_Verstappen",
+                        "givenName": "Max",
+                        "familyName": "Verstappen",
+                        "dateOfBirth": "1997-09-30",
+                        "nationality": "Dutch",
+                        "permanentNumber": 33,
+                        "code": "VER"
+                      },
+                      "Constructor": {
+                        "constructorId": "red_bull",
+                        "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
+                        "name": "Red Bull",
+                        "nationality": "Austrian"
+                      },
+                      "Q1": "1:19.295",
+                      "Q2": "1:18.793",
+                      "Q3": "1:27.999"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Qualifying results not found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/results/standings/drivers/{season}": {
+      "get": {
+        "tags": [
+          "Results",
+          "Season"
+        ],
+        "summary": "Get Driver Standings By Season",
+        "operationId": "get_driver_standings_by_season",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Season",
+              "type": "integer"
+            },
+            "name": "season",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DriverStandings"
+                },
+                "example": {
+                  "standings": [
+                    {
+                      "position": 1,
+                      "positionText": "1",
+                      "points": 335,
+                      "wins": 11,
+                      "Driver": {
+                        "driverId": "max_verstappen",
+                        "url": "http://en.wikipedia.org/wiki/Max_Verstappen",
+                        "givenName": "Max",
+                        "familyName": "Verstappen",
+                        "dateOfBirth": "1997-09-30",
+                        "nationality": "Dutch",
+                        "permanentNumber": 33,
+                        "code": "VER"
+                      },
+                      "Constructors": [
+                        {
+                          "constructorId": "red_bull",
+                          "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
+                          "name": "Red Bull",
+                          "nationality": "Austrian"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Standings not found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/results/standings/constructors/{season}": {
+      "get": {
+        "tags": [
+          "Results",
+          "Season"
+        ],
+        "summary": "Get Constructor Standings By Season",
+        "operationId": "get_constructor_standings_by_season",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Season",
+              "type": "integer"
+            },
+            "name": "season",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConstructorStandings"
+                },
+                "example": {
+                  "standings": [
+                    {
+                      "position": 1,
+                      "positionText": "1",
+                      "points": 545,
+                      "wins": 12,
+                      "Constructor": {
+                        "constructorId": "red_bull",
+                        "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
+                        "name": "Red Bull",
+                        "nationality": "Austrian"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Standings not found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AverageSpeed": {
+        "title": "AverageSpeed",
+        "required": [
+          "units",
+          "speed"
+        ],
+        "type": "object",
+        "properties": {
+          "units": {
+            "title": "Units",
+            "type": "string"
+          },
+          "speed": {
+            "title": "Speed",
+            "type": "number"
+          }
+        }
+      },
+      "Calendar": {
+        "title": "Calendar",
+        "required": [
+          "events"
+        ],
+        "type": "object",
+        "properties": {
+          "events": {
+            "title": "Events",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Event"
+            }
+          }
+        }
+      },
+      "Circuit": {
+        "title": "Circuit",
+        "required": [
+          "circuitId",
+          "url",
+          "circuitName",
+          "Location"
+        ],
+        "type": "object",
+        "properties": {
+          "circuitId": {
+            "title": "Circuitid",
+            "type": "string"
+          },
+          "url": {
+            "title": "Url",
+            "type": "string"
+          },
+          "circuitName": {
+            "title": "Circuitname",
+            "type": "string"
+          },
+          "Location": {
+            "$ref": "#/components/schemas/Location"
+          }
+        }
+      },
+      "Circuits": {
+        "title": "Circuits",
+        "required": [
+          "circuits"
+        ],
+        "type": "object",
+        "properties": {
+          "circuits": {
+            "title": "Circuits",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Circuit"
+            }
+          }
+        }
+      },
+      "Constructor": {
+        "title": "Constructor",
+        "required": [
+          "constructorId",
+          "url",
+          "name",
+          "nationality"
+        ],
+        "type": "object",
+        "properties": {
+          "constructorId": {
+            "title": "Constructorid",
+            "type": "string"
+          },
+          "url": {
+            "title": "Url",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "nationality": {
+            "title": "Nationality",
+            "type": "string"
+          }
+        }
+      },
+      "ConstructorStanding": {
+        "title": "ConstructorStanding",
+        "required": [
+          "position",
+          "positionText",
+          "points",
+          "wins",
+          "Constructor"
+        ],
+        "type": "object",
+        "properties": {
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "positionText": {
+            "title": "Positiontext",
+            "type": "string"
+          },
+          "points": {
+            "title": "Points",
+            "type": "integer"
+          },
+          "wins": {
+            "title": "Wins",
+            "type": "integer"
+          },
+          "Constructor": {
+            "$ref": "#/components/schemas/Constructor"
+          }
+        }
+      },
+      "ConstructorStandings": {
+        "title": "ConstructorStandings",
+        "required": [
+          "standings"
+        ],
+        "type": "object",
+        "properties": {
+          "standings": {
+            "title": "Standings",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConstructorStanding"
+            }
+          }
+        }
+      },
+      "Constructors": {
+        "title": "Constructors",
+        "required": [
+          "constructors"
+        ],
+        "type": "object",
+        "properties": {
+          "constructors": {
+            "title": "Constructors",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Constructor"
+            }
+          }
+        }
+      },
+      "Driver": {
+        "title": "Driver",
+        "required": [
+          "driverId",
+          "url",
+          "givenName",
+          "familyName",
+          "dateOfBirth",
+          "nationality"
+        ],
+        "type": "object",
+        "properties": {
+          "driverId": {
+            "title": "Driverid",
+            "type": "string"
+          },
+          "url": {
+            "title": "Url",
+            "type": "string"
+          },
+          "givenName": {
+            "title": "Givenname",
+            "type": "string"
+          },
+          "familyName": {
+            "title": "Familyname",
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "title": "Dateofbirth",
+            "type": "string"
+          },
+          "nationality": {
+            "title": "Nationality",
+            "type": "string"
+          },
+          "permanentNumber": {
+            "title": "Permanentnumber",
+            "type": "integer"
+          },
+          "code": {
+            "title": "Code",
+            "type": "string"
+          }
+        }
+      },
+      "DriverStanding": {
+        "title": "DriverStanding",
+        "required": [
+          "position",
+          "positionText",
+          "points",
+          "wins",
+          "Driver",
+          "Constructors"
+        ],
+        "type": "object",
+        "properties": {
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "positionText": {
+            "title": "Positiontext",
+            "type": "string"
+          },
+          "points": {
+            "title": "Points",
+            "type": "integer"
+          },
+          "wins": {
+            "title": "Wins",
+            "type": "integer"
+          },
+          "Driver": {
+            "$ref": "#/components/schemas/Driver"
+          },
+          "Constructors": {
+            "title": "Constructors",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Constructor"
+            }
+          }
+        }
+      },
+      "DriverStandings": {
+        "title": "DriverStandings",
+        "required": [
+          "standings"
+        ],
+        "type": "object",
+        "properties": {
+          "standings": {
+            "title": "Standings",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DriverStanding"
+            }
+          }
+        }
+      },
+      "Drivers": {
+        "title": "Drivers",
+        "required": [
+          "drivers"
+        ],
+        "type": "object",
+        "properties": {
+          "drivers": {
+            "title": "Drivers",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Driver"
+            }
+          }
+        }
+      },
+      "Event": {
+        "title": "Event",
+        "required": [
+          "season",
+          "round",
+          "url",
+          "raceName",
+          "Circuit",
+          "date"
+        ],
+        "type": "object",
+        "properties": {
+          "season": {
+            "title": "Season",
+            "type": "integer"
+          },
+          "round": {
+            "title": "Round",
+            "type": "integer"
+          },
+          "url": {
+            "title": "Url",
+            "type": "string"
+          },
+          "raceName": {
+            "title": "Racename",
+            "type": "string"
+          },
+          "Circuit": {
+            "$ref": "#/components/schemas/Circuit"
+          },
+          "date": {
+            "title": "Date",
+            "type": "string"
+          },
+          "time": {
+            "title": "Time",
+            "type": "string"
+          },
+          "FirstPractice": {
+            "$ref": "#/components/schemas/Session"
+          },
+          "SecondPractice": {
+            "$ref": "#/components/schemas/Session"
+          },
+          "ThirdPractice": {
+            "$ref": "#/components/schemas/Session"
+          },
+          "Qualifying": {
+            "$ref": "#/components/schemas/Session"
+          }
+        }
+      },
+      "FastestLap": {
+        "title": "FastestLap",
+        "required": [
+          "rank",
+          "lap",
+          "Time",
+          "AverageSpeed"
+        ],
+        "type": "object",
+        "properties": {
+          "rank": {
+            "title": "Rank",
+            "type": "integer"
+          },
+          "lap": {
+            "title": "Lap",
+            "type": "integer"
+          },
+          "Time": {
+            "$ref": "#/components/schemas/Time"
+          },
+          "AverageSpeed": {
+            "$ref": "#/components/schemas/AverageSpeed"
+          }
+        }
+      },
+      "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
+          }
+        }
+      },
+      "Location": {
+        "title": "Location",
+        "required": [
+          "lat",
+          "long",
+          "locality",
+          "country"
+        ],
+        "type": "object",
+        "properties": {
+          "lat": {
+            "title": "Lat",
+            "type": "number"
+          },
+          "long": {
+            "title": "Long",
+            "type": "number"
+          },
+          "locality": {
+            "title": "Locality",
+            "type": "string"
+          },
+          "country": {
+            "title": "Country",
+            "type": "string"
+          }
+        }
+      },
+      "Message": {
+        "title": "Message",
+        "required": [
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "message": {
+            "title": "Message",
+            "type": "string"
+          }
+        }
+      },
+      "NextEvent": {
+        "title": "NextEvent",
+        "required": [
+          "season",
+          "round"
+        ],
+        "type": "object",
+        "properties": {
+          "season": {
+            "title": "Season",
+            "type": "integer"
+          },
+          "round": {
+            "title": "Round",
+            "type": "integer"
+          }
+        }
+      },
+      "RaceResult": {
+        "title": "RaceResult",
+        "required": [
+          "number",
+          "position",
+          "positionText",
+          "points",
+          "Driver",
+          "Constructor",
+          "grid",
+          "laps",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "number": {
+            "title": "Number",
+            "type": "integer"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "positionText": {
+            "title": "Positiontext",
+            "type": "string"
+          },
+          "points": {
+            "title": "Points",
+            "type": "number"
+          },
+          "Driver": {
+            "$ref": "#/components/schemas/Driver"
+          },
+          "Constructor": {
+            "$ref": "#/components/schemas/Constructor"
+          },
+          "grid": {
+            "title": "Grid",
+            "type": "integer"
+          },
+          "laps": {
+            "title": "Laps",
+            "type": "integer"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "Time": {
+            "$ref": "#/components/schemas/Time"
+          },
+          "FastestLap": {
+            "$ref": "#/components/schemas/FastestLap"
+          }
+        }
+      },
+      "RaceResults": {
+        "title": "RaceResults",
+        "required": [
+          "results"
+        ],
+        "type": "object",
+        "properties": {
+          "results": {
+            "title": "Results",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RaceResult"
+            }
+          }
+        }
+      },
+      "Session": {
+        "title": "Session",
+        "type": "object",
+        "properties": {
+          "date": {
+            "title": "Date",
+            "type": "string"
+          },
+          "time": {
+            "title": "Time",
+            "type": "string"
+          }
+        }
+      },
+      "Time": {
+        "title": "Time",
+        "required": [
+          "time"
+        ],
+        "type": "object",
+        "properties": {
+          "time": {
+            "title": "Time",
+            "type": "string"
+          },
+          "millis": {
+            "title": "Millis",
+            "type": "string"
+          }
+        }
+      },
+      "ValidationError": {
+        "title": "ValidationError",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
