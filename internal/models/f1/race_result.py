@@ -10,7 +10,7 @@ class RaceResult(BaseModel):
     number: int
     position: int
     positionText: str
-    points: int
+    points: float
     Driver: Driver
     Constructor: Constructor
     grid: int
