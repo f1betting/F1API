@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
 from fastapi.routing import APIRoute
 
-from routers import constructors, calendar, drivers, circuits, results
+from app.routers import constructors, calendar, drivers, circuits, results
 
 app = FastAPI()
 

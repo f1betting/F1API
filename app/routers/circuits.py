@@ -2,8 +2,8 @@ import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from internal.models.f1.circuit import Circuit, Circuits, CircuitExample
-from internal.models.general.message import Message, create_message
+from app.internal.models.f1.circuit import Circuit, Circuits, CircuitExample
+from app.internal.models.general.message import Message, create_message
 
 router = APIRouter(
     tags=["Circuits"]

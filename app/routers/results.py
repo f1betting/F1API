@@ -2,12 +2,11 @@ import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from internal.models.f1.constructor_standing import ConstructorStandings, \
-    ConstructorStandingsExample
-from internal.models.f1.driver_standing import DriverStandings, DriverStandingsExample
-from internal.models.f1.qualifying_result import QualifyingResults, QualifyingResultExample
-from internal.models.f1.race_result import RaceResults, RaceResultExample
-from internal.models.general.message import Message, create_message
+from app.internal.models.f1.constructor_standing import ConstructorStandings, ConstructorStandingsExample
+from app.internal.models.f1.driver_standing import DriverStandings, DriverStandingsExample
+from app.internal.models.f1.qualifying_result import QualifyingResults, QualifyingResultExample
+from app.internal.models.f1.race_result import RaceResults, RaceResultExample
+from app.internal.models.general.message import Message, create_message
 
 router = APIRouter(
     prefix="/results",

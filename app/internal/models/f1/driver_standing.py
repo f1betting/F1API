@@ -1,6 +1,6 @@
 from pydantic import BaseModel
-from internal.models.f1.constructor import Constructor
-from internal.models.f1.driver import Driver
+from app.internal.models.f1.constructor import Constructor
+from app.internal.models.f1.driver import Driver
 
 
 class DriverStanding(BaseModel):
