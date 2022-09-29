@@ -1,6 +1,9 @@
 name: Docker Build and Push
 
-on: [ push, pull_request, workflow_dispatch ]
+on:
+  push:
+    tags:
+      - 'v*.*.*'
 
 jobs:
   build:
@@ -10,7 +13,7 @@ jobs:
 
       - name: Add short SHA to env
         run: |
-          echo "SHORT_SHA=`echo ${{ github.sha }} | cut -c1-8`" >> $GITHUB_ENV
+          echo "RELEASE_VERSION=${{ github.ref_name }}" >> $GITHUB_ENV
 
       - name: Docker Login
         env:
@@ -21,8 +24,8 @@ jobs:
 
       - name: Docker Build
         run: |
-          docker build -t ${{ secrets.DOCKER_USER }}/f1api:$SHORT_SHA .
+          docker build -t ${{ secrets.DOCKER_USER }}/f1api:$RELEASE_VERSION .
 
       - name: Docker Push
         run: |
-          docker push ${{ secrets.DOCKER_USER }}/f1api:$SHORT_SHA
+          docker push ${{ secrets.DOCKER_USER }}/f1api:$RELEASE_VERSION
