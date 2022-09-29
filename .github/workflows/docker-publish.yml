@@ -1,0 +1,28 @@
+name: Docker Build and Push
+
+on: [ push, pull_request, workflow_dispatch ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Add short SHA to env
+        run: |
+          echo "SHORT_SHA=`echo ${{ github.sha }} | cut -c1-8`" >> $GITHUB_ENV
+
+      - name: Docker Login
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+        run: |
+          docker login -u $DOCKER_USER -p $DOCKER_TOKEN
+
+      - name: Docker Build
+        run: |
+          docker build -t ${{ secrets.DOCKER_USER }}/f1api:$SHORT_SHA .
+
+      - name: Docker Push
+        run: |
+          docker push ${{ secrets.DOCKER_USER }}/f1api:$SHORT_SHA
