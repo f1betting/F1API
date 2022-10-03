@@ -13,8 +13,8 @@ class QualifyingResult(BaseModel):
     Q3: str | None
 
 
-class QualifyingResults(list[QualifyingResult]):
-    pass
+class QualifyingResults(BaseModel):
+    results: list[QualifyingResult]
 
 
 QualifyingResultExample = {
