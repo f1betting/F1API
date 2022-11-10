@@ -84,6 +84,8 @@ Below are the instructions for running the API for development and general usage
 
 ## 🚀 Usage
 
+<img src="docs/screenshot.png">
+
 A swagger browser is included at the ``/docs`` endpoint. Alternatively you can use the ``/redoc`` endpoint if you wish
 to use redoc.
 
