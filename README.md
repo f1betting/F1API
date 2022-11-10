@@ -6,9 +6,6 @@
   <p align="center">
     A more user-friendly way to use <a href="https://ergast.com/mrd/">ergast.com</a>
     <br />
-    <a href="https://github.com/niek-o/F1API/"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
     <a href="https://github.com/niek-o/F1API/issues">Report Bug</a>
     ·
     <a href="https://github.com/niek-o/F1API/issues">Request Feature</a>
