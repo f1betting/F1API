@@ -6,9 +6,9 @@
   <p align="center">
     A more user-friendly way to use <a href="https://ergast.com/mrd/">ergast.com</a>
     <br />
-    <a href="https://github.com/niek-o/F1API/issues">Report Bug</a>
+    <a href="https://github.com/f1betting/F1API/issues">Report Bug</a>
     ·
-    <a href="https://github.com/niek-o/F1API/issues">Request Feature</a>
+    <a href="https://github.com/f1betting/F1API/issues">Request Feature</a>
   </p>
 </div>
 
@@ -31,9 +31,6 @@
 ## ℹ️ About The Project
 
 A more user-friendly way to use [ergast.com](https://ergast.com/mrd/)!
-
-This project was made to use with [F1Betting](https://github.com/niek-o/F1Betting) as part of research for my
-internship.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -90,7 +87,8 @@ Below are the instructions for running the API for development and general usage
 A swagger browser is included at the ``/docs`` endpoint. Alternatively you can use the ``/redoc`` endpoint if you wish
 to use redoc.
 
-_For the OpenAPI specification, please refer to [OpenAPI.json](https://github.com/niek-o/F1API/blob/main/OpenAPI.json)_
+_For the OpenAPI specification, please refer
+to [OpenAPI.json](https://github.com/f1betting/F1API/blob/main/OpenAPI.json)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
