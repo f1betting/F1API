@@ -65,7 +65,7 @@ Below are the instructions for running the API for development and general usage
 
 ### 🏡 Running locally
 
-1. Install depedencies with pip using:
+1. Install dependencies with pip using:
 
    ````shell
    $ pip install -r requirements.txt
