@@ -1,10 +1,7 @@
-from json import JSONDecodeError
-
-import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from app.internal.logic.cache_init import cache_init, cache_write, get_cache
+from app.internal.logic.cache_init import get_cache
 from app.internal.models.f1.event import Calendar, EventExample, NextEvent, NextEventExample, Event
 from app.internal.models.general.message import Message, create_message
 
@@ -87,12 +84,13 @@ def get_next_race():
                 }}
             })
 def get_event_details(season: int, round: int):
-    data, timestamp = get_cache(f"http://185.229.22.110/api/f1/{season}/{round}.json", f"get_event_details.{season}.{round}")
+    data, timestamp = get_cache(f"http://185.229.22.110/api/f1/{season}/{round}.json",
+                                f"get_event_details.{season}.{round}")
 
-    event_data = data["MRData"]["RaceTable"]["Races"][0]
-    event_data["timestamp"] = timestamp
-
-    if not event_data:
+    try:
+        event_data = data["MRData"]["RaceTable"]["Races"][0]
+        event_data["timestamp"] = timestamp
+    except IndexError:
         return JSONResponse(status_code=404, content=create_message("Event not found"))
 
     return event_data
