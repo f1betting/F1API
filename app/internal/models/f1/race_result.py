@@ -1,12 +1,11 @@
-from pydantic import BaseModel
-
 from app.internal.models.f1.constructor import Constructor
 from app.internal.models.f1.driver import Driver
 from app.internal.models.f1.internal.fastest_lap import FastestLap
 from app.internal.models.f1.internal.time import Time
+from app.internal.models.general.request import BaseRequest
 
 
-class RaceResult(BaseModel):
+class RaceResult(BaseRequest):
     number: int
     position: int
     positionText: str
@@ -20,7 +19,7 @@ class RaceResult(BaseModel):
     FastestLap: FastestLap | None
 
 
-class RaceResults(BaseModel):
+class RaceResults(BaseRequest):
     results: list[RaceResult]
 
 

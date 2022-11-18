@@ -1,9 +1,9 @@
-from pydantic import BaseModel
 from app.internal.models.f1.constructor import Constructor
 from app.internal.models.f1.driver import Driver
+from app.internal.models.general.request import BaseRequest
 
 
-class QualifyingResult(BaseModel):
+class QualifyingResult(BaseRequest):
     number: int
     position: int
     Driver: Driver
@@ -13,7 +13,7 @@ class QualifyingResult(BaseModel):
     Q3: str | None
 
 
-class QualifyingResults(BaseModel):
+class QualifyingResults(BaseRequest):
     results: list[QualifyingResult]
 
 

@@ -2,6 +2,7 @@ import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
+from app.internal.logic.cache_init import get_cache
 from app.internal.models.f1.circuit import Circuit, Circuits, CircuitExample
 from app.internal.models.general.message import Message, create_message
 
@@ -11,7 +12,7 @@ router = APIRouter(
 
 
 # CIRCUITS
-# https://ergast.com/mrd/methods/circuits/
+# http://185.229.22.110/mrd/methods/circuits/
 
 @router.get("/circuits",
             response_model=Circuits,
@@ -32,15 +33,14 @@ router = APIRouter(
                 }}
             })
 async def get_circuits():
-    url = f"https://ergast.com/api/f1/circuits.json?limit=100"
-    res = requests.get(url)
-    data = res.json()
-    circuits = data["MRData"]["CircuitTable"]["Circuits"]
+    data, timestamp = get_cache("http://185.229.22.110/api/f1/circuits.json?limit=100", "get_circuits")
 
-    if not circuits:
+    circuits = {"circuits": data["MRData"]["CircuitTable"]["Circuits"], "timestamp": timestamp}
+
+    if not circuits["circuits"]:
         return JSONResponse(status_code=404, content=create_message("Circuits not found"))
 
-    return {"circuits": circuits}
+    return circuits
 
 
 @router.get("/circuits/{season}",
@@ -63,15 +63,15 @@ async def get_circuits():
                 }}
             })
 async def get_circuits_by_season(season: str):
-    url = f"https://ergast.com/api/f1/{season}/circuits.json?limit=100"
-    res = requests.get(url)
-    data = res.json()
-    circuits = data["MRData"]["CircuitTable"]["Circuits"]
+    data, timestamp = get_cache(f"http://185.229.22.110/api/f1/{season}/circuits.json?limit=100",
+                                f"get_circuits_by_season.{season}")
 
-    if not circuits:
+    circuits = {"circuits": data["MRData"]["CircuitTable"]["Circuits"], "timestamp": timestamp}
+
+    if not circuits["circuits"]:
         return JSONResponse(status_code=404, content=create_message("Circuits not found"))
 
-    return {"circuits": circuits}
+    return circuits
 
 
 @router.get("/circuit/{circuit_id}",
@@ -89,12 +89,13 @@ async def get_circuits_by_season(season: str):
                 }}
             })
 async def get_circuit_by_id(circuit_id: str):
-    url = f"https://ergast.com/api/f1/circuits/{circuit_id}.json"
-    res = requests.get(url)
-    data = res.json()
-    circuit = data["MRData"]["CircuitTable"]["Circuits"]
+    data, timestamp = get_cache(f"http://185.229.22.110/api/f1/circuits/{circuit_id}.json",
+                                f"get_circuit_by_id.{circuit_id}")
 
-    if not circuit:
+    try:
+        circuit = data["MRData"]["CircuitTable"]["Circuits"][0]
+        circuit["timestamp"] = timestamp
+    except IndexError:
         return JSONResponse(status_code=404, content=create_message("Circuit not found"))
 
-    return circuit[0]
+    return circuit

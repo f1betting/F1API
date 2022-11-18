@@ -1,7 +1,10 @@
+from json import JSONDecodeError
+
 import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
+from app.internal.logic.cache_init import cache_init, cache_write, get_cache
 from app.internal.models.f1.event import Calendar, EventExample, NextEvent, NextEventExample, Event
 from app.internal.models.general.message import Message, create_message
 
@@ -9,7 +12,7 @@ router = APIRouter()
 
 
 # CALENDAR
-# https://ergast.com/mrd/methods/schedule/
+# http://185.229.22.110/mrd/methods/schedule/
 
 @router.get("/calendar/{season}",
             tags=["Season"],
@@ -31,15 +34,14 @@ router = APIRouter()
                 }}
             })
 def get_calendar_by_season(season: int):
-    url = f"https://ergast.com/api/f1/{season}.json"
-    res = requests.get(url)
-    data = res.json()
-    calendar = data["MRData"]["RaceTable"]["Races"]
+    data, timestamp = get_cache(f"http://185.229.22.110/api/f1/{season}.json", f"get_calendar_by_season.{season}")
 
-    if not calendar:
+    calendar = {"events": data["MRData"]["RaceTable"]["Races"], "timestamp": timestamp}
+
+    if not calendar["events"]:
         return JSONResponse(status_code=404, content=create_message("Calendar not found"))
 
-    return {"events": calendar}
+    return calendar
 
 
 @router.get("/event/next",
@@ -58,10 +60,10 @@ def get_calendar_by_season(season: int):
                 }}
             })
 def get_next_race():
-    url = f"https://ergast.com/api/f1/current/next/results.json"
-    res = requests.get(url)
-    data = res.json()
+    data, timestamp = get_cache("http://185.229.22.110/api/f1/current/next.json", "get_next_race")
+
     event_data = data["MRData"]["RaceTable"]
+    event_data["timestamp"] = timestamp
 
     if not event_data:
         return JSONResponse(status_code=404, content=create_message("Event not found"))
@@ -85,12 +87,18 @@ def get_next_race():
                 }}
             })
 def get_event_details(season: int, round: int):
-    url = f"https://ergast.com/api/f1/{season}/{round}.json"
-    res = requests.get(url)
-    data = res.json()
+    data, timestamp = get_cache(f"http://185.229.22.110/api/f1/{season}/{round}.json", f"get_event_details.{season}.{round}")
+
     event_data = data["MRData"]["RaceTable"]["Races"][0]
+    event_data["timestamp"] = timestamp
 
     if not event_data:
         return JSONResponse(status_code=404, content=create_message("Event not found"))
 
     return event_data
+
+
+@router.get("/test")
+def test():
+    data = get_cache("https://sandbox.api.service.nhs.uk/hello-world/hello/world", "test")
+    return data

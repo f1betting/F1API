@@ -1,7 +1,7 @@
-import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
+from app.internal.logic.cache_init import get_cache
 from app.internal.models.f1.driver import Driver, Drivers, DriverExample
 from app.internal.models.general.message import Message, create_message
 
@@ -11,7 +11,7 @@ router = APIRouter(
 
 
 # DRIVERS
-# https://ergast.com/mrd/methods/drivers/
+# http://185.229.22.110/mrd/methods/drivers/
 
 @router.get("/drivers",
             response_model=Drivers,
@@ -32,15 +32,15 @@ router = APIRouter(
                 }}
             })
 async def get_drivers():
-    url = f"https://ergast.com/api/f1/drivers.json?limit=1000"
-    res = requests.get(url)
-    data = res.json()
-    drivers = data["MRData"]["DriverTable"]["Drivers"]
+    data, timestamp = get_cache("http://185.229.22.110/api/f1/drivers.json?limit=1000",
+                                f"get_drivers")
 
-    if not drivers:
+    drivers = {"drivers": data["MRData"]["DriverTable"]["Drivers"], "timestamp": timestamp}
+
+    if not drivers["drivers"]:
         return JSONResponse(status_code=404, content=create_message("Drivers not found"))
 
-    return {"drivers": drivers}
+    return drivers
 
 
 @router.get("/drivers/{season}",
@@ -63,15 +63,15 @@ async def get_drivers():
                 }}
             })
 async def get_drivers_by_season(season: int):
-    url = f"https://ergast.com/api/f1/{season}/drivers.json?limit=1000"
-    res = requests.get(url)
-    data = res.json()
-    drivers = data["MRData"]["DriverTable"]["Drivers"]
+    data, timestamp = get_cache(f"http://185.229.22.110/api/f1/{season}/drivers.json?limit=1000",
+                                f"get_drivers_by_season.{season}")
 
-    if not drivers:
+    drivers = {"drivers": data["MRData"]["DriverTable"]["Drivers"], "timestamp": timestamp}
+
+    if not drivers["drivers"]:
         return JSONResponse(status_code=404, content=create_message("Drivers not found"))
 
-    return {"drivers": drivers}
+    return drivers
 
 
 @router.get("/driver/{driver_id}",
@@ -89,12 +89,13 @@ async def get_drivers_by_season(season: int):
                 }}
             })
 async def get_driver_by_id(driver_id: str):
-    url = f"https://ergast.com/api/f1/drivers/{driver_id}.json"
-    res = requests.get(url)
-    data = res.json()
-    driver = data["MRData"]["DriverTable"]["Drivers"]
+    data, timestamp = get_cache(f"http://185.229.22.110/api/f1/drivers/{driver_id}.json",
+                                f"get_driver_by_id.{driver_id}")
 
-    if not driver:
+    try:
+        driver = data["MRData"]["DriverTable"]["Drivers"][0]
+        driver["timestamp"] = timestamp
+    except IndexError:
         return JSONResponse(status_code=404, content=create_message("Driver not found"))
 
-    return driver[0]
+    return driver

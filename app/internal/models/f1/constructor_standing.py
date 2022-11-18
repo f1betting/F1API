@@ -1,8 +1,8 @@
-from pydantic import BaseModel
 from app.internal.models.f1.constructor import Constructor
+from app.internal.models.general.request import BaseRequest
 
 
-class ConstructorStanding(BaseModel):
+class ConstructorStanding(BaseRequest):
     position: int
     positionText: str
     points: int
@@ -10,7 +10,7 @@ class ConstructorStanding(BaseModel):
     Constructor: Constructor
 
 
-class ConstructorStandings(BaseModel):
+class ConstructorStandings(BaseRequest):
     standings: list[ConstructorStanding]
 
 

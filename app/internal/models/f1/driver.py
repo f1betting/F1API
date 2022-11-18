@@ -1,7 +1,7 @@
-from pydantic import BaseModel
+from app.internal.models.general.request import BaseRequest
 
 
-class Driver(BaseModel):
+class Driver(BaseRequest):
     driverId: str
     url: str
     givenName: str
@@ -12,7 +12,7 @@ class Driver(BaseModel):
     code: str | None
 
 
-class Drivers(BaseModel):
+class Drivers(BaseRequest):
     drivers: list[Driver]
 
 

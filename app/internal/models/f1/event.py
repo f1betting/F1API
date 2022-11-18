@@ -2,9 +2,10 @@ from pydantic import BaseModel
 
 from app.internal.models.f1.circuit import Circuit
 from app.internal.models.f1.internal.session import Session
+from app.internal.models.general.request import BaseRequest
 
 
-class Event(BaseModel):
+class Event(BaseRequest):
     season: int
     round: int
     url: str
@@ -18,11 +19,11 @@ class Event(BaseModel):
     Qualifying: Session | None
 
 
-class Calendar(BaseModel):
+class Calendar(BaseRequest):
     events: list[Event]
 
 
-class NextEvent(BaseModel):
+class NextEvent(BaseRequest):
     season: int
     round: int
 

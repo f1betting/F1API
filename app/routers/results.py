@@ -1,7 +1,7 @@
-import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
+from app.internal.logic.cache_init import get_cache
 from app.internal.models.f1.constructor_standing import ConstructorStandings, ConstructorStandingsExample
 from app.internal.models.f1.driver_standing import DriverStandings, DriverStandingsExample
 from app.internal.models.f1.qualifying_result import QualifyingResults, QualifyingResultExample
@@ -15,7 +15,7 @@ router = APIRouter(
 
 
 # RACE RESULTS
-# https://ergast.com/mrd/methods/results/
+# http://185.229.22.110/mrd/methods/results/
 
 @router.get("/race/{season}/{race}",
             response_model=RaceResults,
@@ -36,22 +36,20 @@ router = APIRouter(
                 }}
             })
 async def get_race_results(season: int, race: int):
-    url = f"https://ergast.com/api/f1/{season}/{race}/results.json"
-    res = requests.get(url)
-    data = res.json()
-    race_results = data["MRData"]["RaceTable"]["Races"]
+    data, timestamp = get_cache(f"http://185.229.22.110/api/f1/{season}/{race}/results.json",
+                                f"get_race_results.{season}.{race}")
 
-    if not race_results:
-        return JSONResponse(status_code=404, content={"message": "Race results not found"})
+    results = {"results": data["MRData"]["RaceTable"]["Races"][0]["Results"],
+               "timestamp": timestamp}
 
-    if race_results:
-        race_results = race_results[0]["Results"]
+    if not results["results"]:
+        return JSONResponse(status_code=404, content=create_message("Race results not found"))
 
-    return {"results": race_results}
+    return results
 
 
 # QUALIFYING RESULTS
-# https://ergast.com/mrd/methods/qualifying/
+# http://185.229.22.110/mrd/methods/qualifying/
 
 @router.get("/qualifying/{season}/{race}",
             response_model=QualifyingResults,
@@ -72,22 +70,20 @@ async def get_race_results(season: int, race: int):
                 }}
             })
 def get_qualifying_results(season: int, race: int):
-    url = f"https://ergast.com/api/f1/{season}/{race}/qualifying.json"
-    res = requests.get(url)
-    data = res.json()
-    qualifying_results = data["MRData"]["RaceTable"]["Races"]
+    data, timestamp = get_cache(f"http://185.229.22.110/api/f1/{season}/{race}/qualifying.json",
+                                f"get_qualifying_results.{season}.{race}")
 
-    if not qualifying_results:
-        return JSONResponse(status_code=404, content={"message": "Qualifying results not found"})
+    results = {"results": data["MRData"]["RaceTable"]["Races"][0]["QualifyingResults"],
+               "timestamp": timestamp}
 
-    if qualifying_results:
-        qualifying_results = qualifying_results[0]["QualifyingResults"]
+    if not results["results"]:
+        return JSONResponse(status_code=404, content=create_message("Qualifying results not found"))
 
-    return {"results": qualifying_results}
+    return results
 
 
 # STANDINGS
-# https://ergast.com/mrd/methods/standings/
+# http://185.229.22.110/mrd/methods/standings/
 
 @router.get("/standings/drivers/{season}",
             tags=["Season"],
@@ -109,18 +105,16 @@ def get_qualifying_results(season: int, race: int):
                 }}
             })
 def get_driver_standings_by_season(season: int):
-    url = f"https://ergast.com/api/f1/{season}/driverStandings.json"
-    res = requests.get(url)
-    data = res.json()
-    standings = data["MRData"]["StandingsTable"]["StandingsLists"]
+    data, timestamp = get_cache(f"http://185.229.22.110/api/f1/{season}/driverStandings.json",
+                                f"get_driver_standings_by_season.{season}")
 
-    if not standings:
-        return JSONResponse(status_code=404, content={"message": "Standings not found"})
+    standings = {"standings": data["MRData"]["StandingsTable"]["StandingsLists"][0]["DriverStandings"],
+                 "timestamp": timestamp}
 
-    if standings:
-        standings = standings[0]["DriverStandings"]
+    if not standings["standings"]:
+        return JSONResponse(status_code=404, content=create_message("Standings not found"))
 
-    return {"standings": standings}
+    return standings
 
 
 @router.get("/standings/constructors/{season}",
@@ -143,15 +137,13 @@ def get_driver_standings_by_season(season: int):
                 }}
             })
 def get_constructor_standings_by_season(season: int):
-    url = f"https://ergast.com/api/f1/{season}/constructorStandings.json"
-    res = requests.get(url)
-    data = res.json()
-    standings = data["MRData"]["StandingsTable"]["StandingsLists"]
+    data, timestamp = get_cache(f"http://185.229.22.110/api/f1/{season}/constructorStandings.json",
+                                f"get_constructor_standings_by_season.{season}")
 
-    if not standings:
-        return JSONResponse(status_code=404, content={"message": "Standings not found"})
+    standings = {"standings": data["MRData"]["StandingsTable"]["StandingsLists"][0]["ConstructorStandings"],
+                 "timestamp": timestamp}
 
-    if standings:
-        standings = standings[0]["ConstructorStandings"]
+    if not standings["standings"]:
+        return JSONResponse(status_code=404, content=create_message("Standings not found"))
 
-    return {"standings": standings}
+    return standings

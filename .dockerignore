@@ -18,3 +18,8 @@ coverage.xml
 .mypy_cache
 .pytest_cache
 .hypothesis
+cache
+
+app/cache/*
+!.gitkeep
+!**/.gitkeep

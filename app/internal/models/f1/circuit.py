@@ -1,5 +1,7 @@
 from pydantic import BaseModel
 
+from app.internal.models.general.request import BaseRequest
+
 
 class Location(BaseModel):
     lat: float
@@ -8,14 +10,14 @@ class Location(BaseModel):
     country: str
 
 
-class Circuit(BaseModel):
+class Circuit(BaseRequest):
     circuitId: str
     url: str
     circuitName: str
     Location: Location
 
 
-class Circuits(BaseModel):
+class Circuits(BaseRequest):
     circuits: list[Circuit]
 
 

@@ -1,14 +1,16 @@
 from pydantic import BaseModel
 
+from app.internal.models.general.request import BaseRequest
 
-class Constructor(BaseModel):
+
+class Constructor(BaseRequest):
     constructorId: str
     url: str
     name: str
     nationality: str
 
 
-class Constructors(BaseModel):
+class Constructors(BaseRequest):
     constructors: list[Constructor]
 
 
