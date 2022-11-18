@@ -244,6 +244,22 @@
         }
       }
     },
+    "/test": {
+      "get": {
+        "summary": "Test",
+        "operationId": "test",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
     "/circuits": {
       "get": {
         "tags": [
@@ -925,9 +941,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "Response 200 Get Qualifying Results Results Qualifying  Season   Race  Get",
-                  "type": "array",
-                  "items": {}
+                  "$ref": "#/components/schemas/QualifyingResults"
                 },
                 "example": {
                   "results": [
@@ -1169,6 +1183,10 @@
         ],
         "type": "object",
         "properties": {
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "number"
+          },
           "events": {
             "title": "Events",
             "type": "array",
@@ -1188,6 +1206,10 @@
         ],
         "type": "object",
         "properties": {
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "number"
+          },
           "circuitId": {
             "title": "Circuitid",
             "type": "string"
@@ -1212,6 +1234,10 @@
         ],
         "type": "object",
         "properties": {
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "number"
+          },
           "circuits": {
             "title": "Circuits",
             "type": "array",
@@ -1231,6 +1257,10 @@
         ],
         "type": "object",
         "properties": {
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "number"
+          },
           "constructorId": {
             "title": "Constructorid",
             "type": "string"
@@ -1260,6 +1290,10 @@
         ],
         "type": "object",
         "properties": {
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "number"
+          },
           "position": {
             "title": "Position",
             "type": "integer"
@@ -1288,6 +1322,10 @@
         ],
         "type": "object",
         "properties": {
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "number"
+          },
           "standings": {
             "title": "Standings",
             "type": "array",
@@ -1304,6 +1342,10 @@
         ],
         "type": "object",
         "properties": {
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "number"
+          },
           "constructors": {
             "title": "Constructors",
             "type": "array",
@@ -1325,6 +1367,10 @@
         ],
         "type": "object",
         "properties": {
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "number"
+          },
           "driverId": {
             "title": "Driverid",
             "type": "string"
@@ -1371,6 +1417,10 @@
         ],
         "type": "object",
         "properties": {
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "number"
+          },
           "position": {
             "title": "Position",
             "type": "integer"
@@ -1406,6 +1456,10 @@
         ],
         "type": "object",
         "properties": {
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "number"
+          },
           "standings": {
             "title": "Standings",
             "type": "array",
@@ -1422,6 +1476,10 @@
         ],
         "type": "object",
         "properties": {
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "number"
+          },
           "drivers": {
             "title": "Drivers",
             "type": "array",
@@ -1443,6 +1501,10 @@
         ],
         "type": "object",
         "properties": {
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "number"
+          },
           "season": {
             "title": "Season",
             "type": "integer"
@@ -1572,6 +1634,10 @@
         ],
         "type": "object",
         "properties": {
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "number"
+          },
           "season": {
             "title": "Season",
             "type": "integer"
@@ -1579,6 +1645,68 @@
           "round": {
             "title": "Round",
             "type": "integer"
+          }
+        }
+      },
+      "QualifyingResult": {
+        "title": "QualifyingResult",
+        "required": [
+          "number",
+          "position",
+          "Driver",
+          "Constructor"
+        ],
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "number"
+          },
+          "number": {
+            "title": "Number",
+            "type": "integer"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "Driver": {
+            "$ref": "#/components/schemas/Driver"
+          },
+          "Constructor": {
+            "$ref": "#/components/schemas/Constructor"
+          },
+          "Q1": {
+            "title": "Q1",
+            "type": "string"
+          },
+          "Q2": {
+            "title": "Q2",
+            "type": "string"
+          },
+          "Q3": {
+            "title": "Q3",
+            "type": "string"
+          }
+        }
+      },
+      "QualifyingResults": {
+        "title": "QualifyingResults",
+        "required": [
+          "results"
+        ],
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "number"
+          },
+          "results": {
+            "title": "Results",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QualifyingResult"
+            }
           }
         }
       },
@@ -1597,6 +1725,10 @@
         ],
         "type": "object",
         "properties": {
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "number"
+          },
           "number": {
             "title": "Number",
             "type": "integer"
@@ -1646,6 +1778,10 @@
         ],
         "type": "object",
         "properties": {
+          "timestamp": {
+            "title": "Timestamp",
+            "type": "number"
+          },
           "results": {
             "title": "Results",
             "type": "array",
