@@ -25,6 +25,11 @@ router = APIRouter(
                         "example": create_message("Race results not found")
                     }
                 }},
+                503: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Service unavailable")
+                    }
+                }},
                 200: {"model": RaceResults, "content": {
                     "application/json": {
                         "example": {
@@ -42,8 +47,10 @@ async def get_race_results(season: int, race: int):
     try:
         results = {"results": data["MRData"]["RaceTable"]["Races"][0]["Results"],
                    "timestamp": timestamp}
-    except (IndexError, KeyError):
+    except IndexError:
         return JSONResponse(status_code=404, content=create_message("Race results not found"))
+    except KeyError:
+        return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return results
 
@@ -57,6 +64,11 @@ async def get_race_results(season: int, race: int):
                 404: {"model": Message, "content": {
                     "application/json": {
                         "example": create_message("Qualifying results not found")
+                    }
+                }},
+                503: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Service unavailable")
                     }
                 }},
                 200: {"model": QualifyingResults, "content": {
@@ -76,8 +88,10 @@ def get_qualifying_results(season: int, race: int):
     try:
         results = {"results": data["MRData"]["RaceTable"]["Races"][0]["QualifyingResults"],
                    "timestamp": timestamp}
-    except (IndexError, KeyError):
+    except IndexError:
         return JSONResponse(status_code=404, content=create_message("Qualifying results not found"))
+    except KeyError:
+        return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return results
 
@@ -92,6 +106,11 @@ def get_qualifying_results(season: int, race: int):
                 404: {"model": Message, "content": {
                     "application/json": {
                         "example": create_message("Standings not found")
+                    }
+                }},
+                503: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Service unavailable")
                     }
                 }},
                 200: {"model": DriverStandings, "content": {
@@ -111,8 +130,10 @@ def get_driver_standings_by_season(season: int):
     try:
         standings = {"standings": data["MRData"]["StandingsTable"]["StandingsLists"][0]["DriverStandings"],
                      "timestamp": timestamp}
-    except (IndexError, KeyError):
+    except IndexError:
         return JSONResponse(status_code=404, content=create_message("Standings not found"))
+    except KeyError:
+        return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return standings
 
@@ -124,6 +145,11 @@ def get_driver_standings_by_season(season: int):
                 404: {"model": Message, "content": {
                     "application/json": {
                         "example": create_message("Standings not found")
+                    }
+                }},
+                503: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Service unavailable")
                     }
                 }},
                 200: {"model": ConstructorStandings, "content": {
@@ -143,7 +169,9 @@ def get_constructor_standings_by_season(season: int):
     try:
         standings = {"standings": data["MRData"]["StandingsTable"]["StandingsLists"][0]["ConstructorStandings"],
                      "timestamp": timestamp}
-    except (IndexError, KeyError):
+    except IndexError:
         return JSONResponse(status_code=404, content=create_message("Standings not found"))
+    except KeyError:
+        return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return standings
