@@ -44,7 +44,7 @@ def custom_openapi():
 
     openapi_schema = get_openapi(
         title="F1 API",
-        version="1.2.3",
+        version="1.2.5",
         description="An easier way to use the [ergast.com](https://ergast.com/mrd/) F1 API, with correct types!",
         license_info={
             "name": "MIT",

@@ -7,7 +7,7 @@
       "name": "MIT",
       "url": "https://github.com/niek-o/F1API/blob/main/LICENSE.md"
     },
-    "version": "1.2.3",
+    "version": "1.2.5",
     "x-logo": {
       "url": "https://upload.wikimedia.org/wikipedia/commons/f/f2/New_era_F1_logo.png"
     }
@@ -163,8 +163,8 @@
         "tags": [
           "Events"
         ],
-        "summary": "Get Next Race",
-        "operationId": "get_next_race",
+        "summary": "Get Previous Race",
+        "operationId": "get_previous_race",
         "responses": {
           "200": {
             "description": "Successful Response",
