@@ -35,9 +35,9 @@ async def get_constructors():
     data, timestamp = get_cache("http://185.229.22.110/api/f1/constructors.json?limit=300",
                                 "get_constructors")
 
-    constructors = {"constructors": data["MRData"]["ConstructorTable"]["Constructors"], "timestamp": timestamp}
-
-    if not constructors["constructors"]:
+    try:
+        constructors = {"constructors": data["MRData"]["ConstructorTable"]["Constructors"], "timestamp": timestamp}
+    except (IndexError, KeyError):
         return JSONResponse(status_code=404, content=create_message("Constructors not found"))
 
     return constructors
@@ -66,9 +66,9 @@ async def get_constructors_by_season(season: str):
     data, timestamp = get_cache(f"http://185.229.22.110/api/f1/{season}/constructors.json?limit=300",
                                 f"get_constructors_by_season.{season}")
 
-    constructors = {"constructors": data["MRData"]["ConstructorTable"]["Constructors"], "timestamp": timestamp}
-
-    if not constructors["constructors"]:
+    try:
+        constructors = {"constructors": data["MRData"]["ConstructorTable"]["Constructors"], "timestamp": timestamp}
+    except (IndexError, KeyError):
         return JSONResponse(status_code=404, content=create_message("Constructors not found"))
 
     return constructors
@@ -95,7 +95,7 @@ async def get_constructor_by_id(constructor_id: str):
     try:
         constructor = data["MRData"]["ConstructorTable"]["Constructors"][0]
         constructor["timestamp"] = timestamp
-    except IndexError:
+    except (IndexError, KeyError):
         return JSONResponse(status_code=404, content=create_message("Constructor not found"))
 
     return constructor

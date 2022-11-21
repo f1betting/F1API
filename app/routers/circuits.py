@@ -35,9 +35,9 @@ router = APIRouter(
 async def get_circuits():
     data, timestamp = get_cache("http://185.229.22.110/api/f1/circuits.json?limit=100", "get_circuits")
 
-    circuits = {"circuits": data["MRData"]["CircuitTable"]["Circuits"], "timestamp": timestamp}
-
-    if not circuits["circuits"]:
+    try:
+        circuits = {"circuits": data["MRData"]["CircuitTable"]["Circuits"], "timestamp": timestamp}
+    except (IndexError, KeyError):
         return JSONResponse(status_code=404, content=create_message("Circuits not found"))
 
     return circuits
@@ -66,9 +66,9 @@ async def get_circuits_by_season(season: str):
     data, timestamp = get_cache(f"http://185.229.22.110/api/f1/{season}/circuits.json?limit=100",
                                 f"get_circuits_by_season.{season}")
 
-    circuits = {"circuits": data["MRData"]["CircuitTable"]["Circuits"], "timestamp": timestamp}
-
-    if not circuits["circuits"]:
+    try:
+        circuits = {"circuits": data["MRData"]["CircuitTable"]["Circuits"], "timestamp": timestamp}
+    except (IndexError, KeyError):
         return JSONResponse(status_code=404, content=create_message("Circuits not found"))
 
     return circuits
@@ -95,7 +95,7 @@ async def get_circuit_by_id(circuit_id: str):
     try:
         circuit = data["MRData"]["CircuitTable"]["Circuits"][0]
         circuit["timestamp"] = timestamp
-    except IndexError:
+    except (IndexError, KeyError):
         return JSONResponse(status_code=404, content=create_message("Circuit not found"))
 
     return circuit

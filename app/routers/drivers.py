@@ -35,9 +35,9 @@ async def get_drivers():
     data, timestamp = get_cache("http://185.229.22.110/api/f1/drivers.json?limit=1000",
                                 f"get_drivers")
 
-    drivers = {"drivers": data["MRData"]["DriverTable"]["Drivers"], "timestamp": timestamp}
-
-    if not drivers["drivers"]:
+    try:
+        drivers = {"drivers": data["MRData"]["DriverTable"]["Drivers"], "timestamp": timestamp}
+    except (IndexError, KeyError):
         return JSONResponse(status_code=404, content=create_message("Drivers not found"))
 
     return drivers
@@ -66,9 +66,9 @@ async def get_drivers_by_season(season: int):
     data, timestamp = get_cache(f"http://185.229.22.110/api/f1/{season}/drivers.json?limit=1000",
                                 f"get_drivers_by_season.{season}")
 
-    drivers = {"drivers": data["MRData"]["DriverTable"]["Drivers"], "timestamp": timestamp}
-
-    if not drivers["drivers"]:
+    try:
+        drivers = {"drivers": data["MRData"]["DriverTable"]["Drivers"], "timestamp": timestamp}
+    except (IndexError, KeyError):
         return JSONResponse(status_code=404, content=create_message("Drivers not found"))
 
     return drivers
@@ -95,7 +95,7 @@ async def get_driver_by_id(driver_id: str):
     try:
         driver = data["MRData"]["DriverTable"]["Drivers"][0]
         driver["timestamp"] = timestamp
-    except IndexError:
+    except (IndexError, KeyError):
         return JSONResponse(status_code=404, content=create_message("Driver not found"))
 
     return driver

@@ -3,7 +3,7 @@ import time
 from json import JSONDecodeError
 from pathlib import Path
 
-from app.internal.logic.req import req
+import requests
 
 
 def cache_init(file_name, duration):
@@ -55,7 +55,7 @@ def get_cache(url, path, duration=3600):
             return [cache, timestamp]
         case False:
             try:
-                data = req(url)
+                data = requests.get(url).json()
 
                 cache_write(data, path)
             except JSONDecodeError:
@@ -63,7 +63,7 @@ def get_cache(url, path, duration=3600):
             finally:
                 return [cache, timestamp]
         case None:
-            data = req(url)
+            data = requests.get(url).json()
 
             cache_write(data, path)
             return [data, timestamp]

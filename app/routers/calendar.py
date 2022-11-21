@@ -33,9 +33,9 @@ router = APIRouter()
 def get_calendar_by_season(season: int):
     data, timestamp = get_cache(f"http://185.229.22.110/api/f1/{season}.json", f"get_calendar_by_season.{season}")
 
-    calendar = {"events": data["MRData"]["RaceTable"]["Races"], "timestamp": timestamp}
-
-    if not calendar["events"]:
+    try:
+        calendar = {"events": data["MRData"]["RaceTable"]["Races"], "timestamp": timestamp}
+    except KeyError:
         return JSONResponse(status_code=404, content=create_message("Calendar not found"))
 
     return calendar
@@ -59,10 +59,10 @@ def get_calendar_by_season(season: int):
 def get_next_race():
     data, timestamp = get_cache("http://185.229.22.110/api/f1/current/next.json", "get_next_race")
 
-    event_data = data["MRData"]["RaceTable"]
-    event_data["timestamp"] = timestamp
-
-    if not event_data:
+    try:
+        event_data = data["MRData"]["RaceTable"]
+        event_data["timestamp"] = timestamp
+    except (IndexError, KeyError):
         return JSONResponse(status_code=404, content=create_message("Event not found"))
 
     return event_data
@@ -90,7 +90,7 @@ def get_event_details(season: int, round: int):
     try:
         event_data = data["MRData"]["RaceTable"]["Races"][0]
         event_data["timestamp"] = timestamp
-    except IndexError:
+    except (IndexError, KeyError):
         return JSONResponse(status_code=404, content=create_message("Event not found"))
 
     return event_data

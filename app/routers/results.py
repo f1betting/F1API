@@ -42,7 +42,7 @@ async def get_race_results(season: int, race: int):
     try:
         results = {"results": data["MRData"]["RaceTable"]["Races"][0]["Results"],
                    "timestamp": timestamp}
-    except IndexError:
+    except (IndexError, KeyError):
         return JSONResponse(status_code=404, content=create_message("Race results not found"))
 
     return results
@@ -76,7 +76,7 @@ def get_qualifying_results(season: int, race: int):
     try:
         results = {"results": data["MRData"]["RaceTable"]["Races"][0]["QualifyingResults"],
                    "timestamp": timestamp}
-    except IndexError:
+    except (IndexError, KeyError):
         return JSONResponse(status_code=404, content=create_message("Qualifying results not found"))
 
     return results
@@ -111,7 +111,7 @@ def get_driver_standings_by_season(season: int):
     try:
         standings = {"standings": data["MRData"]["StandingsTable"]["StandingsLists"][0]["DriverStandings"],
                      "timestamp": timestamp}
-    except IndexError:
+    except (IndexError, KeyError):
         return JSONResponse(status_code=404, content=create_message("Standings not found"))
 
     return standings
@@ -143,7 +143,7 @@ def get_constructor_standings_by_season(season: int):
     try:
         standings = {"standings": data["MRData"]["StandingsTable"]["StandingsLists"][0]["ConstructorStandings"],
                      "timestamp": timestamp}
-    except IndexError:
+    except (IndexError, KeyError):
         return JSONResponse(status_code=404, content=create_message("Standings not found"))
 
     return standings
