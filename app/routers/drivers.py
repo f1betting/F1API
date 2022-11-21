@@ -21,6 +21,11 @@ router = APIRouter(
                         "example": create_message("Drivers not found")
                     }
                 }},
+                503: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Service unavailable")
+                    }
+                }},
                 200: {"model": Drivers, "content": {
                     "application/json": {
                         "example": {
@@ -37,8 +42,10 @@ async def get_drivers():
 
     try:
         drivers = {"drivers": data["MRData"]["DriverTable"]["Drivers"], "timestamp": timestamp}
-    except (IndexError, KeyError):
+    except IndexError:
         return JSONResponse(status_code=404, content=create_message("Drivers not found"))
+    except KeyError:
+        return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return drivers
 
@@ -50,6 +57,11 @@ async def get_drivers():
                 404: {"model": Message, "content": {
                     "application/json": {
                         "example": create_message("Drivers not found")
+                    }
+                }},
+                503: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Service unavailable")
                     }
                 }},
                 200: {"model": Drivers, "content": {
@@ -68,8 +80,10 @@ async def get_drivers_by_season(season: int):
 
     try:
         drivers = {"drivers": data["MRData"]["DriverTable"]["Drivers"], "timestamp": timestamp}
-    except (IndexError, KeyError):
+    except IndexError:
         return JSONResponse(status_code=404, content=create_message("Drivers not found"))
+    except KeyError:
+        return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return drivers
 
@@ -80,6 +94,11 @@ async def get_drivers_by_season(season: int):
                 404: {"model": Message, "content": {
                     "application/json": {
                         "example": create_message("Driver not found")
+                    }
+                }},
+                503: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Service unavailable")
                     }
                 }},
                 200: {"model": Driver, "content": {
@@ -95,7 +114,9 @@ async def get_driver_by_id(driver_id: str):
     try:
         driver = data["MRData"]["DriverTable"]["Drivers"][0]
         driver["timestamp"] = timestamp
-    except (IndexError, KeyError):
+    except IndexError:
         return JSONResponse(status_code=404, content=create_message("Driver not found"))
+    except KeyError:
+        return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return driver

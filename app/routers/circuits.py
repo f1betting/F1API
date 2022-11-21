@@ -22,6 +22,11 @@ router = APIRouter(
                         "example": create_message("Circuits not found")
                     }
                 }},
+                503: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Service unavailable")
+                    }
+                }},
                 200: {"model": Circuits, "content": {
                     "application/json": {
                         "example": {
@@ -37,8 +42,10 @@ async def get_circuits():
 
     try:
         circuits = {"circuits": data["MRData"]["CircuitTable"]["Circuits"], "timestamp": timestamp}
-    except (IndexError, KeyError):
+    except IndexError:
         return JSONResponse(status_code=404, content=create_message("Circuits not found"))
+    except KeyError:
+        return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return circuits
 
@@ -50,6 +57,11 @@ async def get_circuits():
                 404: {"model": Message, "content": {
                     "application/json": {
                         "example": create_message("Circuits not found")
+                    }
+                }},
+                503: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Service unavailable")
                     }
                 }},
                 200: {"model": Circuits, "content": {
@@ -68,8 +80,10 @@ async def get_circuits_by_season(season: str):
 
     try:
         circuits = {"circuits": data["MRData"]["CircuitTable"]["Circuits"], "timestamp": timestamp}
-    except (IndexError, KeyError):
+    except IndexError:
         return JSONResponse(status_code=404, content=create_message("Circuits not found"))
+    except KeyError:
+        return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return circuits
 
@@ -80,6 +94,11 @@ async def get_circuits_by_season(season: str):
                 404: {"model": Message, "content": {
                     "application/json": {
                         "example": create_message("Circuit not found")
+                    }
+                }},
+                503: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Service unavailable")
                     }
                 }},
                 200: {"model": Circuit, "content": {
@@ -95,7 +114,9 @@ async def get_circuit_by_id(circuit_id: str):
     try:
         circuit = data["MRData"]["CircuitTable"]["Circuits"][0]
         circuit["timestamp"] = timestamp
-    except (IndexError, KeyError):
+    except IndexError:
         return JSONResponse(status_code=404, content=create_message("Circuit not found"))
+    except KeyError:
+        return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return circuit

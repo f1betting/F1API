@@ -21,6 +21,11 @@ router = APIRouter(
                         "example": create_message("Constructors not found")
                     }
                 }},
+                503: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Service unavailable")
+                    }
+                }},
                 200: {"model": Constructors, "content": {
                     "application/json": {
                         "example": {
@@ -37,8 +42,10 @@ async def get_constructors():
 
     try:
         constructors = {"constructors": data["MRData"]["ConstructorTable"]["Constructors"], "timestamp": timestamp}
-    except (IndexError, KeyError):
+    except IndexError:
         return JSONResponse(status_code=404, content=create_message("Constructors not found"))
+    except KeyError:
+        return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return constructors
 
@@ -50,6 +57,11 @@ async def get_constructors():
                 404: {"model": Message, "content": {
                     "application/json": {
                         "example": create_message("Constructors not found")
+                    }
+                }},
+                503: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Service unavailable")
                     }
                 }},
                 200: {"model": Constructors, "content": {
@@ -68,8 +80,10 @@ async def get_constructors_by_season(season: str):
 
     try:
         constructors = {"constructors": data["MRData"]["ConstructorTable"]["Constructors"], "timestamp": timestamp}
-    except (IndexError, KeyError):
+    except IndexError:
         return JSONResponse(status_code=404, content=create_message("Constructors not found"))
+    except KeyError:
+        return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return constructors
 
@@ -80,6 +94,11 @@ async def get_constructors_by_season(season: str):
                 404: {"model": Message, "content": {
                     "application/json": {
                         "example": create_message("Constructor not found")
+                    }
+                }},
+                503: {"model": Message, "content": {
+                    "application/json": {
+                        "example": create_message("Service unavailable")
                     }
                 }},
                 200: {"model": Constructor, "content": {
@@ -95,7 +114,9 @@ async def get_constructor_by_id(constructor_id: str):
     try:
         constructor = data["MRData"]["ConstructorTable"]["Constructors"][0]
         constructor["timestamp"] = timestamp
-    except (IndexError, KeyError):
+    except IndexError:
         return JSONResponse(status_code=404, content=create_message("Constructor not found"))
+    except KeyError:
+        return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return constructor

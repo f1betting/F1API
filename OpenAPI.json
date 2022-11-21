@@ -7,7 +7,7 @@
       "name": "MIT",
       "url": "https://github.com/niek-o/F1API/blob/main/LICENSE.md"
     },
-    "version": "1.0.0",
+    "version": "1.2.3",
     "x-logo": {
       "url": "https://upload.wikimedia.org/wikipedia/commons/f/f2/New_era_F1_logo.png"
     }
@@ -141,6 +141,70 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Service unavailable"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/event/previous": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Get Next Race",
+        "operationId": "get_next_race",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NextEvent"
+                },
+                "example": {
+                  "season": 2022,
+                  "round": 17
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Event not found"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Service unavailable"
+                }
+              }
+            }
           }
         }
       }
@@ -240,6 +304,19 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Service unavailable"
+                }
+              }
+            }
           }
         }
       }
@@ -302,6 +379,19 @@
                 },
                 "example": {
                   "message": "Circuits not found"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Service unavailable"
                 }
               }
             }
@@ -376,6 +466,19 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Service unavailable"
+                }
+              }
+            }
           }
         }
       }
@@ -442,6 +545,19 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Service unavailable"
+                }
+              }
+            }
           }
         }
       }
@@ -483,6 +599,19 @@
                 },
                 "example": {
                   "message": "Constructors not found"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Service unavailable"
                 }
               }
             }
@@ -552,6 +681,19 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Service unavailable"
+                }
+              }
+            }
           }
         }
       }
@@ -613,6 +755,19 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Service unavailable"
+                }
+              }
+            }
           }
         }
       }
@@ -658,6 +813,19 @@
                 },
                 "example": {
                   "message": "Drivers not found"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Service unavailable"
                 }
               }
             }
@@ -731,6 +899,19 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Service unavailable"
+                }
+              }
+            }
           }
         }
       }
@@ -793,6 +974,19 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Service unavailable"
                 }
               }
             }
@@ -904,6 +1098,19 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Service unavailable"
+                }
+              }
+            }
           }
         }
       }
@@ -995,6 +1202,19 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Service unavailable"
+                }
+              }
+            }
           }
         }
       }
@@ -1079,6 +1299,19 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Service unavailable"
+                }
+              }
+            }
           }
         }
       }
@@ -1148,6 +1381,19 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                },
+                "example": {
+                  "message": "Service unavailable"
                 }
               }
             }

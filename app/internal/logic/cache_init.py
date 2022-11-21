@@ -63,7 +63,10 @@ def get_cache(url, path, duration=3600):
             finally:
                 return [cache, timestamp]
         case None:
-            data = requests.get(url).json()
+            try:
+                data = requests.get(url).json()
+            except JSONDecodeError:
+                data = {}
 
             cache_write(data, path)
             return [data, timestamp]
