@@ -22,7 +22,7 @@ class TestDrivers(unittest.TestCase):
 
         timestamp = float(time.time())
 
-        albert_park_data = {
+        max_verstappen_data = {
             "MRData": {
                 "xmlns": "http://ergast.com/mrd/1.5",
                 "series": "f1",
@@ -52,7 +52,7 @@ class TestDrivers(unittest.TestCase):
         full_path = "./app/cache/get_driver_by_id.max_verstappen.json"
 
         cache_file = open(full_path, "w+")
-        cache_file.write(json.dumps(albert_park_data))
+        cache_file.write(json.dumps(max_verstappen_data))
         cache_file.close()
 
         return timestamp
@@ -132,7 +132,7 @@ class TestDrivers(unittest.TestCase):
 
     def test_driver_by_id(self):
         """
-        Test 200 response on /driver/{id} endpoint with albert_park as example
+        Test 200 response on /driver/{id} endpoint with max_verstappen as example
         """
 
         timestamp = self.setUpMaxVerstappen()
@@ -166,7 +166,7 @@ class TestDrivers(unittest.TestCase):
 
     def test_driver_by_id_503(self):
         """
-        Test 503 response on /driver/{id} endpoint with albert_park as example
+        Test 503 response on /driver/{id} endpoint with max_verstappen as example
         """
 
         self.setUpEmptyCache("get_driver_by_id.max_verstappen")

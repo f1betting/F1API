@@ -34,9 +34,14 @@ def get_calendar_by_season(season: int):
     data, timestamp = get_cache(f"http://185.229.22.110/api/f1/{season}.json", f"get_calendar_by_season.{season}")
 
     try:
+        if len(data["MRData"]["RaceTable"]["Races"]) <= 0:
+            raise IndexError
+
         calendar = {"events": data["MRData"]["RaceTable"]["Races"], "timestamp": timestamp}
-    except KeyError:
+    except IndexError:
         return JSONResponse(status_code=404, content=create_message("Calendar not found"))
+    except KeyError:
+        return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return calendar
 
@@ -134,6 +139,9 @@ def get_event_details(season: int, round: int):
                                 f"get_event_details.{season}.{round}")
 
     try:
+        if len(data["MRData"]["RaceTable"]["Races"]) <= 0:
+            raise IndexError
+
         event_data = data["MRData"]["RaceTable"]["Races"][0]
         event_data["timestamp"] = timestamp
     except IndexError:

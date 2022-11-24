@@ -128,7 +128,7 @@ class TestConstructors(unittest.TestCase):
 
     def test_constructor_by_id(self):
         """
-        Test 200 response on /constructor/{id} endpoint with albert_park as example
+        Test 200 response on /constructor/{id} endpoint with red_bull as example
         """
 
         timestamp = self.setUpRedBull()
@@ -158,7 +158,7 @@ class TestConstructors(unittest.TestCase):
 
     def test_constructor_by_id_503(self):
         """
-        Test 503 response on /constructor/{id} endpoint with albert_park as example
+        Test 503 response on /constructor/{id} endpoint with red_bull as example
         """
 
         self.setUpEmptyCache("get_constructor_by_id.red_bull")
