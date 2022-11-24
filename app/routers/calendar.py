@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from app.internal.logic.cache_init import get_cache
+from app.internal.logic.cache_init import get_cache, invalidate_cache
 from app.internal.models.f1.event import Calendar, EventExample, NextEvent, NextEventExample, Event
 from app.internal.models.general.message import Message, create_message
 
@@ -39,8 +39,10 @@ def get_calendar_by_season(season: int):
 
         calendar = {"events": data["MRData"]["RaceTable"]["Races"], "timestamp": timestamp}
     except IndexError:
+        invalidate_cache(f"get_calendar_by_season.{season}")
         return JSONResponse(status_code=404, content=create_message("Calendar not found"))
     except KeyError:
+        invalidate_cache(f"get_calendar_by_season.{season}")
         return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return calendar
@@ -73,8 +75,10 @@ def get_next_race():
         event_data = data["MRData"]["RaceTable"]
         event_data["timestamp"] = timestamp
     except IndexError:
+        invalidate_cache("get_next_race")
         return JSONResponse(status_code=404, content=create_message("Event not found"))
     except KeyError:
+        invalidate_cache("get_next_race")
         return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return event_data
@@ -107,8 +111,10 @@ def get_previous_race():
         event_data = data["MRData"]["RaceTable"]
         event_data["timestamp"] = timestamp
     except IndexError:
+        invalidate_cache("get_previous_race")
         return JSONResponse(status_code=404, content=create_message("Event not found"))
     except KeyError:
+        invalidate_cache("get_previous_race")
         return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return event_data
@@ -145,9 +151,10 @@ def get_event_details(season: int, round: int):
         event_data = data["MRData"]["RaceTable"]["Races"][0]
         event_data["timestamp"] = timestamp
     except IndexError:
+        invalidate_cache(f"get_event_details.{season}.{round}")
         return JSONResponse(status_code=404, content=create_message("Event not found"))
     except KeyError:
+        invalidate_cache(f"get_event_details.{season}.{round}")
         return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return event_data
-

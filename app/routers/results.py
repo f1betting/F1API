@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from app.internal.logic.cache_init import get_cache
+from app.internal.logic.cache_init import get_cache, invalidate_cache
 from app.internal.models.f1.constructor_standing import ConstructorStandings, ConstructorStandingsExample
 from app.internal.models.f1.driver_standing import DriverStandings, DriverStandingsExample
 from app.internal.models.f1.qualifying_result import QualifyingResults, QualifyingResultExample
@@ -48,8 +48,10 @@ async def get_race_results(season: int, race: int):
         results = {"results": data["MRData"]["RaceTable"]["Races"][0]["Results"],
                    "timestamp": timestamp}
     except IndexError:
+        invalidate_cache(f"get_race_results.{season}.{race}")
         return JSONResponse(status_code=404, content=create_message("Race results not found"))
     except KeyError:
+        invalidate_cache(f"get_race_results.{season}.{race}")
         return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return results
@@ -89,8 +91,10 @@ def get_qualifying_results(season: int, race: int):
         results = {"results": data["MRData"]["RaceTable"]["Races"][0]["QualifyingResults"],
                    "timestamp": timestamp}
     except IndexError:
+        invalidate_cache(f"get_qualifying_results.{season}.{race}")
         return JSONResponse(status_code=404, content=create_message("Qualifying results not found"))
     except KeyError:
+        invalidate_cache(f"get_qualifying_results.{season}.{race}")
         return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return results
@@ -131,8 +135,10 @@ def get_driver_standings_by_season(season: int):
         standings = {"standings": data["MRData"]["StandingsTable"]["StandingsLists"][0]["DriverStandings"],
                      "timestamp": timestamp}
     except IndexError:
+        invalidate_cache(f"get_driver_standings_by_season.{season}")
         return JSONResponse(status_code=404, content=create_message("Standings not found"))
     except KeyError:
+        invalidate_cache(f"get_driver_standings_by_season.{season}")
         return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return standings
@@ -170,8 +176,10 @@ def get_constructor_standings_by_season(season: int):
         standings = {"standings": data["MRData"]["StandingsTable"]["StandingsLists"][0]["ConstructorStandings"],
                      "timestamp": timestamp}
     except IndexError:
+        invalidate_cache(f"get_constructor_standings_by_season.{season}")
         return JSONResponse(status_code=404, content=create_message("Standings not found"))
     except KeyError:
+        invalidate_cache(f"get_constructor_standings_by_season.{season}")
         return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return standings
