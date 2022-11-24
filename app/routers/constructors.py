@@ -41,6 +41,9 @@ async def get_constructors():
                                 "get_constructors")
 
     try:
+        if len(data["MRData"]["ConstructorTable"]["Constructors"]) <= 0:
+            raise IndexError
+
         constructors = {"constructors": data["MRData"]["ConstructorTable"]["Constructors"], "timestamp": timestamp}
     except IndexError:
         return JSONResponse(status_code=404, content=create_message("Constructors not found"))
@@ -79,6 +82,9 @@ async def get_constructors_by_season(season: str):
                                 f"get_constructors_by_season.{season}")
 
     try:
+        if len(data["MRData"]["ConstructorTable"]["Constructors"]) <= 0:
+            raise IndexError
+
         constructors = {"constructors": data["MRData"]["ConstructorTable"]["Constructors"], "timestamp": timestamp}
     except IndexError:
         return JSONResponse(status_code=404, content=create_message("Constructors not found"))

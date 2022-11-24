@@ -41,6 +41,9 @@ async def get_drivers():
                                 f"get_drivers")
 
     try:
+        if len(data["MRData"]["DriverTable"]["Drivers"]) <= 0:
+            raise IndexError
+
         drivers = {"drivers": data["MRData"]["DriverTable"]["Drivers"], "timestamp": timestamp}
     except IndexError:
         return JSONResponse(status_code=404, content=create_message("Drivers not found"))
@@ -79,6 +82,9 @@ async def get_drivers_by_season(season: int):
                                 f"get_drivers_by_season.{season}")
 
     try:
+        if len(data["MRData"]["DriverTable"]["Drivers"]) <= 0:
+            raise IndexError
+
         drivers = {"drivers": data["MRData"]["DriverTable"]["Drivers"], "timestamp": timestamp}
     except IndexError:
         return JSONResponse(status_code=404, content=create_message("Drivers not found"))
