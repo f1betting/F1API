@@ -11,6 +11,7 @@ jobs:
 
   docker:
     uses: ./.github/workflows/action_docker_publish.yml
+    secrets: inherit
 
 #  deploy:
 #    runs-on: ubuntu-latest
