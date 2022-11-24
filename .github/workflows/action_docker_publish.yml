@@ -1,9 +1,4 @@
-name: Docker Build and Push
-
-on:
-  push:
-    tags:
-      - 'v*.*.*'
+on: workflow_call
 
 jobs:
   build:

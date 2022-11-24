@@ -1,0 +1,12 @@
+name: Python on Pull Request
+
+on:
+  pull_request:
+    paths:
+      - app/**
+      - test/**
+      - requirements.txt
+
+jobs:
+  testing:
+    uses: ./.github/workflows/action_python_testing.yml
