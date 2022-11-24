@@ -16,9 +16,10 @@ def cache_init(file_name, duration):
     try:
         cache_file = open(full_path, "r")
         json_dump = cache_file.read()
+        cache_file.close()
 
     except FileNotFoundError:
-        open(full_path, "w")
+        open(full_path, "w").close()
 
     current_timestamp = float(time.time())
 
@@ -45,6 +46,7 @@ def cache_write(cache, file_name):
     cache_file = open(full_path, "w+")
     cache["timestamp"] = float(time.time())
     cache_file.write(json.dumps(cache))
+    cache_file.close()
 
 
 def get_cache(url, path, duration=3600):
