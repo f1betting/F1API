@@ -54,13 +54,13 @@ Below are the instructions for running the API for development and general usage
 1. You can use the docker image from the DockerHub [repository](https://hub.docker.com/r/nieko3/f1api) using:
 
    ````shell
-   $ docker pull nieko3/f1api:v1.2.0
+   $ docker pull nieko3/f1api:latest
    ````
 
 2. Run container using:
 
     ````shell
-    $ docker run -d --name f1api -p 8000:80 nieko3/f1api:v1.2.0
+    $ docker run -d --name f1api -p 8000:80 nieko3/f1api:latest
     ````
 
 ### 🏡 Running locally
