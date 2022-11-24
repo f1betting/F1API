@@ -10,6 +10,7 @@ jobs:
     uses: ./.github/workflows/action_python_testing.yml
 
   docker:
+    needs: [ testing ]
     uses: ./.github/workflows/action_docker_publish.yml
     secrets: inherit
 
