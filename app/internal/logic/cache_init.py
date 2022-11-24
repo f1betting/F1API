@@ -1,4 +1,5 @@
 import json
+import os
 import time
 from json import JSONDecodeError
 from pathlib import Path
@@ -47,6 +48,12 @@ def cache_write(cache, file_name):
     cache["timestamp"] = float(time.time())
     cache_file.write(json.dumps(cache))
     cache_file.close()
+
+
+def invalidate_cache(file_name):
+    base_path = Path(__file__).parent
+
+    os.remove(base_path / f"../../cache/{file_name}.json")
 
 
 def get_cache(url, path, duration=3600):

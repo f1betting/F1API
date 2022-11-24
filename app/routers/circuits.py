@@ -2,7 +2,7 @@ import requests
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from app.internal.logic.cache_init import get_cache
+from app.internal.logic.cache_init import get_cache, invalidate_cache
 from app.internal.models.f1.circuit import Circuit, Circuits, CircuitExample
 from app.internal.models.general.message import Message, create_message
 
@@ -41,10 +41,15 @@ async def get_circuits():
     data, timestamp = get_cache("http://185.229.22.110/api/f1/circuits.json?limit=100", "get_circuits")
 
     try:
+        if len(data["MRData"]["CircuitTable"]["Circuits"]) <= 0:
+            raise IndexError
+
         circuits = {"circuits": data["MRData"]["CircuitTable"]["Circuits"], "timestamp": timestamp}
     except IndexError:
+        invalidate_cache(f"get_circuits")
         return JSONResponse(status_code=404, content=create_message("Circuits not found"))
     except KeyError:
+        invalidate_cache(f"get_circuits")
         return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return circuits
@@ -79,10 +84,15 @@ async def get_circuits_by_season(season: str):
                                 f"get_circuits_by_season.{season}")
 
     try:
+        if len(data["MRData"]["CircuitTable"]["Circuits"]) <= 0:
+            raise IndexError
+
         circuits = {"circuits": data["MRData"]["CircuitTable"]["Circuits"], "timestamp": timestamp}
     except IndexError:
+        invalidate_cache(f"get_circuits_by_season.{season}")
         return JSONResponse(status_code=404, content=create_message("Circuits not found"))
     except KeyError:
+        invalidate_cache(f"get_circuits_by_season.{season}")
         return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return circuits
@@ -115,8 +125,10 @@ async def get_circuit_by_id(circuit_id: str):
         circuit = data["MRData"]["CircuitTable"]["Circuits"][0]
         circuit["timestamp"] = timestamp
     except IndexError:
+        invalidate_cache(f"get_circuit_by_id.{circuit_id}")
         return JSONResponse(status_code=404, content=create_message("Circuit not found"))
     except KeyError:
+        invalidate_cache(f"get_circuit_by_id.{circuit_id}")
         return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return circuit
