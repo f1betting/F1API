@@ -28,5 +28,5 @@ jobs:
           coverageFile: coverage.xml
           token: ${{ secrets.GITHUB_TOKEN }}
           thresholdAll: 0.1
-          thresholdNew: 0.1
+          thresholdNew: 0
           thresholdModified: 0 # looks at all modified lines not only the python files
