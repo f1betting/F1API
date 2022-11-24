@@ -17,7 +17,9 @@ jobs:
       - name: Docker Build
         run: |
           docker build -t ${{ secrets.DOCKER_USER }}/f1api:$RELEASE_VERSION .
+          docker build -t ${{ secrets.DOCKER_USER }}/f1api:latest .
 
       - name: Docker Push
         run: |
           docker push ${{ secrets.DOCKER_USER }}/f1api:$RELEASE_VERSION
+          docker push ${{ secrets.DOCKER_USER }}/f1api:latest
