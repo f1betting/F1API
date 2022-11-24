@@ -7,7 +7,7 @@ from fastapi.openapi.utils import get_openapi
 from fastapi.routing import APIRoute
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 
-from app.routers import constructors, calendar, drivers, circuits, results
+from app.routers import constructors, calendar, drivers, circuits, results, general
 
 app = FastAPI()
 
@@ -19,6 +19,7 @@ app.include_router(circuits.router)
 app.include_router(constructors.router)
 app.include_router(drivers.router)
 app.include_router(results.router)
+app.include_router(general.router)
 
 # Allow all origins
 origins = ["*"]

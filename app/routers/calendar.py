@@ -143,8 +143,3 @@ def get_event_details(season: int, round: int):
 
     return event_data
 
-
-@router.get("/test")
-def test():
-    data = get_cache("https://sandbox.api.service.nhs.uk/hello-world/hello/world", "test")
-    return data
