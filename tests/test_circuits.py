@@ -4,6 +4,7 @@ import time
 import unittest
 
 from fastapi.testclient import TestClient
+from .mock_data.circuits import get_albert_park_data, get_albert_park_response, get_placeholder_data
 
 from app.main import app
 
@@ -22,33 +23,7 @@ class TestCircuits(unittest.TestCase):
 
         timestamp = float(time.time())
 
-        albert_park_data = {
-            "MRData": {
-                "xmlns": "http://ergast.com/mrd/1.5",
-                "series": "f1",
-                "url": "http://ergast.com/api/f1/circuits/albert_park.json",
-                "limit": "30",
-                "offset": "0",
-                "total": "1",
-                "CircuitTable": {
-                    "circuitId": "albert_park",
-                    "Circuits": [
-                        {
-                            "circuitId": "albert_park",
-                            "url": "http://en.wikipedia.org/wiki/Melbourne_Grand_Prix_Circuit",
-                            "circuitName": "Albert Park Grand Prix Circuit",
-                            "Location": {
-                                "lat": "-37.8497",
-                                "long": "144.968",
-                                "locality": "Melbourne",
-                                "country": "Australia"
-                            }
-                        }
-                    ]
-                }
-            },
-            "timestamp": timestamp
-        }
+        albert_park_data = get_albert_park_data(timestamp)
 
         full_path = "./app/cache/get_circuit_by_id.albert_park.json"
 
@@ -71,21 +46,7 @@ class TestCircuits(unittest.TestCase):
 
         timestamp = float(time.time())
 
-        placeholder_data = {
-            "MRData": {
-                "xmlns": "http://ergast.com/mrd/1.5",
-                "series": "f1",
-                "url": "http://ergast.com/api/f1/circuits/placeholder.json",
-                "limit": "30",
-                "offset": "0",
-                "total": "1",
-                "CircuitTable": {
-                    "circuitId": "placeholder",
-                    "Circuits": []
-                }
-            },
-            "timestamp": timestamp
-        }
+        placeholder_data = get_placeholder_data(timestamp)
 
         full_path = f"./app/cache/{file_name}.json"
 
@@ -137,18 +98,7 @@ class TestCircuits(unittest.TestCase):
 
         res = self.test_client.get("/circuit/albert_park").json()
 
-        data = {
-            "timestamp": timestamp,
-            "circuitId": "albert_park",
-            "url": "http://en.wikipedia.org/wiki/Melbourne_Grand_Prix_Circuit",
-            "circuitName": "Albert Park Grand Prix Circuit",
-            "Location": {
-                "lat": -37.8497,
-                "long": 144.968,
-                "locality": "Melbourne",
-                "country": "Australia"
-            }
-        }
+        data = get_albert_park_response(timestamp)
 
         self.assertEqual(res, data)
 
@@ -185,18 +135,7 @@ class TestCircuits(unittest.TestCase):
 
         circuit_data = next(circuit for circuit in res["circuits"] if circuit["circuitId"] == "albert_park")
 
-        data = {
-            "timestamp": None,
-            "circuitId": "albert_park",
-            "url": "http://en.wikipedia.org/wiki/Melbourne_Grand_Prix_Circuit",
-            "circuitName": "Albert Park Grand Prix Circuit",
-            "Location": {
-                "lat": -37.8497,
-                "long": 144.968,
-                "locality": "Melbourne",
-                "country": "Australia"
-            }
-        }
+        data = get_albert_park_response()
 
         self.assertEqual(circuit_data, data)
 
@@ -233,18 +172,7 @@ class TestCircuits(unittest.TestCase):
 
         circuit_data = next(circuit for circuit in res["circuits"] if circuit["circuitId"] == "albert_park")
 
-        data = {
-            "timestamp": None,
-            "circuitId": "albert_park",
-            "url": "http://en.wikipedia.org/wiki/Melbourne_Grand_Prix_Circuit",
-            "circuitName": "Albert Park Grand Prix Circuit",
-            "Location": {
-                "lat": -37.8497,
-                "long": 144.968,
-                "locality": "Melbourne",
-                "country": "Australia"
-            }
-        }
+        data = get_albert_park_response()
 
         self.assertEqual(circuit_data, data)
 

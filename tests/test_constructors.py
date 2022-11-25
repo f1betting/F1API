@@ -6,11 +6,12 @@ import unittest
 from fastapi.testclient import TestClient
 
 from app.main import app
+from tests.mock_data.constructors import get_red_bull_data, get_placeholder_data, get_red_bull_response
 
 
 class TestConstructors(unittest.TestCase):
     @classmethod
-    def setUpRedBull(cls):
+    def setUpConstructor(cls):
         """
         Init ergast.com response for red_bull in cache (200)
         :return: timestamp
@@ -22,28 +23,7 @@ class TestConstructors(unittest.TestCase):
 
         timestamp = float(time.time())
 
-        red_bull_data = {
-            "MRData": {
-                "xmlns": "http://ergast.com/mrd/1.5",
-                "series": "f1",
-                "url": "http://ergast.com/api/f1/constructors/red_bull.json",
-                "limit": "30",
-                "offset": "0",
-                "total": "1",
-                "ConstructorTable": {
-                    "constructorId": "red_bull",
-                    "Constructors": [
-                        {
-                            "constructorId": "red_bull",
-                            "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
-                            "name": "Red Bull",
-                            "nationality": "Austrian"
-                        }
-                    ]
-                }
-            },
-            "timestamp": timestamp
-        }
+        red_bull_data = get_red_bull_data(timestamp)
 
         full_path = "./app/cache/get_constructor_by_id.red_bull.json"
 
@@ -66,21 +46,7 @@ class TestConstructors(unittest.TestCase):
 
         timestamp = float(time.time())
 
-        placeholder_data = {
-            "MRData": {
-                "xmlns": "http://ergast.com/mrd/1.5",
-                "series": "f1",
-                "url": "http://ergast.com/api/f1/constructors/placeholder.json",
-                "limit": "30",
-                "offset": "0",
-                "total": "1",
-                "ConstructorTable": {
-                    "constructorId": "placeholder",
-                    "Constructors": []
-                }
-            },
-            "timestamp": timestamp
-        }
+        placeholder_data = get_placeholder_data(timestamp)
 
         full_path = f"./app/cache/{file_name}.json"
 
@@ -131,17 +97,11 @@ class TestConstructors(unittest.TestCase):
         Test 200 response on /constructor/{id} endpoint with red_bull as example
         """
 
-        timestamp = self.setUpRedBull()
+        timestamp = self.setUpConstructor()
 
         res = self.test_client.get("/constructor/red_bull").json()
 
-        data = {
-            "timestamp": timestamp,
-            "constructorId": "red_bull",
-            "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
-            "name": "Red Bull",
-            "nationality": "Austrian"
-        }
+        data = get_red_bull_response(timestamp)
 
         self.assertEqual(res, data)
 
@@ -172,7 +132,7 @@ class TestConstructors(unittest.TestCase):
     ########################
 
     def test_constructors_by_season(self):
-        self.setUpRedBull()
+        self.setUpConstructor()
 
         res = self.test_client.get("/constructors/2022").json()
 
@@ -180,13 +140,7 @@ class TestConstructors(unittest.TestCase):
             constructor for constructor in res["constructors"] if constructor["constructorId"] == "red_bull"
         )
 
-        data = {
-            "timestamp": None,
-            "constructorId": "red_bull",
-            "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
-            "name": "Red Bull",
-            "nationality": "Austrian"
-        }
+        data = get_red_bull_response()
 
         self.assertEqual(constructors_data, data)
 
@@ -217,7 +171,7 @@ class TestConstructors(unittest.TestCase):
     #############
 
     def test_constructors(self):
-        self.setUpRedBull()
+        self.setUpConstructor()
 
         res = self.test_client.get("/constructors").json()
 
@@ -225,13 +179,7 @@ class TestConstructors(unittest.TestCase):
             constructor for constructor in res["constructors"] if constructor["constructorId"] == "red_bull"
         )
 
-        data = {
-            "timestamp": None,
-            "constructorId": "red_bull",
-            "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
-            "name": "Red Bull",
-            "nationality": "Austrian"
-        }
+        data = get_red_bull_response()
 
         self.assertEqual(constructor_data, data)
 

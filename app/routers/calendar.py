@@ -52,11 +52,6 @@ def get_calendar_by_season(season: int):
             tags=["Events"],
             response_model=NextEvent,
             responses={
-                404: {"model": Message, "content": {
-                    "application/json": {
-                        "example": create_message("Event not found")
-                    }
-                }},
                 503: {"model": Message, "content": {
                     "application/json": {
                         "example": create_message("Service unavailable")
@@ -74,10 +69,7 @@ def get_next_race():
     try:
         event_data = data["MRData"]["RaceTable"]
         event_data["timestamp"] = timestamp
-    except IndexError:
-        invalidate_cache("get_next_race")
-        return JSONResponse(status_code=404, content=create_message("Event not found"))
-    except KeyError:
+    except (KeyError, IndexError):
         invalidate_cache("get_next_race")
         return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
@@ -88,11 +80,6 @@ def get_next_race():
             tags=["Events"],
             response_model=NextEvent,
             responses={
-                404: {"model": Message, "content": {
-                    "application/json": {
-                        "example": create_message("Event not found")
-                    }
-                }},
                 503: {"model": Message, "content": {
                     "application/json": {
                         "example": create_message("Service unavailable")
@@ -110,10 +97,7 @@ def get_previous_race():
     try:
         event_data = data["MRData"]["RaceTable"]
         event_data["timestamp"] = timestamp
-    except IndexError:
-        invalidate_cache("get_previous_race")
-        return JSONResponse(status_code=404, content=create_message("Event not found"))
-    except KeyError:
+    except (KeyError, IndexError):
         invalidate_cache("get_previous_race")
         return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 

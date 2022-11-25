@@ -67,14 +67,14 @@ def get_cache(url, path, duration=3600):
                 data = requests.get(url).json()
 
                 cache_write(data, path)
-            except JSONDecodeError:
+            except JSONDecodeError:  # pragma: no coverage
                 pass
             finally:
                 return [cache, timestamp]
         case None:
             try:
                 data = requests.get(url).json()
-            except JSONDecodeError:
+            except JSONDecodeError:  # pragma: no coverage
                 data = {}
 
             cache_write(data, path)

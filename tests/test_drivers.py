@@ -6,11 +6,12 @@ import unittest
 from fastapi.testclient import TestClient
 
 from app.main import app
+from tests.mock_data.drivers import get_max_verstappen_data, get_placeholder_data, get_max_verstappen_response
 
 
 class TestDrivers(unittest.TestCase):
     @classmethod
-    def setUpMaxVerstappen(cls):
+    def setUpDriver(cls):
         """
         Init ergast.com response for max_verstappen in cache (200)
         :return: timestamp
@@ -22,32 +23,7 @@ class TestDrivers(unittest.TestCase):
 
         timestamp = float(time.time())
 
-        max_verstappen_data = {
-            "MRData": {
-                "xmlns": "http://ergast.com/mrd/1.5",
-                "series": "f1",
-                "url": "http://ergast.com/api/f1/drivers/max_verstappen.json",
-                "limit": "30",
-                "offset": "0",
-                "total": "1",
-                "DriverTable": {
-                    "driverId": "max_verstappen",
-                    "Drivers": [
-                        {
-                            "driverId": "max_verstappen",
-                            "permanentNumber": "33",
-                            "code": "VER",
-                            "url": "http://en.wikipedia.org/wiki/Max_Verstappen",
-                            "givenName": "Max",
-                            "familyName": "Verstappen",
-                            "dateOfBirth": "1997-09-30",
-                            "nationality": "Dutch"
-                        }
-                    ]
-                }
-            },
-            "timestamp": timestamp
-        }
+        max_verstappen_data = get_max_verstappen_data(timestamp)
 
         full_path = "./app/cache/get_driver_by_id.max_verstappen.json"
 
@@ -70,21 +46,7 @@ class TestDrivers(unittest.TestCase):
 
         timestamp = float(time.time())
 
-        placeholder_data = {
-            "MRData": {
-                "xmlns": "http://ergast.com/mrd/1.5",
-                "series": "f1",
-                "url": "http://ergast.com/api/f1/drivers/placeholder.json",
-                "limit": "30",
-                "offset": "0",
-                "total": "0",
-                "DriverTable": {
-                    "driverId": "placeholder",
-                    "Drivers": []
-                }
-            },
-            "timestamp": timestamp
-        }
+        placeholder_data = get_placeholder_data(timestamp)
 
         full_path = f"./app/cache/{file_name}.json"
 
@@ -135,21 +97,11 @@ class TestDrivers(unittest.TestCase):
         Test 200 response on /driver/{id} endpoint with max_verstappen as example
         """
 
-        timestamp = self.setUpMaxVerstappen()
+        timestamp = self.setUpDriver()
 
         res = self.test_client.get("/driver/max_verstappen").json()
 
-        data = {
-            "timestamp": timestamp,
-            "driverId": "max_verstappen",
-            "url": "http://en.wikipedia.org/wiki/Max_Verstappen",
-            "givenName": "Max",
-            "familyName": "Verstappen",
-            "dateOfBirth": "1997-09-30",
-            "nationality": "Dutch",
-            "permanentNumber": 33,
-            "code": "VER"
-        }
+        data = get_max_verstappen_response(timestamp)
 
         self.assertEqual(res, data)
 
@@ -180,23 +132,13 @@ class TestDrivers(unittest.TestCase):
     #####################
 
     def test_drivers_by_season(self):
-        self.setUpMaxVerstappen()
+        self.setUpDriver()
 
         res = self.test_client.get("/drivers/2022").json()
 
         driver_data = next(driver for driver in res["drivers"] if driver["driverId"] == "max_verstappen")
 
-        data = {
-            "timestamp": None,
-            "driverId": "max_verstappen",
-            "url": "http://en.wikipedia.org/wiki/Max_Verstappen",
-            "givenName": "Max",
-            "familyName": "Verstappen",
-            "dateOfBirth": "1997-09-30",
-            "nationality": "Dutch",
-            "permanentNumber": 33,
-            "code": "VER"
-        }
+        data = get_max_verstappen_response()
 
         self.assertEqual(driver_data, data)
 
@@ -227,23 +169,13 @@ class TestDrivers(unittest.TestCase):
     #############
 
     def test_drivers(self):
-        self.setUpMaxVerstappen()
+        self.setUpDriver()
 
         res = self.test_client.get("/drivers").json()
 
         driver_data = next(driver for driver in res["drivers"] if driver["driverId"] == "max_verstappen")
 
-        data = {
-            "timestamp": None,
-            "driverId": "max_verstappen",
-            "url": "http://en.wikipedia.org/wiki/Max_Verstappen",
-            "givenName": "Max",
-            "familyName": "Verstappen",
-            "dateOfBirth": "1997-09-30",
-            "nationality": "Dutch",
-            "permanentNumber": 33,
-            "code": "VER"
-        }
+        data = get_max_verstappen_response()
 
         self.assertEqual(driver_data, data)
 
