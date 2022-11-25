@@ -32,14 +32,14 @@ app.add_middleware(CORSMiddleware,
 
 # Allow only specific hosts
 
-if os.getenv("ALLOWED_HOSTS"):
+if os.getenv("ALLOWED_HOSTS"):  # pragma: no coverage
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=os.getenv("ALLOWED_HOSTS").split("|"))
 
 
 # CUSTOMIZE OPENAPI
 # https://fastapi.tiangolo.com/advanced/extending-openapi/
 
-def custom_openapi():
+def custom_openapi():  # pragma: no coverage
     if app.openapi_schema:
         return app.openapi_schema
 
