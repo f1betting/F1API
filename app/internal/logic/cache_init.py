@@ -1,4 +1,5 @@
 import json
+import os
 import time
 from json import JSONDecodeError
 from pathlib import Path
@@ -49,6 +50,12 @@ def cache_write(cache, file_name):
     cache_file.close()
 
 
+def invalidate_cache(file_name):
+    base_path = Path(__file__).parent
+
+    os.remove(base_path / f"../../cache/{file_name}.json")
+
+
 def get_cache(url, path, duration=3600):
     status, cache, timestamp = cache_init(path, duration)
 
@@ -60,14 +67,14 @@ def get_cache(url, path, duration=3600):
                 data = requests.get(url).json()
 
                 cache_write(data, path)
-            except JSONDecodeError:
+            except JSONDecodeError:  # pragma: no coverage
                 pass
             finally:
                 return [cache, timestamp]
         case None:
             try:
                 data = requests.get(url).json()
-            except JSONDecodeError:
+            except JSONDecodeError:  # pragma: no coverage
                 data = {}
 
             cache_write(data, path)

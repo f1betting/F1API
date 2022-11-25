@@ -7,7 +7,7 @@
       "name": "MIT",
       "url": "https://github.com/niek-o/F1API/blob/main/LICENSE.md"
     },
-    "version": "1.2.5",
+    "version": "1.4.0",
     "x-logo": {
       "url": "https://upload.wikimedia.org/wikipedia/commons/f/f2/New_era_F1_logo.png"
     }
@@ -129,19 +129,6 @@
               }
             }
           },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Message"
-                },
-                "example": {
-                  "message": "Event not found"
-                }
-              }
-            }
-          },
           "503": {
             "description": "Service Unavailable",
             "content": {
@@ -176,19 +163,6 @@
                 "example": {
                   "season": 2022,
                   "round": 17
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Message"
-                },
-                "example": {
-                  "message": "Event not found"
                 }
               }
             }
@@ -315,22 +289,6 @@
                 "example": {
                   "message": "Service unavailable"
                 }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/test": {
-      "get": {
-        "summary": "Test",
-        "operationId": "test",
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
               }
             }
           }
@@ -1395,6 +1353,22 @@
                 "example": {
                   "message": "Service unavailable"
                 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/test": {
+      "get": {
+        "summary": "Test",
+        "operationId": "test",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
               }
             }
           }

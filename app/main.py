@@ -32,20 +32,20 @@ app.add_middleware(CORSMiddleware,
 
 # Allow only specific hosts
 
-if os.getenv("ALLOWED_HOSTS"):
+if os.getenv("ALLOWED_HOSTS"):  # pragma: no coverage
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=os.getenv("ALLOWED_HOSTS").split("|"))
 
 
 # CUSTOMIZE OPENAPI
 # https://fastapi.tiangolo.com/advanced/extending-openapi/
 
-def custom_openapi():
+def custom_openapi():  # pragma: no coverage
     if app.openapi_schema:
         return app.openapi_schema
 
     openapi_schema = get_openapi(
         title="F1 API",
-        version="1.2.5",
+        version="1.4.0",
         description="An easier way to use the [ergast.com](https://ergast.com/mrd/) F1 API, with correct types!",
         license_info={
             "name": "MIT",

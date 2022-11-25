@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
-from app.internal.logic.cache_init import get_cache
+from app.internal.logic.cache_init import get_cache, invalidate_cache
 from app.internal.models.f1.event import Calendar, EventExample, NextEvent, NextEventExample, Event
 from app.internal.models.general.message import Message, create_message
 
@@ -34,9 +34,16 @@ def get_calendar_by_season(season: int):
     data, timestamp = get_cache(f"http://185.229.22.110/api/f1/{season}.json", f"get_calendar_by_season.{season}")
 
     try:
+        if len(data["MRData"]["RaceTable"]["Races"]) <= 0:
+            raise IndexError
+
         calendar = {"events": data["MRData"]["RaceTable"]["Races"], "timestamp": timestamp}
-    except KeyError:
+    except IndexError:
+        invalidate_cache(f"get_calendar_by_season.{season}")
         return JSONResponse(status_code=404, content=create_message("Calendar not found"))
+    except KeyError:
+        invalidate_cache(f"get_calendar_by_season.{season}")
+        return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return calendar
 
@@ -45,11 +52,6 @@ def get_calendar_by_season(season: int):
             tags=["Events"],
             response_model=NextEvent,
             responses={
-                404: {"model": Message, "content": {
-                    "application/json": {
-                        "example": create_message("Event not found")
-                    }
-                }},
                 503: {"model": Message, "content": {
                     "application/json": {
                         "example": create_message("Service unavailable")
@@ -67,9 +69,8 @@ def get_next_race():
     try:
         event_data = data["MRData"]["RaceTable"]
         event_data["timestamp"] = timestamp
-    except IndexError:
-        return JSONResponse(status_code=404, content=create_message("Event not found"))
-    except KeyError:
+    except (KeyError, IndexError):
+        invalidate_cache("get_next_race")
         return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return event_data
@@ -79,11 +80,6 @@ def get_next_race():
             tags=["Events"],
             response_model=NextEvent,
             responses={
-                404: {"model": Message, "content": {
-                    "application/json": {
-                        "example": create_message("Event not found")
-                    }
-                }},
                 503: {"model": Message, "content": {
                     "application/json": {
                         "example": create_message("Service unavailable")
@@ -101,9 +97,8 @@ def get_previous_race():
     try:
         event_data = data["MRData"]["RaceTable"]
         event_data["timestamp"] = timestamp
-    except IndexError:
-        return JSONResponse(status_code=404, content=create_message("Event not found"))
-    except KeyError:
+    except (KeyError, IndexError):
+        invalidate_cache("get_previous_race")
         return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return event_data
@@ -134,12 +129,16 @@ def get_event_details(season: int, round: int):
                                 f"get_event_details.{season}.{round}")
 
     try:
+        if len(data["MRData"]["RaceTable"]["Races"]) <= 0:
+            raise IndexError
+
         event_data = data["MRData"]["RaceTable"]["Races"][0]
         event_data["timestamp"] = timestamp
     except IndexError:
+        invalidate_cache(f"get_event_details.{season}.{round}")
         return JSONResponse(status_code=404, content=create_message("Event not found"))
     except KeyError:
+        invalidate_cache(f"get_event_details.{season}.{round}")
         return JSONResponse(status_code=503, content=create_message("Service unavailable"))
 
     return event_data
-
