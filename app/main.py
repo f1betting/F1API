@@ -1,11 +1,8 @@
-import os
-
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
 from fastapi.routing import APIRoute
-from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 from app.routers import constructors, calendar, drivers, circuits, results, general
 
@@ -30,11 +27,6 @@ app.add_middleware(CORSMiddleware,
                    allow_methods=["*"],
                    allow_headers=["*"])
 
-# Allow only specific hosts
-
-if os.getenv("ALLOWED_HOSTS"):  # pragma: no coverage
-    app.add_middleware(TrustedHostMiddleware, allowed_hosts=os.getenv("ALLOWED_HOSTS").split("|"))
-
 
 # CUSTOMIZE OPENAPI
 # https://fastapi.tiangolo.com/advanced/extending-openapi/
@@ -45,7 +37,7 @@ def custom_openapi():  # pragma: no coverage
 
     openapi_schema = get_openapi(
         title="F1 API",
-        version="1.4.0",
+        version="1.5.0",
         description="An easier way to use the [ergast.com](https://ergast.com/mrd/) F1 API, with correct types!",
         license_info={
             "name": "MIT",

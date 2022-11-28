@@ -24,7 +24,7 @@ DriverStandingsExample = {
     "wins": 11,
     "Driver": {
         "driverId": "max_verstappen",
-        "url": "http://en.wikipedia.org/wiki/Max_Verstappen",
+        "url": "https://://en.wikipedia.org/wiki/Max_Verstappen",
         "givenName": "Max",
         "familyName": "Verstappen",
         "dateOfBirth": "1997-09-30",
@@ -35,7 +35,7 @@ DriverStandingsExample = {
     "Constructors": [
         {
             "constructorId": "red_bull",
-            "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
+            "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
             "name": "Red Bull",
             "nationality": "Austrian"
         }

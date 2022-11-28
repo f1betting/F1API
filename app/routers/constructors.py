@@ -1,3 +1,5 @@
+import os
+
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
@@ -11,7 +13,7 @@ router = APIRouter(
 
 
 # CONSTRUCTORS
-# http://185.229.22.110/mrd/methods/constructors/
+# https://ergast.com/mrd/methods/constructors/
 
 @router.get("/constructors",
             response_model=Constructors,
@@ -37,7 +39,7 @@ router = APIRouter(
                 }}
             })
 async def get_constructors():
-    data, timestamp = get_cache("http://185.229.22.110/api/f1/constructors.json?limit=300",
+    data, timestamp = get_cache(f"{os.getenv('ERGAST_API')}/api/f1/constructors.json?limit=300",
                                 "get_constructors")
 
     try:
@@ -80,7 +82,7 @@ async def get_constructors():
                 }}
             })
 async def get_constructors_by_season(season: str):
-    data, timestamp = get_cache(f"http://185.229.22.110/api/f1/{season}/constructors.json?limit=300",
+    data, timestamp = get_cache(f"{os.getenv('ERGAST_API')}/api/f1/{season}/constructors.json?limit=300",
                                 f"get_constructors_by_season.{season}")
 
     try:
@@ -118,7 +120,7 @@ async def get_constructors_by_season(season: str):
                 }}
             })
 async def get_constructor_by_id(constructor_id: str):
-    data, timestamp = get_cache(f"http://185.229.22.110/api/f1/constructors/{constructor_id}.json",
+    data, timestamp = get_cache(f"{os.getenv('ERGAST_API')}/api/f1/constructors/{constructor_id}.json",
                                 f"get_constructor_by_id.{constructor_id}")
 
     try:

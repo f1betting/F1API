@@ -7,7 +7,7 @@
       "name": "MIT",
       "url": "https://github.com/niek-o/F1API/blob/main/LICENSE.md"
     },
-    "version": "1.4.0",
+    "version": "1.5.0",
     "x-logo": {
       "url": "https://upload.wikimedia.org/wikipedia/commons/f/f2/New_era_F1_logo.png"
     }
@@ -44,11 +44,11 @@
                     {
                       "season": 2022,
                       "round": 1,
-                      "url": "http://en.wikipedia.org/wiki/2022_Bahrain_Grand_Prix",
+                      "url": "https://://en.wikipedia.org/wiki/2022_Bahrain_Grand_Prix",
                       "raceName": "Bahrain Grand Prix",
                       "Circuit": {
                         "circuitId": "bahrain",
-                        "url": "http://en.wikipedia.org/wiki/Bahrain_International_Circuit",
+                        "url": "https://://en.wikipedia.org/wiki/Bahrain_International_Circuit",
                         "circuitName": "Bahrain International Circuit",
                         "Location": {
                           "lat": 26.0325,
@@ -221,11 +221,11 @@
                 "example": {
                   "season": 2022,
                   "round": 1,
-                  "url": "http://en.wikipedia.org/wiki/2022_Bahrain_Grand_Prix",
+                  "url": "https://://en.wikipedia.org/wiki/2022_Bahrain_Grand_Prix",
                   "raceName": "Bahrain Grand Prix",
                   "Circuit": {
                     "circuitId": "bahrain",
-                    "url": "http://en.wikipedia.org/wiki/Bahrain_International_Circuit",
+                    "url": "https://://en.wikipedia.org/wiki/Bahrain_International_Circuit",
                     "circuitName": "Bahrain International Circuit",
                     "Location": {
                       "lat": 26.0325,
@@ -314,7 +314,7 @@
                   "circuits": [
                     {
                       "circuitId": "zandvoort",
-                      "url": "http://en.wikipedia.org/wiki/Circuit_Zandvoort",
+                      "url": "https://://en.wikipedia.org/wiki/Circuit_Zandvoort",
                       "circuitName": "Circuit Park Zandvoort",
                       "Location": {
                         "lat": 52.3888,
@@ -388,7 +388,7 @@
                   "circuits": [
                     {
                       "circuitId": "zandvoort",
-                      "url": "http://en.wikipedia.org/wiki/Circuit_Zandvoort",
+                      "url": "https://://en.wikipedia.org/wiki/Circuit_Zandvoort",
                       "circuitName": "Circuit Park Zandvoort",
                       "Location": {
                         "lat": 52.3888,
@@ -469,7 +469,7 @@
                 },
                 "example": {
                   "circuitId": "zandvoort",
-                  "url": "http://en.wikipedia.org/wiki/Circuit_Zandvoort",
+                  "url": "https://://en.wikipedia.org/wiki/Circuit_Zandvoort",
                   "circuitName": "Circuit Park Zandvoort",
                   "Location": {
                     "lat": 52.3888,
@@ -539,7 +539,7 @@
                   "constructors": [
                     {
                       "constructorId": "red_bull",
-                      "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
+                      "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
                       "name": "Red Bull",
                       "nationality": "Austrian"
                     }
@@ -608,7 +608,7 @@
                   "constructors": [
                     {
                       "constructorId": "red_bull",
-                      "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
+                      "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
                       "name": "Red Bull",
                       "nationality": "Austrian"
                     }
@@ -684,7 +684,7 @@
                 },
                 "example": {
                   "constructorId": "red_bull",
-                  "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
+                  "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
                   "name": "Red Bull",
                   "nationality": "Austrian"
                 }
@@ -749,7 +749,7 @@
                   "drivers": [
                     {
                       "driverId": "max_verstappen",
-                      "url": "http://en.wikipedia.org/wiki/Max_Verstappen",
+                      "url": "https://://en.wikipedia.org/wiki/Max_Verstappen",
                       "givenName": "Max",
                       "familyName": "Verstappen",
                       "dateOfBirth": "1997-09-30",
@@ -822,7 +822,7 @@
                   "drivers": [
                     {
                       "driverId": "max_verstappen",
-                      "url": "http://en.wikipedia.org/wiki/Max_Verstappen",
+                      "url": "https://://en.wikipedia.org/wiki/Max_Verstappen",
                       "givenName": "Max",
                       "familyName": "Verstappen",
                       "dateOfBirth": "1997-09-30",
@@ -902,7 +902,7 @@
                 },
                 "example": {
                   "driverId": "max_verstappen",
-                  "url": "http://en.wikipedia.org/wiki/Max_Verstappen",
+                  "url": "https://://en.wikipedia.org/wiki/Max_Verstappen",
                   "givenName": "Max",
                   "familyName": "Verstappen",
                   "dateOfBirth": "1997-09-30",
@@ -996,7 +996,7 @@
                       "points": 26,
                       "Driver": {
                         "driverId": "max_verstappen",
-                        "url": "http://en.wikipedia.org/wiki/Max_Verstappen",
+                        "url": "https://://en.wikipedia.org/wiki/Max_Verstappen",
                         "givenName": "Max",
                         "familyName": "Verstappen",
                         "dateOfBirth": "1997-09-30",
@@ -1006,7 +1006,7 @@
                       },
                       "Constructor": {
                         "constructorId": "red_bull",
-                        "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
+                        "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
                         "name": "Red Bull",
                         "nationality": "Austrian"
                       },
@@ -1115,7 +1115,7 @@
                       "position": 1,
                       "Driver": {
                         "driverId": "max_verstappen",
-                        "url": "http://en.wikipedia.org/wiki/Max_Verstappen",
+                        "url": "https://://en.wikipedia.org/wiki/Max_Verstappen",
                         "givenName": "Max",
                         "familyName": "Verstappen",
                         "dateOfBirth": "1997-09-30",
@@ -1125,7 +1125,7 @@
                       },
                       "Constructor": {
                         "constructorId": "red_bull",
-                        "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
+                        "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
                         "name": "Red Bull",
                         "nationality": "Austrian"
                       },
@@ -1213,7 +1213,7 @@
                       "wins": 11,
                       "Driver": {
                         "driverId": "max_verstappen",
-                        "url": "http://en.wikipedia.org/wiki/Max_Verstappen",
+                        "url": "https://://en.wikipedia.org/wiki/Max_Verstappen",
                         "givenName": "Max",
                         "familyName": "Verstappen",
                         "dateOfBirth": "1997-09-30",
@@ -1224,7 +1224,7 @@
                       "Constructors": [
                         {
                           "constructorId": "red_bull",
-                          "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
+                          "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
                           "name": "Red Bull",
                           "nationality": "Austrian"
                         }
@@ -1310,7 +1310,7 @@
                       "wins": 12,
                       "Constructor": {
                         "constructorId": "red_bull",
-                        "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
+                        "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
                         "name": "Red Bull",
                         "nationality": "Austrian"
                       }

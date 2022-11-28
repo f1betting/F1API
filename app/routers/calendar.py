@@ -1,3 +1,5 @@
+import os
+
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
@@ -9,7 +11,7 @@ router = APIRouter()
 
 
 # CALENDAR
-# http://185.229.22.110/mrd/methods/schedule/
+# https://ergast.com/mrd/methods/schedule/
 
 @router.get("/calendar/{season}",
             tags=["Season"],
@@ -31,7 +33,7 @@ router = APIRouter()
                 }}
             })
 def get_calendar_by_season(season: int):
-    data, timestamp = get_cache(f"http://185.229.22.110/api/f1/{season}.json", f"get_calendar_by_season.{season}")
+    data, timestamp = get_cache(f"{os.getenv('ERGAST_API')}/api/f1/{season}.json", f"get_calendar_by_season.{season}")
 
     try:
         if len(data["MRData"]["RaceTable"]["Races"]) <= 0:
@@ -64,7 +66,7 @@ def get_calendar_by_season(season: int):
                 }}
             })
 def get_next_race():
-    data, timestamp = get_cache("http://185.229.22.110/api/f1/current/next.json", "get_next_race")
+    data, timestamp = get_cache(f"{os.getenv('ERGAST_API')}/api/f1/current/next.json", "get_next_race")
 
     try:
         event_data = data["MRData"]["RaceTable"]
@@ -92,7 +94,7 @@ def get_next_race():
                 }}
             })
 def get_previous_race():
-    data, timestamp = get_cache("http://185.229.22.110/api/f1/current/last.json", "get_previous_race")
+    data, timestamp = get_cache(f"{os.getenv('ERGAST_API')}/api/f1/current/last.json", "get_previous_race")
 
     try:
         event_data = data["MRData"]["RaceTable"]
@@ -125,7 +127,7 @@ def get_previous_race():
                 }}
             })
 def get_event_details(season: int, round: int):
-    data, timestamp = get_cache(f"http://185.229.22.110/api/f1/{season}/{round}.json",
+    data, timestamp = get_cache(f"{os.getenv('ERGAST_API')}/api/f1/{season}/{round}.json",
                                 f"get_event_details.{season}.{round}")
 
     try:

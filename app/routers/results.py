@@ -1,3 +1,5 @@
+import os
+
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
@@ -15,7 +17,7 @@ router = APIRouter(
 
 
 # RACE RESULTS
-# http://185.229.22.110/mrd/methods/results/
+# https://ergast.com/mrd/methods/results/
 
 @router.get("/race/{season}/{race}",
             response_model=RaceResults,
@@ -41,7 +43,7 @@ router = APIRouter(
                 }}
             })
 async def get_race_results(season: int, race: int):
-    data, timestamp = get_cache(f"http://185.229.22.110/api/f1/{season}/{race}/results.json",
+    data, timestamp = get_cache(f"{os.getenv('ERGAST_API')}/api/f1/{season}/{race}/results.json",
                                 f"get_race_results.{season}.{race}")
 
     try:
@@ -58,7 +60,7 @@ async def get_race_results(season: int, race: int):
 
 
 # QUALIFYING RESULTS
-# http://185.229.22.110/mrd/methods/qualifying/
+# {os.getenv('ERGAST_API')}/mrd/methods/qualifying/
 
 @router.get("/qualifying/{season}/{race}",
             response_model=QualifyingResults,
@@ -84,7 +86,7 @@ async def get_race_results(season: int, race: int):
                 }}
             })
 def get_qualifying_results(season: int, race: int):
-    data, timestamp = get_cache(f"http://185.229.22.110/api/f1/{season}/{race}/qualifying.json",
+    data, timestamp = get_cache(f"{os.getenv('ERGAST_API')}/api/f1/{season}/{race}/qualifying.json",
                                 f"get_qualifying_results.{season}.{race}")
 
     try:
@@ -101,7 +103,7 @@ def get_qualifying_results(season: int, race: int):
 
 
 # STANDINGS
-# http://185.229.22.110/mrd/methods/standings/
+# {os.getenv('ERGAST_API')}/mrd/methods/standings/
 
 @router.get("/standings/drivers/{season}",
             tags=["Season"],
@@ -128,7 +130,7 @@ def get_qualifying_results(season: int, race: int):
                 }}
             })
 def get_driver_standings_by_season(season: int):
-    data, timestamp = get_cache(f"http://185.229.22.110/api/f1/{season}/driverStandings.json",
+    data, timestamp = get_cache(f"{os.getenv('ERGAST_API')}/api/f1/{season}/driverStandings.json",
                                 f"get_driver_standings_by_season.{season}")
 
     try:
@@ -169,7 +171,7 @@ def get_driver_standings_by_season(season: int):
                 }}
             })
 def get_constructor_standings_by_season(season: int):
-    data, timestamp = get_cache(f"http://185.229.22.110/api/f1/{season}/constructorStandings.json",
+    data, timestamp = get_cache(f"{os.getenv('ERGAST_API')}/api/f1/{season}/constructorStandings.json",
                                 f"get_constructor_standings_by_season.{season}")
 
     try:

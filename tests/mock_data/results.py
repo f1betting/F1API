@@ -5,9 +5,9 @@
 def get_race_results_data(timestamp):
     return {
         "MRData": {
-            "xmlns": "http://ergast.com/mrd/1.5",
+            "xmlns": "https://://ergast.com/mrd/1.5",
             "series": "f1",
-            "url": "http://ergast.com/api/f1/2022/15/results.json",
+            "url": "https://://ergast.com/api/f1/2022/15/results.json",
             "limit": "30",
             "offset": "0",
             "total": "20",
@@ -18,11 +18,11 @@ def get_race_results_data(timestamp):
                     {
                         "season": "2022",
                         "round": "15",
-                        "url": "http://en.wikipedia.org/wiki/2022_Dutch_Grand_Prix",
+                        "url": "https://://en.wikipedia.org/wiki/2022_Dutch_Grand_Prix",
                         "raceName": "Dutch Grand Prix",
                         "Circuit": {
                             "circuitId": "zandvoort",
-                            "url": "http://en.wikipedia.org/wiki/Circuit_Zandvoort",
+                            "url": "https://://en.wikipedia.org/wiki/Circuit_Zandvoort",
                             "circuitName": "Circuit Park Zandvoort",
                             "Location": {
                                 "lat": "52.3888",
@@ -43,7 +43,7 @@ def get_race_results_data(timestamp):
                                     "driverId": "max_verstappen",
                                     "permanentNumber": "33",
                                     "code": "VER",
-                                    "url": "http://en.wikipedia.org/wiki/Max_Verstappen",
+                                    "url": "https://://en.wikipedia.org/wiki/Max_Verstappen",
                                     "givenName": "Max",
                                     "familyName": "Verstappen",
                                     "dateOfBirth": "1997-09-30",
@@ -51,7 +51,7 @@ def get_race_results_data(timestamp):
                                 },
                                 "Constructor": {
                                     "constructorId": "red_bull",
-                                    "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
+                                    "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
                                     "name": "Red Bull",
                                     "nationality": "Austrian"
                                 },
@@ -96,7 +96,7 @@ def get_race_results_response(timestamp=None):
                 "Driver": {
                     "timestamp": None,
                     "driverId": "max_verstappen",
-                    "url": "http://en.wikipedia.org/wiki/Max_Verstappen",
+                    "url": "https://://en.wikipedia.org/wiki/Max_Verstappen",
                     "givenName": "Max",
                     "familyName": "Verstappen",
                     "dateOfBirth": "1997-09-30",
@@ -107,7 +107,7 @@ def get_race_results_response(timestamp=None):
                 "Constructor": {
                     "timestamp": None,
                     "constructorId": "red_bull",
-                    "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
+                    "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
                     "name": "Red Bull",
                     "nationality": "Austrian"
                 },
@@ -138,9 +138,9 @@ def get_race_results_response(timestamp=None):
 def get_race_results_placeholder_data(timestamp):
     return {
         "MRData": {
-            "xmlns": "http://ergast.com/mrd/1.5",
+            "xmlns": "https://://ergast.com/mrd/1.5",
             "series": "f1",
-            "url": "http://ergast.com/api/f1/2022/placeholder/results.json",
+            "url": "https://://ergast.com/api/f1/2022/placeholder/results.json",
             "limit": "30",
             "offset": "0",
             "total": "0",
@@ -161,9 +161,9 @@ def get_race_results_placeholder_data(timestamp):
 def get_qualifying_results_data(timestamp):
     return {
         "MRData": {
-            "xmlns": "http://ergast.com/mrd/1.5",
+            "xmlns": "https://://ergast.com/mrd/1.5",
             "series": "f1",
-            "url": "http://ergast.com/api/f1/2022/15/qualifying.json",
+            "url": "https://://ergast.com/api/f1/2022/15/qualifying.json",
             "limit": "30",
             "offset": "0",
             "total": "20",
@@ -174,11 +174,11 @@ def get_qualifying_results_data(timestamp):
                     {
                         "season": "2022",
                         "round": "15",
-                        "url": "http://en.wikipedia.org/wiki/2022_Dutch_Grand_Prix",
+                        "url": "https://://en.wikipedia.org/wiki/2022_Dutch_Grand_Prix",
                         "raceName": "Dutch Grand Prix",
                         "Circuit": {
                             "circuitId": "zandvoort",
-                            "url": "http://en.wikipedia.org/wiki/Circuit_Zandvoort",
+                            "url": "https://://en.wikipedia.org/wiki/Circuit_Zandvoort",
                             "circuitName": "Circuit Park Zandvoort",
                             "Location": {
                                 "lat": "52.3888",
@@ -197,7 +197,7 @@ def get_qualifying_results_data(timestamp):
                                     "driverId": "max_verstappen",
                                     "permanentNumber": "33",
                                     "code": "VER",
-                                    "url": "http://en.wikipedia.org/wiki/Max_Verstappen",
+                                    "url": "https://://en.wikipedia.org/wiki/Max_Verstappen",
                                     "givenName": "Max",
                                     "familyName": "Verstappen",
                                     "dateOfBirth": "1997-09-30",
@@ -205,7 +205,7 @@ def get_qualifying_results_data(timestamp):
                                 },
                                 "Constructor": {
                                     "constructorId": "red_bull",
-                                    "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
+                                    "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
                                     "name": "Red Bull",
                                     "nationality": "Austrian"
                                 },
@@ -233,7 +233,7 @@ def get_qualifying_results_response(timestamp=None):
                 "Driver": {
                     "timestamp": None,
                     "driverId": "max_verstappen",
-                    "url": "http://en.wikipedia.org/wiki/Max_Verstappen",
+                    "url": "https://://en.wikipedia.org/wiki/Max_Verstappen",
                     "givenName": "Max",
                     "familyName": "Verstappen",
                     "dateOfBirth": "1997-09-30",
@@ -244,7 +244,7 @@ def get_qualifying_results_response(timestamp=None):
                 "Constructor": {
                     "timestamp": None,
                     "constructorId": "red_bull",
-                    "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
+                    "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
                     "name": "Red Bull",
                     "nationality": "Austrian"
                 },
@@ -259,9 +259,9 @@ def get_qualifying_results_response(timestamp=None):
 def get_qualifying_results_placeholder_data(timestamp):
     return {
         "MRData": {
-            "xmlns": "http://ergast.com/mrd/1.5",
+            "xmlns": "https://://ergast.com/mrd/1.5",
             "series": "f1",
-            "url": "http://ergast.com/api/f1/2022/placeholder/qualifying.json",
+            "url": "https://://ergast.com/api/f1/2022/placeholder/qualifying.json",
             "limit": "30",
             "offset": "0",
             "total": "0",
@@ -282,9 +282,9 @@ def get_qualifying_results_placeholder_data(timestamp):
 def get_driver_standings_data(timestamp):
     return {
         "MRData": {
-            "xmlns": "http://ergast.com/mrd/1.5",
+            "xmlns": "https://://ergast.com/mrd/1.5",
             "series": "f1",
-            "url": "http://ergast.com/api/f1/2022/driverstandings.json",
+            "url": "https://://ergast.com/api/f1/2022/driverstandings.json",
             "limit": "30",
             "offset": "0",
             "total": "22",
@@ -304,7 +304,7 @@ def get_driver_standings_data(timestamp):
                                     "driverId": "max_verstappen",
                                     "permanentNumber": "33",
                                     "code": "VER",
-                                    "url": "http://en.wikipedia.org/wiki/Max_Verstappen",
+                                    "url": "https://://en.wikipedia.org/wiki/Max_Verstappen",
                                     "givenName": "Max",
                                     "familyName": "Verstappen",
                                     "dateOfBirth": "1997-09-30",
@@ -313,7 +313,7 @@ def get_driver_standings_data(timestamp):
                                 "Constructors": [
                                     {
                                         "constructorId": "red_bull",
-                                        "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
+                                        "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
                                         "name": "Red Bull",
                                         "nationality": "Austrian"
                                     }
@@ -341,7 +341,7 @@ def get_driver_standings_response(timestamp=None):
                 "Driver": {
                     "timestamp": None,
                     "driverId": "max_verstappen",
-                    "url": "http://en.wikipedia.org/wiki/Max_Verstappen",
+                    "url": "https://://en.wikipedia.org/wiki/Max_Verstappen",
                     "givenName": "Max",
                     "familyName": "Verstappen",
                     "dateOfBirth": "1997-09-30",
@@ -353,7 +353,7 @@ def get_driver_standings_response(timestamp=None):
                     {
                         "timestamp": None,
                         "constructorId": "red_bull",
-                        "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
+                        "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
                         "name": "Red Bull",
                         "nationality": "Austrian"
                     }
@@ -366,9 +366,9 @@ def get_driver_standings_response(timestamp=None):
 def get_driver_standings_placeholder_data(timestamp):
     return {
         "MRData": {
-            "xmlns": "http://ergast.com/mrd/1.5",
+            "xmlns": "https://://ergast.com/mrd/1.5",
             "series": "f1",
-            "url": "http://ergast.com/api/f1/placeholder/driverstandings.json",
+            "url": "https://://ergast.com/api/f1/placeholder/driverstandings.json",
             "limit": "30",
             "offset": "0",
             "total": "0",
@@ -388,9 +388,9 @@ def get_driver_standings_placeholder_data(timestamp):
 def get_constructor_standings_data(timestamp):
     return {
         "MRData": {
-            "xmlns": "http://ergast.com/mrd/1.5",
+            "xmlns": "https://://ergast.com/mrd/1.5",
             "series": "f1",
-            "url": "http://ergast.com/api/f1/2022/constructorstandings.json",
+            "url": "https://://ergast.com/api/f1/2022/constructorstandings.json",
             "limit": "30",
             "offset": "0",
             "total": "10",
@@ -408,7 +408,7 @@ def get_constructor_standings_data(timestamp):
                                 "wins": "17",
                                 "Constructor": {
                                     "constructorId": "red_bull",
-                                    "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
+                                    "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
                                     "name": "Red Bull",
                                     "nationality": "Austrian"
                                 }
@@ -435,7 +435,7 @@ def get_constructor_standings_response(timestamp=None):
                 "Constructor": {
                     "timestamp": None,
                     "constructorId": "red_bull",
-                    "url": "http://en.wikipedia.org/wiki/Red_Bull_Racing",
+                    "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
                     "name": "Red Bull",
                     "nationality": "Austrian"
                 }
@@ -447,9 +447,9 @@ def get_constructor_standings_response(timestamp=None):
 def get_constructor_standings_placeholder_data(timestamp):
     return {
         "MRData": {
-            "xmlns": "http://ergast.com/mrd/1.5",
+            "xmlns": "https://://ergast.com/mrd/1.5",
             "series": "f1",
-            "url": "http://ergast.com/api/f1/placeholder/constructorStandings.json",
+            "url": "https://://ergast.com/api/f1/placeholder/constructorStandings.json",
             "limit": "30",
             "offset": "0",
             "total": "0",
