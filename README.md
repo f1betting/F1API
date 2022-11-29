@@ -21,6 +21,7 @@
 - [ℹ️ About The Project](#-about-the-project)
     - [🚧 Built With](#built-with)
 - [🔨 Getting Started](#-getting-started)
+    - [🤖 .env file](#-env-file)
     - [🚢 Running using Docker](#running-using-docker)
     - [🏡 Running locally](#running-locally)
 - [🚀 Usage ](#-usage)

@@ -5,9 +5,9 @@
 def get_season_data(timestamp):
     return {
         "MRData": {
-            "xmlns": "https://://ergast.com/mrd/1.5",
+            "xmlns": "https://ergast.com/mrd/1.5",
             "series": "f1",
-            "url": "https://://ergast.com/api/f1/2022.json",
+            "url": "https://ergast.com/api/f1/2022.json",
             "limit": "30",
             "offset": "0",
             "total": "22",
@@ -17,11 +17,11 @@ def get_season_data(timestamp):
                     {
                         "season": "2022",
                         "round": "15",
-                        "url": "https://://en.wikipedia.org/wiki/2022_Dutch_Grand_Prix",
+                        "url": "https://en.wikipedia.org/wiki/2022_Dutch_Grand_Prix",
                         "raceName": "Dutch Grand Prix",
                         "Circuit": {
                             "circuitId": "zandvoort",
-                            "url": "https://://en.wikipedia.org/wiki/Circuit_Zandvoort",
+                            "url": "https://en.wikipedia.org/wiki/Circuit_Zandvoort",
                             "circuitName": "Circuit Park Zandvoort",
                             "Location": {
                                 "lat": "52.3888",
@@ -61,12 +61,12 @@ def get_season_response():
         "timestamp": None,
         "season": 2022,
         "round": 15,
-        "url": "https://://en.wikipedia.org/wiki/2022_Dutch_Grand_Prix",
+        "url": "https://en.wikipedia.org/wiki/2022_Dutch_Grand_Prix",
         "raceName": "Dutch Grand Prix",
         "Circuit": {
             "timestamp": None,
             "circuitId": "zandvoort",
-            "url": "https://://en.wikipedia.org/wiki/Circuit_Zandvoort",
+            "url": "https://en.wikipedia.org/wiki/Circuit_Zandvoort",
             "circuitName": "Circuit Park Zandvoort",
             "Location": {
                 "lat": 52.3888,
@@ -99,9 +99,9 @@ def get_season_response():
 def get_season_placeholder_data(timestamp):
     return {
         "MRData": {
-            "xmlns": "https://://ergast.com/mrd/1.5",
+            "xmlns": "https://ergast.com/mrd/1.5",
             "series": "f1",
-            "url": "https://://ergast.com/api/f1/placeholder.json",
+            "url": "https://ergast.com/api/f1/placeholder.json",
             "limit": "30",
             "offset": "0",
             "total": "0",
@@ -121,9 +121,9 @@ def get_season_placeholder_data(timestamp):
 def get_next_race_data(timestamp):
     return {
         "MRData": {
-            "xmlns": "https://://ergast.com/mrd/1.5",
+            "xmlns": "https://ergast.com/mrd/1.5",
             "series": "f1",
-            "url": "https://://ergast.com/api/f1/current/next.json",
+            "url": "https://ergast.com/api/f1/current/next.json",
             "limit": "30",
             "offset": "0",
             "total": "0",
@@ -152,9 +152,9 @@ def get_next_race_response(timestamp):
 def get_previous_race_data(timestamp):
     return {
         "MRData": {
-            "xmlns": "https://://ergast.com/mrd/1.5",
+            "xmlns": "https://ergast.com/mrd/1.5",
             "series": "f1",
-            "url": "https://://ergast.com/api/f1/current/last.json",
+            "url": "https://ergast.com/api/f1/current/last.json",
             "limit": "30",
             "offset": "0",
             "total": "1",
@@ -165,11 +165,11 @@ def get_previous_race_data(timestamp):
                     {
                         "season": "2022",
                         "round": "22",
-                        "url": "https://://en.wikipedia.org/wiki/2022_Abu_Dhabi_Grand_Prix",
+                        "url": "https://en.wikipedia.org/wiki/2022_Abu_Dhabi_Grand_Prix",
                         "raceName": "Abu Dhabi Grand Prix",
                         "Circuit": {
                             "circuitId": "yas_marina",
-                            "url": "https://://en.wikipedia.org/wiki/Yas_Marina_Circuit",
+                            "url": "https://en.wikipedia.org/wiki/Yas_Marina_Circuit",
                             "circuitName": "Yas Marina Circuit",
                             "Location": {
                                 "lat": "24.4672",
@@ -220,9 +220,9 @@ def get_previous_race_response(timestamp):
 def get_event_details_data(timestamp):
     return {
         "MRData": {
-            "xmlns": "https://://ergast.com/mrd/1.5",
+            "xmlns": "https://ergast.com/mrd/1.5",
             "series": "f1",
-            "url": "https://://ergast.com/api/f1/2022/15.json",
+            "url": "https://ergast.com/api/f1/2022/15.json",
             "limit": "30",
             "offset": "0",
             "total": "1",
@@ -233,11 +233,11 @@ def get_event_details_data(timestamp):
                     {
                         "season": "2022",
                         "round": "15",
-                        "url": "https://://en.wikipedia.org/wiki/2022_Dutch_Grand_Prix",
+                        "url": "https://en.wikipedia.org/wiki/2022_Dutch_Grand_Prix",
                         "raceName": "Dutch Grand Prix",
                         "Circuit": {
                             "circuitId": "zandvoort",
-                            "url": "https://://en.wikipedia.org/wiki/Circuit_Zandvoort",
+                            "url": "https://en.wikipedia.org/wiki/Circuit_Zandvoort",
                             "circuitName": "Circuit Park Zandvoort",
                             "Location": {
                                 "lat": "52.3888",
@@ -277,12 +277,12 @@ def get_event_details_response(timestamp=None):
         "timestamp": timestamp,
         "season": 2022,
         "round": 15,
-        "url": "https://://en.wikipedia.org/wiki/2022_Dutch_Grand_Prix",
+        "url": "https://en.wikipedia.org/wiki/2022_Dutch_Grand_Prix",
         "raceName": "Dutch Grand Prix",
         "Circuit": {
             "timestamp": None,
             "circuitId": "zandvoort",
-            "url": "https://://en.wikipedia.org/wiki/Circuit_Zandvoort",
+            "url": "https://en.wikipedia.org/wiki/Circuit_Zandvoort",
             "circuitName": "Circuit Park Zandvoort",
             "Location": {
                 "lat": 52.3888,
@@ -315,9 +315,9 @@ def get_event_details_response(timestamp=None):
 def get_event_details_placeholder(timestamp):
     return {
         "MRData": {
-            "xmlns": "https://://ergast.com/mrd/1.5",
+            "xmlns": "https://ergast.com/mrd/1.5",
             "series": "f1",
-            "url": "https://://ergast.com/api/f1/placeholder/placeholder.json",
+            "url": "https://ergast.com/api/f1/placeholder/placeholder.json",
             "limit": "30",
             "offset": "0",
             "total": "0",

@@ -5,9 +5,9 @@
 def get_max_verstappen_data(timestamp):
     return {
         "MRData": {
-            "xmlns": "https://://ergast.com/mrd/1.5",
+            "xmlns": "https://ergast.com/mrd/1.5",
             "series": "f1",
-            "url": "https://://ergast.com/api/f1/drivers/max_verstappen.json",
+            "url": "https://ergast.com/api/f1/drivers/max_verstappen.json",
             "limit": "30",
             "offset": "0",
             "total": "1",
@@ -18,7 +18,7 @@ def get_max_verstappen_data(timestamp):
                         "driverId": "max_verstappen",
                         "permanentNumber": "33",
                         "code": "VER",
-                        "url": "https://://en.wikipedia.org/wiki/Max_Verstappen",
+                        "url": "https://en.wikipedia.org/wiki/Max_Verstappen",
                         "givenName": "Max",
                         "familyName": "Verstappen",
                         "dateOfBirth": "1997-09-30",
@@ -35,7 +35,7 @@ def get_max_verstappen_response(timestamp=None):
     return {
         "timestamp": timestamp,
         "driverId": "max_verstappen",
-        "url": "https://://en.wikipedia.org/wiki/Max_Verstappen",
+        "url": "https://en.wikipedia.org/wiki/Max_Verstappen",
         "givenName": "Max",
         "familyName": "Verstappen",
         "dateOfBirth": "1997-09-30",
@@ -48,9 +48,9 @@ def get_max_verstappen_response(timestamp=None):
 def get_placeholder_data(timestamp):
     return {
         "MRData": {
-            "xmlns": "https://://ergast.com/mrd/1.5",
+            "xmlns": "https://ergast.com/mrd/1.5",
             "series": "f1",
-            "url": "https://://ergast.com/api/f1/drivers/placeholder.json",
+            "url": "https://ergast.com/api/f1/drivers/placeholder.json",
             "limit": "30",
             "offset": "0",
             "total": "0",
