@@ -1,12 +1,6 @@
 name: Python on Pull Request
 
-on:
-  pull_request:
-    paths:
-      - app/**
-      - test/**
-      - requirements.txt
-      - .github/workflows/**
+on: pull_request
 
 jobs:
   testing:
