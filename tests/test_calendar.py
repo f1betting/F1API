@@ -4,9 +4,7 @@ from fastapi.testclient import TestClient
 
 from app.main import app
 from tests.logic.mock_cache import delete_cache_file, mock_cache, empty_cache_data
-from tests.mock_data.calendar import get_season_data, get_season_placeholder_data, get_season_response, \
-    get_next_race_data, get_next_race_response, get_previous_race_data, get_previous_race_response, \
-    get_event_details_data, get_event_details_response, get_event_details_placeholder
+from tests.mock_data.mock_calendar import *
 
 
 class TestCalendar(unittest.TestCase):

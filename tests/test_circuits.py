@@ -4,7 +4,7 @@ from fastapi.testclient import TestClient
 
 from app.main import app
 from .logic.mock_cache import mock_cache, empty_cache_data, delete_cache_file
-from .mock_data.circuits import get_albert_park_data, get_albert_park_response, get_placeholder_data
+from .mock_data.mock_circuits import get_albert_park_data, get_albert_park_response, get_placeholder_data
 
 
 class TestCircuits(unittest.TestCase):

@@ -4,7 +4,7 @@ from fastapi.testclient import TestClient
 
 from app.main import app
 from tests.logic.mock_cache import mock_cache, empty_cache_data, delete_cache_file
-from tests.mock_data.constructors import get_red_bull_data, get_placeholder_data, get_red_bull_response
+from tests.mock_data.mock_constructors import get_red_bull_data, get_placeholder_data, get_red_bull_response
 
 
 class TestConstructors(unittest.TestCase):

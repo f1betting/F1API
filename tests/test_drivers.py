@@ -6,7 +6,7 @@ from fastapi.testclient import TestClient
 
 from app.main import app
 from tests.logic.mock_cache import mock_cache, delete_cache_file, empty_cache_data
-from tests.mock_data.drivers import get_max_verstappen_data, get_placeholder_data, get_max_verstappen_response
+from tests.mock_data.mock_drivers import get_max_verstappen_data, get_placeholder_data, get_max_verstappen_response
 
 
 class TestDrivers(unittest.TestCase):

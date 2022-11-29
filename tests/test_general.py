@@ -6,8 +6,7 @@ import unittest
 from fastapi.testclient import TestClient
 
 from app.main import app
-from tests.mock_data.drivers import get_max_verstappen_data, get_placeholder_data, get_max_verstappen_response
-from tests.mock_data.general import get_test_data
+from tests.mock_data.mock_general import get_test_data
 
 
 class TestGeneral(unittest.TestCase):

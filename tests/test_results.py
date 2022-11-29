@@ -4,10 +4,7 @@ from fastapi.testclient import TestClient
 
 from app.main import app
 from tests.logic.mock_cache import delete_cache_file, mock_cache, empty_cache_data
-from tests.mock_data.results import get_race_results_data, get_race_results_response, get_race_results_placeholder_data, \
-    get_qualifying_results_data, get_qualifying_results_placeholder_data, get_qualifying_results_response, \
-    get_driver_standings_response, get_driver_standings_data, get_driver_standings_placeholder_data, \
-    get_constructor_standings_data, get_constructor_standings_placeholder_data, get_constructor_standings_response
+from tests.mock_data.mock_results import *
 
 
 class TestResults(unittest.TestCase):
