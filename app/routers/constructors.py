@@ -4,6 +4,7 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
 from app.internal.logic.cache_init import get_cache, invalidate_cache
+from app.internal.logic.errors import service_unavailable, data_not_found
 from app.internal.models.f1.constructor import Constructor, Constructors, ConstructorExample
 from app.internal.models.general.message import Message, create_message
 
@@ -49,10 +50,10 @@ async def get_constructors():
         constructors = {"constructors": data["MRData"]["ConstructorTable"]["Constructors"], "timestamp": timestamp}
     except IndexError:
         invalidate_cache("get_constructors")
-        return JSONResponse(status_code=404, content=create_message("Constructors not found"))
+        return data_not_found("Constructors")
     except KeyError:
         invalidate_cache("get_constructors")
-        return JSONResponse(status_code=503, content=create_message("Service unavailable"))
+        return service_unavailable()
 
     return constructors
 
@@ -92,10 +93,10 @@ async def get_constructors_by_season(season: str):
         constructors = {"constructors": data["MRData"]["ConstructorTable"]["Constructors"], "timestamp": timestamp}
     except IndexError:
         invalidate_cache(f"get_constructors_by_season.{season}")
-        return JSONResponse(status_code=404, content=create_message("Constructors not found"))
+        return data_not_found("Constructors")
     except KeyError:
         invalidate_cache(f"get_constructors_by_season.{season}")
-        return JSONResponse(status_code=503, content=create_message("Service unavailable"))
+        return service_unavailable()
 
     return constructors
 
@@ -128,9 +129,9 @@ async def get_constructor_by_id(constructor_id: str):
         constructor["timestamp"] = timestamp
     except IndexError:
         invalidate_cache(f"get_constructor_by_id.{constructor_id}")
-        return JSONResponse(status_code=404, content=create_message("Constructor not found"))
+        return data_not_found("Constructor")
     except KeyError:
         invalidate_cache(f"get_constructor_by_id.{constructor_id}")
-        return JSONResponse(status_code=503, content=create_message("Service unavailable"))
+        return service_unavailable()
 
     return constructor

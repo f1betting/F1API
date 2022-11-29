@@ -4,6 +4,7 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
 from app.internal.logic.cache_init import get_cache, invalidate_cache
+from app.internal.logic.errors import service_unavailable, data_not_found
 from app.internal.models.f1.circuit import Circuit, Circuits, CircuitExample
 from app.internal.models.general.message import Message, create_message
 
@@ -48,10 +49,10 @@ async def get_circuits():
         circuits = {"circuits": data["MRData"]["CircuitTable"]["Circuits"], "timestamp": timestamp}
     except IndexError:
         invalidate_cache(f"get_circuits")
-        return JSONResponse(status_code=404, content=create_message("Circuits not found"))
+        return data_not_found("Circuits")
     except KeyError:
         invalidate_cache(f"get_circuits")
-        return JSONResponse(status_code=503, content=create_message("Service unavailable"))
+        return service_unavailable()
 
     return circuits
 
@@ -91,10 +92,10 @@ async def get_circuits_by_season(season: str):
         circuits = {"circuits": data["MRData"]["CircuitTable"]["Circuits"], "timestamp": timestamp}
     except IndexError:
         invalidate_cache(f"get_circuits_by_season.{season}")
-        return JSONResponse(status_code=404, content=create_message("Circuits not found"))
+        return data_not_found("Circuits")
     except KeyError:
         invalidate_cache(f"get_circuits_by_season.{season}")
-        return JSONResponse(status_code=503, content=create_message("Service unavailable"))
+        return service_unavailable()
 
     return circuits
 
@@ -127,9 +128,9 @@ async def get_circuit_by_id(circuit_id: str):
         circuit["timestamp"] = timestamp
     except IndexError:
         invalidate_cache(f"get_circuit_by_id.{circuit_id}")
-        return JSONResponse(status_code=404, content=create_message("Circuit not found"))
+        return data_not_found("Circuit")
     except KeyError:
         invalidate_cache(f"get_circuit_by_id.{circuit_id}")
-        return JSONResponse(status_code=503, content=create_message("Service unavailable"))
+        return service_unavailable()
 
     return circuit
