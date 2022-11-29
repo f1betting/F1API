@@ -6,7 +6,15 @@ on:
       - app/**
       - test/**
       - requirements.txt
+      - .github/workflows/**
 
 jobs:
   testing:
     uses: ./.github/workflows/action_python_testing.yml
+
+  sonar:
+    uses: ./.github/workflows/action_sonarcloud.yml
+    needs: [ testing ]
+    secrets:
+      github: ${{ secrets.GITHUB_TOKEN }}
+      sonar: ${{ secrets.SONAR_TOKEN }}
