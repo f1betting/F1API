@@ -1,4 +1,5 @@
-import requests
+import os
+
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
@@ -12,7 +13,7 @@ router = APIRouter(
 
 
 # CIRCUITS
-# http://185.229.22.110/mrd/methods/circuits/
+# https://ergast.com/mrd/methods/circuits/
 
 @router.get("/circuits",
             response_model=Circuits,
@@ -38,7 +39,7 @@ router = APIRouter(
                 }}
             })
 async def get_circuits():
-    data, timestamp = get_cache("http://185.229.22.110/api/f1/circuits.json?limit=100", "get_circuits")
+    data, timestamp = get_cache(f"{os.getenv('ERGAST_API')}/api/f1/circuits.json?limit=100", "get_circuits")
 
     try:
         if len(data["MRData"]["CircuitTable"]["Circuits"]) <= 0:
@@ -80,7 +81,7 @@ async def get_circuits():
                 }}
             })
 async def get_circuits_by_season(season: str):
-    data, timestamp = get_cache(f"http://185.229.22.110/api/f1/{season}/circuits.json?limit=100",
+    data, timestamp = get_cache(f"{os.getenv('ERGAST_API')}/api/f1/{season}/circuits.json?limit=100",
                                 f"get_circuits_by_season.{season}")
 
     try:
@@ -118,7 +119,7 @@ async def get_circuits_by_season(season: str):
                 }}
             })
 async def get_circuit_by_id(circuit_id: str):
-    data, timestamp = get_cache(f"http://185.229.22.110/api/f1/circuits/{circuit_id}.json",
+    data, timestamp = get_cache(f"{os.getenv('ERGAST_API')}/api/f1/circuits/{circuit_id}.json",
                                 f"get_circuit_by_id.{circuit_id}")
 
     try:

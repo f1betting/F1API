@@ -23,7 +23,7 @@ class Circuits(BaseRequest):
 
 CircuitExample = {
     "circuitId": "zandvoort",
-    "url": "http://en.wikipedia.org/wiki/Circuit_Zandvoort",
+    "url": "https://://en.wikipedia.org/wiki/Circuit_Zandvoort",
     "circuitName": "Circuit Park Zandvoort",
     "Location": {
         "lat": 52.3888,

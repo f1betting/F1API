@@ -1,167 +1,15 @@
-import json
-import os
-import time
 import unittest
 
 from fastapi.testclient import TestClient
 
 from app.main import app
+from tests.logic.mock_cache import delete_cache_file, mock_cache, empty_cache_data
 from tests.mock_data.calendar import get_season_data, get_season_placeholder_data, get_season_response, \
     get_next_race_data, get_next_race_response, get_previous_race_data, get_previous_race_response, \
     get_event_details_data, get_event_details_response, get_event_details_placeholder
 
 
 class TestCalendar(unittest.TestCase):
-    @classmethod
-    def setUpSeason(cls):
-        """
-        Init ergast.com response for 2022 in cache (200)
-        :return: timestamp
-        """
-
-        if os.path.exists("./app/cache/get_calendar_by_season.2022.json"):
-            os.remove("./app/cache/get_calendar_by_season.2022.json")
-            print("Deleted get_calendar_by_season.2022.json")
-
-        timestamp = float(time.time())
-
-        season_data = get_season_data(timestamp)
-
-        full_path = "./app/cache/get_calendar_by_season.2022.json"
-
-        cache_file = open(full_path, "w+")
-        cache_file.write(json.dumps(season_data))
-        cache_file.close()
-
-        return timestamp
-
-    @classmethod
-    def setUpSeasonPlaceholder(cls, file_name: str):
-        """
-        Init ergast.com response for placeholder in cache (404)
-        :return: timestamp
-        """
-
-        if os.path.exists(f"./app/cache/{file_name}.json"):
-            os.remove(f"./app/cache/{file_name}.json")
-            print(f"Deleted {file_name}.json")
-
-        timestamp = float(time.time())
-
-        placeholder_data = get_season_placeholder_data(timestamp)
-
-        full_path = f"./app/cache/{file_name}.json"
-
-        cache_file = open(full_path, "w+")
-        cache_file.write(json.dumps(placeholder_data))
-        cache_file.close()
-
-        return timestamp
-
-    @classmethod
-    def setUpNextRace(cls):
-        """
-        Init ergast.com response for 2022 in cache (200)
-        :return: timestamp
-        """
-
-        if os.path.exists("./app/cache/get_next_race.json"):
-            os.remove("./app/cache/get_next_race.json")
-            print("Deleted get_next_race.json")
-
-        timestamp = float(time.time())
-
-        next_race_data = get_next_race_data(timestamp)
-
-        full_path = "./app/cache/get_next_race.json"
-
-        cache_file = open(full_path, "w+")
-        cache_file.write(json.dumps(next_race_data))
-        cache_file.close()
-
-        return timestamp
-
-    @classmethod
-    def setUpPreviousRace(cls):
-        """
-        Init ergast.com response for 2022 in cache (200)
-        :return: timestamp
-        """
-
-        if os.path.exists("./app/cache/get_previous_race.json"):
-            os.remove("./app/cache/get_previous_race.json")
-            print("Deleted get_previous_race.json")
-
-        timestamp = float(time.time())
-
-        next_race_data = get_previous_race_data(timestamp)
-
-        full_path = "./app/cache/get_previous_race.json"
-
-        cache_file = open(full_path, "w+")
-        cache_file.write(json.dumps(next_race_data))
-        cache_file.close()
-
-        return timestamp
-
-    @classmethod
-    def setUpEventDetails(cls):
-        """
-        Init ergast.com response for 2022 in cache (200)
-        :return: timestamp
-        """
-
-        if os.path.exists("./app/cache/get_event_details.2022.15.json"):
-            os.remove("./app/cache/get_event_details.2022.15.json")
-            print("Deleted get_event_details.2022.15.json")
-
-        timestamp = float(time.time())
-
-        season_data = get_event_details_data(timestamp)
-
-        full_path = "./app/cache/get_event_details.2022.15.json"
-
-        cache_file = open(full_path, "w+")
-        cache_file.write(json.dumps(season_data))
-        cache_file.close()
-
-        return timestamp
-
-    @classmethod
-    def setUpEventDetailsPlaceholder(cls, file_name: str):
-        """
-        Init ergast.com response for placeholder in cache (404)
-        :return: timestamp
-        """
-
-        if os.path.exists(f"./app/cache/{file_name}.json"):
-            os.remove(f"./app/cache/{file_name}.json")
-            print(f"Deleted {file_name}.json")
-
-        timestamp = float(time.time())
-
-        placeholder_data = get_event_details_placeholder(timestamp)
-
-        full_path = f"./app/cache/{file_name}.json"
-
-        cache_file = open(full_path, "w+")
-        cache_file.write(json.dumps(placeholder_data))
-        cache_file.close()
-
-        return timestamp
-
-    @classmethod
-    def setUpEmptyCache(cls, file_name: str):
-        timestamp = float(time.time())
-
-        full_path = f"./app/cache/{file_name}.json"
-
-        cache_file = open(full_path, "w+")
-        cache_file.write(json.dumps({"timestamp": timestamp}))
-        cache_file.close()
-
-        return timestamp
-
     @classmethod
     def tearDownClass(cls):
         files = [
@@ -174,9 +22,7 @@ class TestCalendar(unittest.TestCase):
         ]
 
         for file in files:
-            if os.path.exists(f"./app/cache/{file}.json"):
-                os.remove(f"./app/cache/{file}.json")
-                print(f"Deleted {file}.json")
+            delete_cache_file(file)
 
     @classmethod
     def setUpClass(cls):
@@ -191,7 +37,7 @@ class TestCalendar(unittest.TestCase):
         Test 200 response on /calendar/{season} endpoint with 2022 as example
         """
 
-        self.setUpSeason()
+        mock_cache(get_season_data, "get_calendar_by_season.2022")
 
         res = self.test_client.get("/calendar/2022").json()
 
@@ -206,7 +52,7 @@ class TestCalendar(unittest.TestCase):
         Test 404 response on /calendar/{season} endpoint with 0 as example
         """
 
-        self.setUpSeasonPlaceholder("get_calendar_by_season.0")
+        mock_cache(get_season_placeholder_data, "get_calendar_by_season.0")
 
         res = self.test_client.get("/calendar/0").status_code
 
@@ -217,7 +63,7 @@ class TestCalendar(unittest.TestCase):
         Test 503 response on /calendar/{season} endpoint with 0 as example
         """
 
-        self.setUpEmptyCache("get_calendar_by_season.0")
+        mock_cache(empty_cache_data, "get_calendar_by_season.0")
 
         res = self.test_client.get("/calendar/0").status_code
 
@@ -232,7 +78,7 @@ class TestCalendar(unittest.TestCase):
         Test 200 response on /event/next
         """
 
-        timestamp = self.setUpNextRace()
+        timestamp = mock_cache(get_next_race_data, "get_next_race")
 
         res = self.test_client.get("/event/next").json()
 
@@ -245,7 +91,7 @@ class TestCalendar(unittest.TestCase):
         Test 503 response on /event/next endpoint with 0 as example
         """
 
-        self.setUpEmptyCache("get_next_race")
+        mock_cache(empty_cache_data, "get_next_race")
 
         res = self.test_client.get("/event/next").status_code
 
@@ -260,7 +106,7 @@ class TestCalendar(unittest.TestCase):
         Test 200 response on /event/previous
         """
 
-        timestamp = self.setUpPreviousRace()
+        timestamp = mock_cache(get_previous_race_data, "get_previous_race")
 
         res = self.test_client.get("/event/previous").json()
 
@@ -273,7 +119,7 @@ class TestCalendar(unittest.TestCase):
         Test 503 response on /event/previous endpoint with 0 as example
         """
 
-        self.setUpEmptyCache("get_previous_race")
+        mock_cache(empty_cache_data, "get_previous_race")
 
         res = self.test_client.get("/event/previous").status_code
 
@@ -288,7 +134,7 @@ class TestCalendar(unittest.TestCase):
         Test 200 response on /event/{season}/{round} endpoint with season 2022 round 15 as example
         """
 
-        timestamp = self.setUpEventDetails()
+        timestamp = mock_cache(get_event_details_data, "get_event_details.2022.15")
 
         res = self.test_client.get("/event/2022/15").json()
 
@@ -301,7 +147,7 @@ class TestCalendar(unittest.TestCase):
         Test 404 response on /event/{season}/{round} endpoint with season 2022 round -1 as example
         """
 
-        self.setUpEventDetailsPlaceholder("get_event_details.2022.-1")
+        mock_cache(get_event_details_placeholder, "get_event_details.2022.-1")
 
         res = self.test_client.get("/event/2022/-1").status_code
 
@@ -312,7 +158,7 @@ class TestCalendar(unittest.TestCase):
         Test 503 response on on /event/{season}/{round} endpoint with season 0 round 0 as example
         """
 
-        self.setUpEmptyCache("get_event_details.0.0")
+        mock_cache(empty_cache_data, "get_event_details.0.0")
 
         res = self.test_client.get("/event/0/0").status_code
 

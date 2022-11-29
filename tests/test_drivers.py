@@ -1,61 +1,15 @@
 import json
-import os
 import time
 import unittest
 
 from fastapi.testclient import TestClient
 
 from app.main import app
+from tests.logic.mock_cache import mock_cache, delete_cache_file, empty_cache_data
 from tests.mock_data.drivers import get_max_verstappen_data, get_placeholder_data, get_max_verstappen_response
 
 
 class TestDrivers(unittest.TestCase):
-    @classmethod
-    def setUpDriver(cls):
-        """
-        Init ergast.com response for max_verstappen in cache (200)
-        :return: timestamp
-        """
-
-        if os.path.exists("./app/cache/get_driver_by_id.max_verstappen.json"):
-            os.remove("./app/cache/get_driver_by_id.max_verstappen.json")
-            print("Deleted get_driver_by_id.max_verstappen.json")
-
-        timestamp = float(time.time())
-
-        max_verstappen_data = get_max_verstappen_data(timestamp)
-
-        full_path = "./app/cache/get_driver_by_id.max_verstappen.json"
-
-        cache_file = open(full_path, "w+")
-        cache_file.write(json.dumps(max_verstappen_data))
-        cache_file.close()
-
-        return timestamp
-
-    @classmethod
-    def setUpPlaceholder(cls, file_name: str):
-        """
-        Init ergast.com response for placeholder in cache (404)
-        :return: timestamp
-        """
-
-        if os.path.exists(f"./app/cache/{file_name}.json"):
-            os.remove(f"./app/cache/{file_name}.json")
-            print(f"Deleted {file_name}.json")
-
-        timestamp = float(time.time())
-
-        placeholder_data = get_placeholder_data(timestamp)
-
-        full_path = f"./app/cache/{file_name}.json"
-
-        cache_file = open(full_path, "w+")
-        cache_file.write(json.dumps(placeholder_data))
-        cache_file.close()
-
-        return timestamp
-
     @classmethod
     def setUpEmptyCache(cls, file_name: str):
         timestamp = float(time.time())
@@ -80,9 +34,7 @@ class TestDrivers(unittest.TestCase):
         ]
 
         for file in files:
-            if os.path.exists(f"./app/cache/{file}.json"):
-                os.remove(f"./app/cache/{file}.json")
-                print(f"Deleted {file}.json")
+            delete_cache_file(file)
 
     @classmethod
     def setUpClass(cls):
@@ -97,7 +49,7 @@ class TestDrivers(unittest.TestCase):
         Test 200 response on /driver/{id} endpoint with max_verstappen as example
         """
 
-        timestamp = self.setUpDriver()
+        timestamp = mock_cache(get_max_verstappen_data, "get_driver_by_id.max_verstappen")
 
         res = self.test_client.get("/driver/max_verstappen").json()
 
@@ -110,7 +62,7 @@ class TestDrivers(unittest.TestCase):
         Test 404 response on /driver/{id} endpoint with placeholder as example
         """
 
-        self.setUpPlaceholder("get_driver_by_id.placeholder")
+        mock_cache(get_placeholder_data, "get_driver_by_id.placeholder")
 
         res = self.test_client.get("/driver/placeholder").status_code
 
@@ -121,7 +73,7 @@ class TestDrivers(unittest.TestCase):
         Test 503 response on /driver/{id} endpoint with max_verstappen as example
         """
 
-        self.setUpEmptyCache("get_driver_by_id.max_verstappen")
+        mock_cache(empty_cache_data, "get_driver_by_id.max_verstappen")
 
         res = self.test_client.get("/driver/max_verstappen").status_code
 
@@ -132,7 +84,7 @@ class TestDrivers(unittest.TestCase):
     #####################
 
     def test_drivers_by_season(self):
-        self.setUpDriver()
+        mock_cache(get_max_verstappen_data, "get_drivers_by_season.2022")
 
         res = self.test_client.get("/drivers/2022").json()
 
@@ -147,7 +99,7 @@ class TestDrivers(unittest.TestCase):
         Test 404 response on /drivers/{season} endpoint with 9999 as example
         """
 
-        self.setUpPlaceholder("get_drivers_by_season.9999")
+        mock_cache(get_placeholder_data, "get_drivers_by_season.9999")
 
         res = self.test_client.get("/drivers/9999").status_code
 
@@ -158,7 +110,7 @@ class TestDrivers(unittest.TestCase):
         Test 503 response on /drivers/{season} endpoint with 0 as example
         """
 
-        self.setUpEmptyCache("get_drivers_by_season.0")
+        mock_cache(empty_cache_data, "get_drivers_by_season.0")
 
         res = self.test_client.get("/drivers/0").status_code
 
@@ -169,7 +121,7 @@ class TestDrivers(unittest.TestCase):
     #############
 
     def test_drivers(self):
-        self.setUpDriver()
+        mock_cache(get_max_verstappen_data, "get_drivers")
 
         res = self.test_client.get("/drivers").json()
 
@@ -184,7 +136,7 @@ class TestDrivers(unittest.TestCase):
         Test 404 response on /drivers
         """
 
-        self.setUpPlaceholder("get_drivers")
+        mock_cache(get_placeholder_data, "get_drivers")
 
         res = self.test_client.get("/drivers").status_code
 
@@ -195,7 +147,7 @@ class TestDrivers(unittest.TestCase):
         Test 503 response on /drivers
         """
 
-        self.setUpEmptyCache("get_drivers")
+        mock_cache(empty_cache_data, "get_drivers")
 
         res = self.test_client.get("/drivers").status_code
 

@@ -18,7 +18,7 @@ class Drivers(BaseRequest):
 
 DriverExample = {
     "driverId": "max_verstappen",
-    "url": "http://en.wikipedia.org/wiki/Max_Verstappen",
+    "url": "https://://en.wikipedia.org/wiki/Max_Verstappen",
     "givenName": "Max",
     "familyName": "Verstappen",
     "dateOfBirth": "1997-09-30",

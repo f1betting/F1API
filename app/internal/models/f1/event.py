@@ -31,11 +31,11 @@ class NextEvent(BaseRequest):
 EventExample = {
     "season": 2022,
     "round": 1,
-    "url": "http://en.wikipedia.org/wiki/2022_Bahrain_Grand_Prix",
+    "url": "https://://en.wikipedia.org/wiki/2022_Bahrain_Grand_Prix",
     "raceName": "Bahrain Grand Prix",
     "Circuit": {
         "circuitId": "bahrain",
-        "url": "http://en.wikipedia.org/wiki/Bahrain_International_Circuit",
+        "url": "https://://en.wikipedia.org/wiki/Bahrain_International_Circuit",
         "circuitName": "Bahrain International Circuit",
         "Location": {
             "lat": 26.0325,

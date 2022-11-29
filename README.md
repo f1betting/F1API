@@ -21,6 +21,7 @@
 - [ℹ️ About The Project](#-about-the-project)
     - [🚧 Built With](#built-with)
 - [🔨 Getting Started](#-getting-started)
+    - [🤖 .env file](#-env-file)
     - [🚢 Running using Docker](#running-using-docker)
     - [🏡 Running locally](#running-locally)
 - [🚀 Usage ](#-usage)
@@ -49,6 +50,15 @@ A more user-friendly way to use [ergast.com](https://ergast.com/mrd/)!
 
 Below are the instructions for running the API for development and general usage.
 
+### 🤖 .env file
+
+This project requires a .env file. Due to the recent ergast.com instability regarding DNS I decided to add this
+to the environment variables, so it could be easily edited without needing to rebuild the entire application.
+
+````dotenv
+ERGAST_API=https://ergast.com
+````
+
 ### 🚢 Running using Docker
 
 1. You can use the docker image from the DockerHub [repository](https://hub.docker.com/r/nieko3/f1api) using:
@@ -60,7 +70,7 @@ Below are the instructions for running the API for development and general usage
 2. Run container using:
 
     ````shell
-    $ docker run -d --name f1api -p 8000:80 nieko3/f1api:latest
+    $ docker run --env-file ./.env -d --name f1api -p 8000:80 nieko3/f1api:latest
     ````
 
 ### 🏡 Running locally
