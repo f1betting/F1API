@@ -4,6 +4,7 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 
 from app.internal.logic.cache_init import get_cache, invalidate_cache
+from app.internal.logic.errors import service_unavailable, data_not_found
 from app.internal.models.f1.driver import Driver, Drivers, DriverExample
 from app.internal.models.general.message import Message, create_message
 
@@ -49,10 +50,10 @@ async def get_drivers():
         drivers = {"drivers": data["MRData"]["DriverTable"]["Drivers"], "timestamp": timestamp}
     except IndexError:
         invalidate_cache("get_drivers")
-        return JSONResponse(status_code=404, content=create_message("Drivers not found"))
+        return data_not_found("Drivers")
     except KeyError:
         invalidate_cache("get_drivers")
-        return JSONResponse(status_code=503, content=create_message("Service unavailable"))
+        return service_unavailable()
 
     return drivers
 
@@ -92,10 +93,10 @@ async def get_drivers_by_season(season: int):
         drivers = {"drivers": data["MRData"]["DriverTable"]["Drivers"], "timestamp": timestamp}
     except IndexError:
         invalidate_cache(f"get_drivers_by_season.{season}")
-        return JSONResponse(status_code=404, content=create_message("Drivers not found"))
+        return data_not_found("Drivers")
     except KeyError:
         invalidate_cache(f"get_drivers_by_season.{season}")
-        return JSONResponse(status_code=503, content=create_message("Service unavailable"))
+        return service_unavailable()
 
     return drivers
 
@@ -128,9 +129,9 @@ async def get_driver_by_id(driver_id: str):
         driver["timestamp"] = timestamp
     except IndexError:
         invalidate_cache(f"get_driver_by_id.{driver_id}")
-        return JSONResponse(status_code=404, content=create_message("Driver not found"))
+        return data_not_found("Driver")
     except KeyError:
         invalidate_cache(f"get_driver_by_id.{driver_id}")
-        return JSONResponse(status_code=503, content=create_message("Service unavailable"))
+        return service_unavailable()
 
     return driver
