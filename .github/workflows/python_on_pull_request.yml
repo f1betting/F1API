@@ -6,6 +6,7 @@ on:
       - app/**
       - test/**
       - requirements.txt
+      - .github/workflows/**
 
 jobs:
   testing:
