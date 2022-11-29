@@ -9,6 +9,17 @@
     <a href="https://github.com/f1betting/F1API/issues">Report Bug</a>
     ·
     <a href="https://github.com/f1betting/F1API/issues">Request Feature</a>
+    <br />
+    <br />
+    <img alt="GitHub tag (latest by date)" src="https://img.shields.io/github/v/tag/f1betting/f1api?label=Version">
+    <br />
+    <img alt="SonarCloud coverage" src="https://sonarcloud.io/api/project_badges/measure?project=f1betting_F1API&metric=coverage">
+    <img alt="SonarCloud quality gate" src="https://sonarcloud.io/api/project_badges/measure?project=f1betting_F1API&metric=alert_status">
+    <img alt="SonarCloud code smells" src="https://sonarcloud.io/api/project_badges/measure?project=f1betting_F1API&metric=code_smells">
+    <br />
+    <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/f1betting/F1API/Python%20on%20Push%20Master?label=Build">
+    <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/f1betting/F1API/Docker%20Build%20and%20Push?label=Docker">
+
   </p>
 </div>
 
