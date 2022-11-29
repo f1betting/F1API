@@ -3,7 +3,7 @@ name: Python on Push Master
 on:
   push:
     branches:
-      - master
+      - main
 
 
 jobs:
