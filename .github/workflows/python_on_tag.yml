@@ -8,16 +8,18 @@ on:
 jobs:
   testing:
     uses: ./.github/workflows/action_python_testing.yml
+  linting:
+    uses: ./.github/workflows/action_python_linting.yml
 
   sonar:
     uses: ./.github/workflows/action_sonarcloud.yml
-    needs: [ testing ]
+    needs: [ testing, linting ]
     secrets:
       github: ${{ secrets.GITHUB_TOKEN }}
       sonar: ${{ secrets.SONAR_TOKEN }}
 
   docker:
-    needs: [ testing, sonar ]
+    needs: [ testing, linting, sonar ]
     uses: ./.github/workflows/action_docker_publish.yml
     secrets: inherit
 
