@@ -18,18 +18,17 @@ class TestCache(unittest.TestCase):
             print("Deleted test.json")
 
     def test_new_cache(self):
-        data, timestamp = get_cache("https://sandbox.api.service.nhs.uk/hello-world/hello/world", "test")
+        data, _ = get_cache("https://sandbox.api.service.nhs.uk/hello-world/hello/world", "test")
         self.assertEqual(data["message"], "Hello World!")
 
     def test_existing_new_cache(self):
-        data, timestamp = get_cache("https://sandbox.api.service.nhs.uk/hello-world/hello/world", "test")
-        data, timestamp = get_cache("https://sandbox.api.service.nhs.uk/hello-world/hello/world", "test")
+        get_cache("https://sandbox.api.service.nhs.uk/hello-world/hello/world", "test")
+        data, _ = get_cache("https://sandbox.api.service.nhs.uk/hello-world/hello/world", "test")
         self.assertEqual(data["message"], "Hello World!")
 
     def test_existing_old_cache(self):
-        cache_file = open("./app/cache/test.json", "w")
-        cache_file.write('{"message": "Hello World!", "timestamp": 669283135.9517488}')
-        cache_file.close()
+        with open("./app/cache/test.json", "w", encoding="utf-8") as cache_file:
+            cache_file.write('{"message": "Hello World!", "timestamp": 669283135.9517488}')
 
-        data, timestamp = get_cache("https://sandbox.api.service.nhs.uk/hello-world/hello/world", "test")
+        _, timestamp = get_cache("https://sandbox.api.service.nhs.uk/hello-world/hello/world", "test")
         self.assertNotEqual(timestamp, 669283135.9517488)

@@ -14,6 +14,7 @@ class ConstructorStandings(BaseRequest):
     standings: list[ConstructorStanding]
 
 
+# pylint: disable=duplicate-code
 ConstructorStandingsExample = {
     "position": 1,
     "positionText": "1",

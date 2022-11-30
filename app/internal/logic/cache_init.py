@@ -15,12 +15,12 @@ def cache_init(file_name, duration):
     full_path = base_path / f"../../cache/{file_name}.json"
 
     try:
-        cache_file = open(full_path, "r")
-        json_dump = cache_file.read()
-        cache_file.close()
+        with open(full_path, "r", encoding="utf-8") as cache_file:
+            json_dump = cache_file.read()
 
     except FileNotFoundError:
-        open(full_path, "w").close()
+        with open(full_path, "w", encoding="utf-8"):
+            pass
 
     current_timestamp = float(time.time())
 
@@ -44,10 +44,9 @@ def cache_write(cache, file_name):
 
     full_path = base_path / f"../../cache/{file_name}.json"
 
-    cache_file = open(full_path, "w+")
-    cache["timestamp"] = float(time.time())
-    cache_file.write(json.dumps(cache))
-    cache_file.close()
+    with open(full_path, "w+", encoding="utf-8") as cache_file:
+        cache["timestamp"] = float(time.time())
+        cache_file.write(json.dumps(cache))
 
 
 def invalidate_cache(file_name):
@@ -64,7 +63,7 @@ def get_cache(url, path, duration=3600):
             return [cache, timestamp]
         case False:
             try:
-                data = requests.get(url).json()
+                data = requests.get(url, timeout=5).json()
 
                 cache_write(data, path)
             except JSONDecodeError:  # pragma: no coverage
@@ -73,9 +72,11 @@ def get_cache(url, path, duration=3600):
                 return [cache, timestamp]
         case None:
             try:
-                data = requests.get(url).json()
+                data = requests.get(url, timeout=5).json()
             except JSONDecodeError:  # pragma: no coverage
                 data = {}
 
             cache_write(data, path)
             return [data, timestamp]
+
+    return [{}, timestamp]

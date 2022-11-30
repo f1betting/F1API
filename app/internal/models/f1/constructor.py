@@ -12,6 +12,7 @@ class Constructors(BaseRequest):
     constructors: list[Constructor]
 
 
+# pylint: disable=duplicate-code
 ConstructorExample = {
     "constructorId": "red_bull",
     "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",

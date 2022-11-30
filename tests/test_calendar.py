@@ -2,9 +2,9 @@ import unittest
 
 from fastapi.testclient import TestClient
 
+import tests.mock_data.mock_calendar as mock
 from app.main import app
 from tests.logic.mock_cache import delete_cache_file, mock_cache, empty_cache_data
-from tests.mock_data.mock_calendar import *
 
 
 class TestCalendar(unittest.TestCase):
@@ -35,13 +35,13 @@ class TestCalendar(unittest.TestCase):
         Test 200 response on /calendar/{season} endpoint with 2022 as example
         """
 
-        mock_cache(get_season_data, "get_calendar_by_season.2022")
+        mock_cache(mock.get_season_data, "get_calendar_by_season.2022")
 
         res = self.test_client.get("/calendar/2022").json()
 
         event_data = next(race for race in res["events"] if race["raceName"] == "Dutch Grand Prix")
 
-        data = get_season_response()
+        data = mock.get_season_response()
 
         self.assertEqual(event_data, data)
 
@@ -50,7 +50,7 @@ class TestCalendar(unittest.TestCase):
         Test 404 response on /calendar/{season} endpoint with 0 as example
         """
 
-        mock_cache(get_season_placeholder_data, "get_calendar_by_season.0")
+        mock_cache(mock.get_season_placeholder_data, "get_calendar_by_season.0")
 
         res = self.test_client.get("/calendar/0").status_code
 
@@ -76,11 +76,11 @@ class TestCalendar(unittest.TestCase):
         Test 200 response on /event/next
         """
 
-        timestamp = mock_cache(get_next_race_data, "get_next_race")
+        timestamp = mock_cache(mock.get_next_race_data, "get_next_race")
 
         res = self.test_client.get("/event/next").json()
 
-        data = get_next_race_response(timestamp)
+        data = mock.get_next_race_response(timestamp)
 
         self.assertEqual(res, data)
 
@@ -104,11 +104,11 @@ class TestCalendar(unittest.TestCase):
         Test 200 response on /event/previous
         """
 
-        timestamp = mock_cache(get_previous_race_data, "get_previous_race")
+        timestamp = mock_cache(mock.get_previous_race_data, "get_previous_race")
 
         res = self.test_client.get("/event/previous").json()
 
-        data = get_previous_race_response(timestamp)
+        data = mock.get_previous_race_response(timestamp)
 
         self.assertEqual(res, data)
 
@@ -132,11 +132,11 @@ class TestCalendar(unittest.TestCase):
         Test 200 response on /event/{season}/{round} endpoint with season 2022 round 15 as example
         """
 
-        timestamp = mock_cache(get_event_details_data, "get_event_details.2022.15")
+        timestamp = mock_cache(mock.get_event_details_data, "get_event_details.2022.15")
 
         res = self.test_client.get("/event/2022/15").json()
 
-        data = get_event_details_response(timestamp)
+        data = mock.get_event_details_response(timestamp)
 
         self.assertEqual(res, data)
 
@@ -145,7 +145,7 @@ class TestCalendar(unittest.TestCase):
         Test 404 response on /event/{season}/{round} endpoint with season 2022 round -1 as example
         """
 
-        mock_cache(get_event_details_placeholder, "get_event_details.2022.-1")
+        mock_cache(mock.get_event_details_placeholder, "get_event_details.2022.-1")
 
         res = self.test_client.get("/event/2022/-1").status_code
 

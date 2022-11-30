@@ -106,7 +106,7 @@ def get_previous_race():
     return event_data
 
 
-@router.get("/event/{season}/{round}",
+@router.get("/event/{season}/{race}",
             tags=["Events"],
             response_model=Event,
             responses={
@@ -126,9 +126,9 @@ def get_previous_race():
                     }
                 }}
             })
-def get_event_details(season: int, round: int):
-    data, timestamp = get_cache(f"{os.getenv('ERGAST_API')}/api/f1/{season}/{round}.json",
-                                f"get_event_details.{season}.{round}")
+def get_event_details(season: int, race: int):
+    data, timestamp = get_cache(f"{os.getenv('ERGAST_API')}/api/f1/{season}/{race}.json",
+                                f"get_event_details.{season}.{race}")
 
     try:
         if len(data["MRData"]["RaceTable"]["Races"]) <= 0:
@@ -137,10 +137,10 @@ def get_event_details(season: int, round: int):
         event_data = data["MRData"]["RaceTable"]["Races"][0]
         event_data["timestamp"] = timestamp
     except IndexError:
-        invalidate_cache(f"get_event_details.{season}.{round}")
+        invalidate_cache(f"get_event_details.{season}.{race}")
         return data_not_found("Event")
     except KeyError:
-        invalidate_cache(f"get_event_details.{season}.{round}")
+        invalidate_cache(f"get_event_details.{season}.{race}")
         return service_unavailable()
 
     return event_data

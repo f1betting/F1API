@@ -17,6 +17,7 @@ class QualifyingResults(BaseRequest):
     results: list[QualifyingResult]
 
 
+# pylint: disable=duplicate-code
 QualifyingResultExample = {
     "number": 1,
     "position": 1,

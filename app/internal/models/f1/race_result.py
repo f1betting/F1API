@@ -23,6 +23,7 @@ class RaceResults(BaseRequest):
     results: list[RaceResult]
 
 
+# pylint: disable=duplicate-code
 RaceResultExample = {
     "number": 1,
     "position": 1,

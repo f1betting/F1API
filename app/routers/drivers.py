@@ -40,7 +40,7 @@ router = APIRouter(
             })
 async def get_drivers():
     data, timestamp = get_cache(f"{os.getenv('ERGAST_API')}/api/f1/drivers.json?limit=1000",
-                                f"get_drivers")
+                                "get_drivers")
 
     try:
         if len(data["MRData"]["DriverTable"]["Drivers"]) <= 0:

@@ -26,6 +26,7 @@ class NextEvent(BaseRequest):
     round: int
 
 
+# pylint: disable=duplicate-code
 EventExample = {
     "season": 2022,
     "round": 1,
@@ -62,6 +63,7 @@ EventExample = {
     }
 }
 
+# pylint: disable=duplicate-code
 NextEventExample = {
     "season": 2022,
     "round": 17,

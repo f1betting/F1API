@@ -2,9 +2,9 @@ import unittest
 
 from fastapi.testclient import TestClient
 
+import tests.mock_data.mock_results as mock
 from app.main import app
 from tests.logic.mock_cache import delete_cache_file, mock_cache, empty_cache_data
-from tests.mock_data.mock_results import *
 
 
 class TestResults(unittest.TestCase):
@@ -33,11 +33,11 @@ class TestResults(unittest.TestCase):
         Test 200 response on /results/race/{season}/{race} endpoint with season 2022 race 15 as example
         """
 
-        timestamp = mock_cache(get_race_results_data, "get_race_results.2022.15")
+        timestamp = mock_cache(mock.get_race_results_data, "get_race_results.2022.15")
 
         res = self.test_client.get("/results/race/2022/15").json()
 
-        data = get_race_results_response(timestamp)
+        data = mock.get_race_results_response(timestamp)
 
         self.assertEqual(res, data)
 
@@ -46,7 +46,7 @@ class TestResults(unittest.TestCase):
         Test 404 response on /results/race/{season}/{race} endpoint with season 2022 race -1 as example
         """
 
-        mock_cache(get_race_results_placeholder_data, "get_race_results.2022.-1")
+        mock_cache(mock.get_race_results_placeholder_data, "get_race_results.2022.-1")
 
         res = self.test_client.get("/results/race/2022/-1").status_code
 
@@ -72,11 +72,11 @@ class TestResults(unittest.TestCase):
         Test 200 response on /results/qualifying/{season}/{race} endpoint with season 2022 race 15 as example
         """
 
-        timestamp = mock_cache(get_qualifying_results_data, "get_qualifying_results.2022.15")
+        timestamp = mock_cache(mock.get_qualifying_results_data, "get_qualifying_results.2022.15")
 
         res = self.test_client.get("/results/qualifying/2022/15").json()
 
-        data = get_qualifying_results_response(timestamp)
+        data = mock.get_qualifying_results_response(timestamp)
 
         self.assertEqual(res, data)
 
@@ -85,7 +85,7 @@ class TestResults(unittest.TestCase):
         Test 404 response on /results/qualifying/{season}/{race} endpoint with season 2022 race -1 as example
         """
 
-        mock_cache(get_qualifying_results_placeholder_data, "get_qualifying_results.2022.-1")
+        mock_cache(mock.get_qualifying_results_placeholder_data, "get_qualifying_results.2022.-1")
 
         res = self.test_client.get("/results/qualifying/2022/-1").status_code
 
@@ -111,11 +111,11 @@ class TestResults(unittest.TestCase):
         Test 200 response on /results/standings/drivers/{season} endpoint with season 2022 as example
         """
 
-        timestamp = mock_cache(get_driver_standings_data, "get_driver_standings_by_season.2022")
+        timestamp = mock_cache(mock.get_driver_standings_data, "get_driver_standings_by_season.2022")
 
         res = self.test_client.get("/results/standings/drivers/2022").json()
 
-        data = get_driver_standings_response(timestamp)
+        data = mock.get_driver_standings_response(timestamp)
 
         self.assertEqual(res, data)
 
@@ -124,7 +124,7 @@ class TestResults(unittest.TestCase):
         Test 404 response on /results/standings/drivers/{season} endpoint with season 0 as example
         """
 
-        mock_cache(get_driver_standings_placeholder_data, "get_driver_standings_by_season.0")
+        mock_cache(mock.get_driver_standings_placeholder_data, "get_driver_standings_by_season.0")
 
         res = self.test_client.get("/results/standings/drivers/0").status_code
 
@@ -150,11 +150,11 @@ class TestResults(unittest.TestCase):
         Test 200 response on /results/standings/constructors/{season} endpoint with season 2022 as example
         """
 
-        timestamp = mock_cache(get_constructor_standings_data, "get_constructor_standings_by_season.2022")
+        timestamp = mock_cache(mock.get_constructor_standings_data, "get_constructor_standings_by_season.2022")
 
         res = self.test_client.get("/results/standings/constructors/2022").json()
 
-        data = get_constructor_standings_response(timestamp)
+        data = mock.get_constructor_standings_response(timestamp)
 
         self.assertEqual(res, data)
 
@@ -163,7 +163,7 @@ class TestResults(unittest.TestCase):
         Test 404 response on /results/standings/constructor/{season} endpoint with season 0 as example
         """
 
-        mock_cache(get_constructor_standings_placeholder_data, "get_constructor_standings_by_season.0")
+        mock_cache(mock.get_constructor_standings_placeholder_data, "get_constructor_standings_by_season.0")
 
         res = self.test_client.get("/results/standings/constructors/0").status_code
 

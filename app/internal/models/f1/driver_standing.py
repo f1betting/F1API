@@ -16,6 +16,7 @@ class DriverStandings(BaseRequest):
     standings: list[DriverStanding]
 
 
+# pylint: disable=duplicate-code
 DriverStandingsExample = {
     "position": 1,
     "positionText": "1",
