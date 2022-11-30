@@ -1,5 +1,3 @@
-from pydantic import BaseModel
-
 from app.internal.models.general.request import BaseRequest
 
 

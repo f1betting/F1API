@@ -1,4 +1,3 @@
-from pydantic import BaseModel
 from app.internal.models.f1.constructor import Constructor
 from app.internal.models.f1.driver import Driver
 from app.internal.models.general.request import BaseRequest
