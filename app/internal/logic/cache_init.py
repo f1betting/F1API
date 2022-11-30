@@ -79,4 +79,5 @@ def get_cache(url, path, duration=3600):
             cache_write(data, path)
             return [data, timestamp]
 
-    return [{}, timestamp]
+    # What are you doing here???
+    return [{}, timestamp]  # pragma: no coverage
