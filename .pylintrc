@@ -4,6 +4,7 @@ disable=
     C0114, # missing-module-docstring
     C0115, # missing-class-docstring
     C0116, # missing-function-or-method-docstring
+extension-pkg-whitelist=pydantic
 
 [FORMAT]
 max-line-length=120
