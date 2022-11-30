@@ -5,6 +5,7 @@ from app.internal.logic.cache_init import get_cache
 
 
 class TestCache(unittest.TestCase):
+    # pylint: disable=arguments-differ
     @classmethod
     def setUp(cls):
         if os.path.exists("./app/cache/test.json"):
