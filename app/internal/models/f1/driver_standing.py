@@ -1,4 +1,3 @@
-from pydantic import BaseModel
 from app.internal.models.f1.constructor import Constructor
 from app.internal.models.f1.driver import Driver
 from app.internal.models.general.request import BaseRequest
@@ -17,6 +16,7 @@ class DriverStandings(BaseRequest):
     standings: list[DriverStanding]
 
 
+# pylint: disable=duplicate-code
 DriverStandingsExample = {
     "position": 1,
     "positionText": "1",

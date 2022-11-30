@@ -12,9 +12,8 @@ def mock_cache(mock_data, file_name: str):
 
     data = mock_data(timestamp)
 
-    cache_file = open(full_path, "w+")
-    cache_file.write(json.dumps(data))
-    cache_file.close()
+    with open(full_path, "w+", encoding="utf-8") as cache_file:
+        cache_file.write(json.dumps(data))
 
     return timestamp
 

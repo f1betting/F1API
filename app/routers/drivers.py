@@ -1,7 +1,6 @@
 import os
 
 from fastapi import APIRouter
-from fastapi.responses import JSONResponse
 
 from app.internal.logic.cache_init import get_cache, invalidate_cache
 from app.internal.logic.errors import service_unavailable, data_not_found
@@ -41,7 +40,7 @@ router = APIRouter(
             })
 async def get_drivers():
     data, timestamp = get_cache(f"{os.getenv('ERGAST_API')}/api/f1/drivers.json?limit=1000",
-                                f"get_drivers")
+                                "get_drivers")
 
     try:
         if len(data["MRData"]["DriverTable"]["Drivers"]) <= 0:

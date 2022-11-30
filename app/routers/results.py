@@ -1,7 +1,6 @@
 import os
 
 from fastapi import APIRouter
-from fastapi.responses import JSONResponse
 
 from app.internal.logic.cache_init import get_cache, invalidate_cache
 from app.internal.logic.errors import service_unavailable, data_not_found

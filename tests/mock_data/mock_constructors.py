@@ -1,3 +1,5 @@
+# pylint: disable=duplicate-code
+
 #####################
 # CONSTRUCTORS DATA #
 #####################

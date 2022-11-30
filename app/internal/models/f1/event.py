@@ -1,5 +1,3 @@
-from pydantic import BaseModel
-
 from app.internal.models.f1.circuit import Circuit
 from app.internal.models.f1.internal.session import Session
 from app.internal.models.general.request import BaseRequest
@@ -28,6 +26,7 @@ class NextEvent(BaseRequest):
     round: int
 
 
+# pylint: disable=duplicate-code
 EventExample = {
     "season": 2022,
     "round": 1,
@@ -64,6 +63,7 @@ EventExample = {
     }
 }
 
+# pylint: disable=duplicate-code
 NextEventExample = {
     "season": 2022,
     "round": 17,

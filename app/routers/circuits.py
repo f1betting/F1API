@@ -1,7 +1,6 @@
 import os
 
 from fastapi import APIRouter
-from fastapi.responses import JSONResponse
 
 from app.internal.logic.cache_init import get_cache, invalidate_cache
 from app.internal.logic.errors import service_unavailable, data_not_found
@@ -48,10 +47,10 @@ async def get_circuits():
 
         circuits = {"circuits": data["MRData"]["CircuitTable"]["Circuits"], "timestamp": timestamp}
     except IndexError:
-        invalidate_cache(f"get_circuits")
+        invalidate_cache("get_circuits")
         return data_not_found("Circuits")
     except KeyError:
-        invalidate_cache(f"get_circuits")
+        invalidate_cache("get_circuits")
         return service_unavailable()
 
     return circuits

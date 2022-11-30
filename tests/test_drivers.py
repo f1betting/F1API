@@ -1,5 +1,3 @@
-import json
-import time
 import unittest
 
 from fastapi.testclient import TestClient
@@ -10,18 +8,6 @@ from tests.mock_data.mock_drivers import get_max_verstappen_data, get_placeholde
 
 
 class TestDrivers(unittest.TestCase):
-    @classmethod
-    def setUpEmptyCache(cls, file_name: str):
-        timestamp = float(time.time())
-
-        full_path = f"./app/cache/{file_name}.json"
-
-        cache_file = open(full_path, "w+")
-        cache_file.write(json.dumps({"timestamp": timestamp}))
-        cache_file.close()
-
-        return timestamp
-
     @classmethod
     def tearDownClass(cls):
         files = [

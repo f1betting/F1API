@@ -16,6 +16,7 @@ class Drivers(BaseRequest):
     drivers: list[Driver]
 
 
+# pylint: disable=duplicate-code
 DriverExample = {
     "driverId": "max_verstappen",
     "url": "https://://en.wikipedia.org/wiki/Max_Verstappen",

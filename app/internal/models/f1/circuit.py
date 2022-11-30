@@ -21,6 +21,7 @@ class Circuits(BaseRequest):
     circuits: list[Circuit]
 
 
+# pylint: disable=duplicate-code
 CircuitExample = {
     "circuitId": "zandvoort",
     "url": "https://://en.wikipedia.org/wiki/Circuit_Zandvoort",
