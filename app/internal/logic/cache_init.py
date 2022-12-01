@@ -19,7 +19,7 @@ def cache_init(file_name, duration):
             json_dump = cache_file.read()
 
     except FileNotFoundError:
-        open(full_path, "x", encoding="utf-8").close()
+        open(full_path, "x", encoding="utf-8").close()  # pylint: disable=consider-using-with
 
     current_timestamp = float(time.time())
 
