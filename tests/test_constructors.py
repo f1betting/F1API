@@ -24,7 +24,7 @@ class TestConstructors(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.test_client = TestClient(app, base_url="http://127.0.0.1:8000")
+        cls.test_client = TestClient(app)
 
     #####################
     # /constructor/{id} #
