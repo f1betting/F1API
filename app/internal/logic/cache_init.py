@@ -19,24 +19,20 @@ def cache_init(file_name, duration):
             json_dump = cache_file.read()
 
     except FileNotFoundError:
-        with open(full_path, "w", encoding="utf-8"):
-            pass
+        open(full_path, "x", encoding="utf-8").close()
 
     current_timestamp = float(time.time())
 
     if json_dump:
         json_file = json.loads(json_dump)
 
-        cache_timestamp = 0
-
-        if json_file["timestamp"]:
-            cache_timestamp = json_file["timestamp"]
+        cache_timestamp = json_file["timestamp"]
 
         if current_timestamp < float(cache_timestamp) + duration:
             return [True, json_file, float(cache_timestamp)]
 
         return [False, json_file, current_timestamp]
-    return [None, {}, 0]
+    return [None, {}, current_timestamp]
 
 
 def cache_write(cache, file_name):

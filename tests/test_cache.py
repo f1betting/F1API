@@ -1,22 +1,18 @@
-import os
 import unittest
 
 from app.internal.logic.cache_init import get_cache
+from tests.logic.mock_cache import delete_cache_file
 
 
 class TestCache(unittest.TestCase):
     # pylint: disable=arguments-differ
     @classmethod
     def setUp(cls):
-        if os.path.exists("./app/cache/test.json"):
-            os.remove("./app/cache/test.json")
-            print("Deleted test.json")
+        delete_cache_file("test")
 
     @classmethod
     def tearDownClass(cls):
-        if os.path.exists("./app/cache/test.json"):
-            os.remove("./app/cache/test.json")
-            print("Deleted test.json")
+        delete_cache_file("test")
 
     def test_new_cache(self):
         data, _ = get_cache("https://sandbox.api.service.nhs.uk/hello-world/hello/world", "test")
