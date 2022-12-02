@@ -4,7 +4,7 @@ from fastapi import APIRouter
 
 from app.internal.logic.cache_init import get_cache, invalidate_cache
 from app.internal.logic.errors import service_unavailable, data_not_found
-from app.internal.models.f1.driver import Driver, Drivers, DriverExample
+from app.internal.models.f1.driver import Driver, Drivers, DriverExample, DriversExample
 from app.internal.models.general.message import Message, create_message
 
 router = APIRouter(
@@ -30,11 +30,7 @@ router = APIRouter(
                 }},
                 200: {"model": Drivers, "content": {
                     "application/json": {
-                        "example": {
-                            "drivers": [
-                                DriverExample
-                            ]
-                        }
+                        "example": DriversExample
                     }
                 }}
             })
@@ -73,11 +69,7 @@ async def get_drivers():
                 }},
                 200: {"model": Drivers, "content": {
                     "application/json": {
-                        "example": {
-                            "drivers": [
-                                DriverExample
-                            ]
-                        }
+                        "example": DriversExample
                     }
                 }}
             })

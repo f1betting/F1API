@@ -25,43 +25,51 @@ class RaceResults(BaseRequest):
 
 # pylint: disable=duplicate-code
 RaceResultExample = {
-    "number": 1,
-    "position": 1,
-    "positionText": "1",
-    "points": 26,
-    "Driver": {
-        "driverId": "max_verstappen",
-        "url": "https://://en.wikipedia.org/wiki/Max_Verstappen",
-        "givenName": "Max",
-        "familyName": "Verstappen",
-        "dateOfBirth": "1997-09-30",
-        "nationality": "Dutch",
-        "permanentNumber": 33,
-        "code": "VER"
-    },
-    "Constructor": {
-        "constructorId": "red_bull",
-        "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
-        "name": "Red Bull",
-        "nationality": "Austrian"
-    },
-    "grid": 1,
-    "laps": 72,
-    "status": "Finished",
-    "Time": {
-        "time": "1:36:42.773",
-        "millis": "5802773"
-    },
-    "FastestLap": {
-        "rank": 1,
-        "lap": 62,
-        "Time": {
-            "time": "1:13.652",
-            "millis": None
-        },
-        "AverageSpeed": {
-            "units": "kph",
-            "speed": 208.173
+    "timestamp": 1669978263.7017405,
+    "results": [
+        {
+            "timestamp": None,
+            "number": 1,
+            "position": 1,
+            "positionText": "1",
+            "points": 25,
+            "Driver": {
+                "timestamp": None,
+                "driverId": "max_verstappen",
+                "url": "https://en.wikipedia.org/wiki/Max_Verstappen",
+                "givenName": "Max",
+                "familyName": "Verstappen",
+                "dateOfBirth": "1997-09-30",
+                "nationality": "Dutch",
+                "permanentNumber": 33,
+                "code": "VER"
+            },
+            "Constructor": {
+                "timestamp": None,
+                "constructorId": "red_bull",
+                "url": "https://en.wikipedia.org/wiki/Red_Bull_Racing",
+                "name": "Red Bull",
+                "nationality": "Austrian"
+            },
+            "grid": 1,
+            "laps": 58,
+            "status": "Finished",
+            "Time": {
+                "time": "1:27:45.914",
+                "millis": "5265914"
+            },
+            "FastestLap": {
+                "rank": 6,
+                "lap": 54,
+                "Time": {
+                    "time": "1:29.392",
+                    "millis": None
+                },
+                "AverageSpeed": {
+                    "units": "kph",
+                    "speed": 212.676
+                }
+            }
         }
-    }
+    ]
 }

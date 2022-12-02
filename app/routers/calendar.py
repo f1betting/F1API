@@ -4,7 +4,7 @@ from fastapi import APIRouter
 
 from app.internal.logic.cache_init import get_cache, invalidate_cache
 from app.internal.logic.errors import service_unavailable, data_not_found
-from app.internal.models.f1.event import Calendar, EventExample, NextEvent, NextEventExample, Event
+from app.internal.models.f1.event import Calendar, EventExample, NextEvent, NextEventExample, Event, CalendarExample
 from app.internal.models.general.message import Message, create_message
 
 router = APIRouter()
@@ -24,11 +24,7 @@ router = APIRouter()
                 }},
                 200: {"model": Calendar, "content": {
                     "application/json": {
-                        "example": {
-                            "events": [
-                                EventExample
-                            ]
-                        }
+                        "example": CalendarExample
                     }
                 }}
             })
