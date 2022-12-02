@@ -4,7 +4,7 @@ from fastapi import APIRouter
 
 from app.internal.logic.cache_init import get_cache, invalidate_cache
 from app.internal.logic.errors import service_unavailable, data_not_found
-from app.internal.models.f1.circuit import Circuit, Circuits, CircuitExample
+from app.internal.models.f1.circuit import Circuit, Circuits, CircuitExample, CircuitsExample
 from app.internal.models.general.message import Message, create_message
 
 router = APIRouter(
@@ -30,11 +30,7 @@ router = APIRouter(
                 }},
                 200: {"model": Circuits, "content": {
                     "application/json": {
-                        "example": {
-                            "circuits": [
-                                CircuitExample
-                            ]
-                        }
+                        "example": CircuitsExample
                     }
                 }}
             })
@@ -72,11 +68,7 @@ async def get_circuits():
                 }},
                 200: {"model": Circuits, "content": {
                     "application/json": {
-                        "example": {
-                            "circuits": [
-                                CircuitExample
-                            ]
-                        }
+                        "example": CircuitsExample
                     }
                 }}
             })

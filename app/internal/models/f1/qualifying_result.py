@@ -19,25 +19,33 @@ class QualifyingResults(BaseRequest):
 
 # pylint: disable=duplicate-code
 QualifyingResultExample = {
-    "number": 1,
-    "position": 1,
-    "Driver": {
-        "driverId": "max_verstappen",
-        "url": "https://://en.wikipedia.org/wiki/Max_Verstappen",
-        "givenName": "Max",
-        "familyName": "Verstappen",
-        "dateOfBirth": "1997-09-30",
-        "nationality": "Dutch",
-        "permanentNumber": 33,
-        "code": "VER"
-    },
-    "Constructor": {
-        "constructorId": "red_bull",
-        "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
-        "name": "Red Bull",
-        "nationality": "Austrian"
-    },
-    "Q1": "1:19.295",
-    "Q2": "1:18.793",
-    "Q3": "1:27.999"
+    "timestamp": 1669978379.0060742,
+    "results": [
+        {
+            "timestamp": None,
+            "number": 1,
+            "position": 1,
+            "Driver": {
+                "timestamp": None,
+                "driverId": "max_verstappen",
+                "url": "https://en.wikipedia.org/wiki/Max_Verstappen",
+                "givenName": "Max",
+                "familyName": "Verstappen",
+                "dateOfBirth": "1997-09-30",
+                "nationality": "Dutch",
+                "permanentNumber": 33,
+                "code": "VER"
+            },
+            "Constructor": {
+                "timestamp": None,
+                "constructorId": "red_bull",
+                "url": "https://en.wikipedia.org/wiki/Red_Bull_Racing",
+                "name": "Red Bull",
+                "nationality": "Austrian"
+            },
+            "Q1": "1:24.754",
+            "Q2": "1:24.622",
+            "Q3": "1:23.824"
+        }
+    ]
 }

@@ -16,14 +16,21 @@ class ConstructorStandings(BaseRequest):
 
 # pylint: disable=duplicate-code
 ConstructorStandingsExample = {
-    "position": 1,
-    "positionText": "1",
-    "points": 545,
-    "wins": 12,
-    "Constructor": {
-        "constructorId": "red_bull",
-        "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
-        "name": "Red Bull",
-        "nationality": "Austrian"
-    }
+    "timestamp": 1669977723.5049899,
+    "standings": [
+        {
+            "timestamp": None,
+            "position": 1,
+            "positionText": "1",
+            "points": 759,
+            "wins": 17,
+            "Constructor": {
+                "timestamp": None,
+                "constructorId": "red_bull",
+                "url": "https://en.wikipedia.org/wiki/Red_Bull_Racing",
+                "name": "Red Bull",
+                "nationality": "Austrian"
+            }
+        },
+    ]
 }

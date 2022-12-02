@@ -34,11 +34,7 @@ router = APIRouter(
                 }},
                 200: {"model": RaceResults, "content": {
                     "application/json": {
-                        "example": {
-                            "results": [
-                                RaceResultExample
-                            ]
-                        }
+                        "example": RaceResultExample
                     }
                 }}
             })
@@ -77,11 +73,7 @@ async def get_race_results(season: int, race: int):
                 }},
                 200: {"model": QualifyingResults, "content": {
                     "application/json": {
-                        "example": {
-                            "results": [
-                                QualifyingResultExample
-                            ]
-                        }
+                        "example": QualifyingResultExample
                     }
                 }}
             })
@@ -121,11 +113,7 @@ def get_qualifying_results(season: int, race: int):
                 }},
                 200: {"model": DriverStandings, "content": {
                     "application/json": {
-                        "example": {
-                            "standings": [
-                                DriverStandingsExample
-                            ]
-                        }
+                        "example": DriverStandingsExample
                     }
                 }}
             })
@@ -162,11 +150,7 @@ def get_driver_standings_by_season(season: int):
                 }},
                 200: {"model": ConstructorStandings, "content": {
                     "application/json": {
-                        "example": {
-                            "standings": [
-                                ConstructorStandingsExample
-                            ]
-                        }
+                        "example": ConstructorStandingsExample
                     }
                 }}
             })

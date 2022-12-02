@@ -7,7 +7,7 @@
       "name": "MIT",
       "url": "https://github.com/niek-o/F1API/blob/main/LICENSE.md"
     },
-    "version": "1.7.1",
+    "version": "1.8.0",
     "x-logo": {
       "url": "https://upload.wikimedia.org/wikipedia/commons/f/f2/New_era_F1_logo.png"
     }
@@ -40,15 +40,16 @@
                   "$ref": "#/components/schemas/Calendar"
                 },
                 "example": {
+                  "timestamp": 1669979281.7311087,
                   "events": [
                     {
                       "season": 2022,
                       "round": 1,
-                      "url": "https://://en.wikipedia.org/wiki/2022_Bahrain_Grand_Prix",
+                      "url": "https://en.wikipedia.org/wiki/2022_Bahrain_Grand_Prix",
                       "raceName": "Bahrain Grand Prix",
                       "Circuit": {
                         "circuitId": "bahrain",
-                        "url": "https://://en.wikipedia.org/wiki/Bahrain_International_Circuit",
+                        "url": "https://en.wikipedia.org/wiki/Bahrain_International_Circuit",
                         "circuitName": "Bahrain International Circuit",
                         "Location": {
                           "lat": 26.0325,
@@ -123,8 +124,9 @@
                   "$ref": "#/components/schemas/NextEvent"
                 },
                 "example": {
-                  "season": 2022,
-                  "round": 17
+                  "timestamp": 1669979205.6921754,
+                  "season": 2023,
+                  "round": 1
                 }
               }
             }
@@ -161,8 +163,9 @@
                   "$ref": "#/components/schemas/NextEvent"
                 },
                 "example": {
-                  "season": 2022,
-                  "round": 17
+                  "timestamp": 1669979205.6921754,
+                  "season": 2023,
+                  "round": 1
                 }
               }
             }
@@ -219,38 +222,39 @@
                   "$ref": "#/components/schemas/Event"
                 },
                 "example": {
+                  "timestamp": 1669979237.0388148,
                   "season": 2022,
-                  "round": 1,
-                  "url": "https://://en.wikipedia.org/wiki/2022_Bahrain_Grand_Prix",
-                  "raceName": "Bahrain Grand Prix",
+                  "round": 22,
+                  "url": "https://en.wikipedia.org/wiki/2022_Abu_Dhabi_Grand_Prix",
+                  "raceName": "Abu Dhabi Grand Prix",
                   "Circuit": {
-                    "circuitId": "bahrain",
-                    "url": "https://://en.wikipedia.org/wiki/Bahrain_International_Circuit",
-                    "circuitName": "Bahrain International Circuit",
+                    "circuitId": "yas_marina",
+                    "url": "https://en.wikipedia.org/wiki/Yas_Marina_Circuit",
+                    "circuitName": "Yas Marina Circuit",
                     "Location": {
-                      "lat": 26.0325,
-                      "long": 50.5106,
-                      "locality": "Sakhir",
-                      "country": "Bahrain"
+                      "lat": 24.4672,
+                      "long": 54.6031,
+                      "locality": "Abu Dhabi",
+                      "country": "UAE"
                     }
                   },
-                  "date": "2022-03-20",
-                  "time": "15:00:00Z",
+                  "date": "2022-11-20",
+                  "time": "13:00:00Z",
                   "FirstPractice": {
-                    "date": "2022-03-18",
-                    "time": "12:00:00Z"
+                    "date": "2022-11-18",
+                    "time": "10:00:00Z"
                   },
                   "SecondPractice": {
-                    "date": "2022-03-18",
-                    "time": "15:00:00Z"
+                    "date": "2022-11-18",
+                    "time": "13:00:00Z"
                   },
                   "ThirdPractice": {
-                    "date": "2022-03-19",
-                    "time": "12:00:00Z"
+                    "date": "2022-11-19",
+                    "time": "11:00:00Z"
                   },
                   "Qualifying": {
-                    "date": "2022-03-19",
-                    "time": "15:00:00Z"
+                    "date": "2022-11-19",
+                    "time": "14:00:00Z"
                   }
                 }
               }
@@ -311,10 +315,11 @@
                   "$ref": "#/components/schemas/Circuits"
                 },
                 "example": {
+                  "timestamp": 1669978972.4221265,
                   "circuits": [
                     {
                       "circuitId": "zandvoort",
-                      "url": "https://://en.wikipedia.org/wiki/Circuit_Zandvoort",
+                      "url": "https://en.wikipedia.org/wiki/Circuit_Zandvoort",
                       "circuitName": "Circuit Park Zandvoort",
                       "Location": {
                         "lat": 52.3888,
@@ -385,10 +390,11 @@
                   "$ref": "#/components/schemas/Circuits"
                 },
                 "example": {
+                  "timestamp": 1669978972.4221265,
                   "circuits": [
                     {
                       "circuitId": "zandvoort",
-                      "url": "https://://en.wikipedia.org/wiki/Circuit_Zandvoort",
+                      "url": "https://en.wikipedia.org/wiki/Circuit_Zandvoort",
                       "circuitName": "Circuit Park Zandvoort",
                       "Location": {
                         "lat": 52.3888,
@@ -468,8 +474,9 @@
                   "$ref": "#/components/schemas/Circuit"
                 },
                 "example": {
+                  "timestamp": 1669978998.3723269,
                   "circuitId": "zandvoort",
-                  "url": "https://://en.wikipedia.org/wiki/Circuit_Zandvoort",
+                  "url": "https://en.wikipedia.org/wiki/Circuit_Zandvoort",
                   "circuitName": "Circuit Park Zandvoort",
                   "Location": {
                     "lat": 52.3888,
@@ -536,10 +543,11 @@
                   "$ref": "#/components/schemas/Constructors"
                 },
                 "example": {
+                  "timestamp": 1669978869.9509943,
                   "constructors": [
                     {
                       "constructorId": "red_bull",
-                      "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
+                      "url": "https://en.wikipedia.org/wiki/Red_Bull_Racing",
                       "name": "Red Bull",
                       "nationality": "Austrian"
                     }
@@ -605,10 +613,11 @@
                   "$ref": "#/components/schemas/Constructors"
                 },
                 "example": {
+                  "timestamp": 1669978869.9509943,
                   "constructors": [
                     {
                       "constructorId": "red_bull",
-                      "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
+                      "url": "https://en.wikipedia.org/wiki/Red_Bull_Racing",
                       "name": "Red Bull",
                       "nationality": "Austrian"
                     }
@@ -683,8 +692,9 @@
                   "$ref": "#/components/schemas/Constructor"
                 },
                 "example": {
+                  "timestamp": 1669978904.85484,
                   "constructorId": "red_bull",
-                  "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
+                  "url": "https://en.wikipedia.org/wiki/Red_Bull_Racing",
                   "name": "Red Bull",
                   "nationality": "Austrian"
                 }
@@ -746,10 +756,11 @@
                   "$ref": "#/components/schemas/Drivers"
                 },
                 "example": {
+                  "timestamp": 1669978500.8190658,
                   "drivers": [
                     {
                       "driverId": "max_verstappen",
-                      "url": "https://://en.wikipedia.org/wiki/Max_Verstappen",
+                      "url": "https://en.wikipedia.org/wiki/Max_Verstappen",
                       "givenName": "Max",
                       "familyName": "Verstappen",
                       "dateOfBirth": "1997-09-30",
@@ -819,10 +830,11 @@
                   "$ref": "#/components/schemas/Drivers"
                 },
                 "example": {
+                  "timestamp": 1669978500.8190658,
                   "drivers": [
                     {
                       "driverId": "max_verstappen",
-                      "url": "https://://en.wikipedia.org/wiki/Max_Verstappen",
+                      "url": "https://en.wikipedia.org/wiki/Max_Verstappen",
                       "givenName": "Max",
                       "familyName": "Verstappen",
                       "dateOfBirth": "1997-09-30",
@@ -901,8 +913,9 @@
                   "$ref": "#/components/schemas/Driver"
                 },
                 "example": {
+                  "timestamp": 1669978482.9627361,
                   "driverId": "max_verstappen",
-                  "url": "https://://en.wikipedia.org/wiki/Max_Verstappen",
+                  "url": "https://en.wikipedia.org/wiki/Max_Verstappen",
                   "givenName": "Max",
                   "familyName": "Verstappen",
                   "dateOfBirth": "1997-09-30",
@@ -988,15 +1001,16 @@
                   "$ref": "#/components/schemas/RaceResults"
                 },
                 "example": {
+                  "timestamp": 1669978263.7017405,
                   "results": [
                     {
                       "number": 1,
                       "position": 1,
                       "positionText": "1",
-                      "points": 26,
+                      "points": 25,
                       "Driver": {
                         "driverId": "max_verstappen",
-                        "url": "https://://en.wikipedia.org/wiki/Max_Verstappen",
+                        "url": "https://en.wikipedia.org/wiki/Max_Verstappen",
                         "givenName": "Max",
                         "familyName": "Verstappen",
                         "dateOfBirth": "1997-09-30",
@@ -1006,26 +1020,26 @@
                       },
                       "Constructor": {
                         "constructorId": "red_bull",
-                        "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
+                        "url": "https://en.wikipedia.org/wiki/Red_Bull_Racing",
                         "name": "Red Bull",
                         "nationality": "Austrian"
                       },
                       "grid": 1,
-                      "laps": 72,
+                      "laps": 58,
                       "status": "Finished",
                       "Time": {
-                        "time": "1:36:42.773",
-                        "millis": "5802773"
+                        "time": "1:27:45.914",
+                        "millis": "5265914"
                       },
                       "FastestLap": {
-                        "rank": 1,
-                        "lap": 62,
+                        "rank": 6,
+                        "lap": 54,
                         "Time": {
-                          "time": "1:13.652"
+                          "time": "1:29.392"
                         },
                         "AverageSpeed": {
                           "units": "kph",
-                          "speed": 208.173
+                          "speed": 212.676
                         }
                       }
                     }
@@ -1109,13 +1123,14 @@
                   "$ref": "#/components/schemas/QualifyingResults"
                 },
                 "example": {
+                  "timestamp": 1669978379.0060742,
                   "results": [
                     {
                       "number": 1,
                       "position": 1,
                       "Driver": {
                         "driverId": "max_verstappen",
-                        "url": "https://://en.wikipedia.org/wiki/Max_Verstappen",
+                        "url": "https://en.wikipedia.org/wiki/Max_Verstappen",
                         "givenName": "Max",
                         "familyName": "Verstappen",
                         "dateOfBirth": "1997-09-30",
@@ -1125,13 +1140,13 @@
                       },
                       "Constructor": {
                         "constructorId": "red_bull",
-                        "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
+                        "url": "https://en.wikipedia.org/wiki/Red_Bull_Racing",
                         "name": "Red Bull",
                         "nationality": "Austrian"
                       },
-                      "Q1": "1:19.295",
-                      "Q2": "1:18.793",
-                      "Q3": "1:27.999"
+                      "Q1": "1:24.754",
+                      "Q2": "1:24.622",
+                      "Q3": "1:23.824"
                     }
                   ]
                 }
@@ -1205,15 +1220,16 @@
                   "$ref": "#/components/schemas/DriverStandings"
                 },
                 "example": {
+                  "timestamp": 1669977611.5538518,
                   "standings": [
                     {
                       "position": 1,
                       "positionText": "1",
-                      "points": 335,
-                      "wins": 11,
+                      "points": 454,
+                      "wins": 15,
                       "Driver": {
                         "driverId": "max_verstappen",
-                        "url": "https://://en.wikipedia.org/wiki/Max_Verstappen",
+                        "url": "https://en.wikipedia.org/wiki/Max_Verstappen",
                         "givenName": "Max",
                         "familyName": "Verstappen",
                         "dateOfBirth": "1997-09-30",
@@ -1224,7 +1240,7 @@
                       "Constructors": [
                         {
                           "constructorId": "red_bull",
-                          "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
+                          "url": "https://en.wikipedia.org/wiki/Red_Bull_Racing",
                           "name": "Red Bull",
                           "nationality": "Austrian"
                         }
@@ -1302,15 +1318,16 @@
                   "$ref": "#/components/schemas/ConstructorStandings"
                 },
                 "example": {
+                  "timestamp": 1669977723.5049899,
                   "standings": [
                     {
                       "position": 1,
                       "positionText": "1",
-                      "points": 545,
-                      "wins": 12,
+                      "points": 759,
+                      "wins": 17,
                       "Constructor": {
                         "constructorId": "red_bull",
-                        "url": "https://://en.wikipedia.org/wiki/Red_Bull_Racing",
+                        "url": "https://en.wikipedia.org/wiki/Red_Bull_Racing",
                         "name": "Red Bull",
                         "nationality": "Austrian"
                       }
