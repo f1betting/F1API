@@ -7,7 +7,7 @@
       "name": "MIT",
       "url": "https://github.com/niek-o/F1API/blob/main/LICENSE.md"
     },
-    "version": "1.5.0",
+    "version": "1.7.1",
     "x-logo": {
       "url": "https://upload.wikimedia.org/wikipedia/commons/f/f2/New_era_F1_logo.png"
     }
@@ -183,7 +183,7 @@
         }
       }
     },
-    "/event/{season}/{round}": {
+    "/event/{season}/{race}": {
       "get": {
         "tags": [
           "Events"
@@ -203,10 +203,10 @@
           {
             "required": true,
             "schema": {
-              "title": "Round",
+              "title": "Race",
               "type": "integer"
             },
-            "name": "round",
+            "name": "race",
             "in": "path"
           }
         ],
