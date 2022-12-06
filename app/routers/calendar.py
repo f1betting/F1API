@@ -4,7 +4,8 @@ from fastapi import APIRouter
 
 from app.internal.logic.cache_init import get_cache, invalidate_cache
 from app.internal.logic.errors import service_unavailable, data_not_found
-from app.internal.models.f1.event import Calendar, EventExample, NextEvent, NextEventExample, Event, CalendarExample
+from app.internal.models.f1.event import Calendar, EventExample, NextEvent, NextEventExample, Event, CalendarExample, \
+    PreviousEventExample
 from app.internal.models.general.message import Message, create_message
 
 router = APIRouter()
@@ -85,7 +86,7 @@ def get_next_race():
                 }},
                 200: {"model": NextEvent, "content": {
                     "application/json": {
-                        "example": NextEventExample
+                        "example": PreviousEventExample
                     }
                 }}
             })

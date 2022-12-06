@@ -7,7 +7,7 @@
       "name": "MIT",
       "url": "https://github.com/niek-o/F1API/blob/main/LICENSE.md"
     },
-    "version": "1.9.0",
+    "version": "1.10.0",
     "x-logo": {
       "url": "https://upload.wikimedia.org/wikipedia/commons/f/f2/New_era_F1_logo.png"
     }
@@ -261,8 +261,8 @@
                 },
                 "example": {
                   "timestamp": 1669979205.6921754,
-                  "season": 2023,
-                  "round": 1
+                  "season": 2022,
+                  "round": 22
                 }
               }
             }
@@ -300,8 +300,8 @@
                 },
                 "example": {
                   "timestamp": 1669979205.6921754,
-                  "season": 2023,
-                  "round": 1
+                  "season": 2022,
+                  "round": 21
                 }
               }
             }

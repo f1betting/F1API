@@ -257,6 +257,13 @@ CalendarExample = {
 # pylint: disable=duplicate-code
 NextEventExample = {
     "timestamp": 1669979205.6921754,
-    "season": 2023,
-    "round": 1
+    "season": 2022,
+    "round": 22
+}
+
+# pylint: disable=duplicate-code
+PreviousEventExample = {
+    "timestamp": 1669979205.6921754,
+    "season": 2022,
+    "round": 21
 }
