@@ -17,8 +17,8 @@
     <img alt="SonarCloud quality gate" src="https://sonarcloud.io/api/project_badges/measure?project=f1betting_F1API&metric=alert_status">
     <img alt="SonarCloud code smells" src="https://sonarcloud.io/api/project_badges/measure?project=f1betting_F1API&metric=code_smells">
     <br />
-    <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/f1betting/F1API/Python%20on%20Push%20Master?label=Build">
-    <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/f1betting/F1API/Docker%20Build%20and%20Push?label=Docker">
+    <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/f1betting/F1API/python_on_push_master.yml?label=Build&branch=main">
+    <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/f1betting/F1API/action_docker_publish.yml?label=Docker&branch=main">
 
   </p>
 </div>
