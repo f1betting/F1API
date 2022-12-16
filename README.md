@@ -18,8 +18,7 @@
     <img alt="SonarCloud code smells" src="https://sonarcloud.io/api/project_badges/measure?project=f1betting_F1API&metric=code_smells">
     <br />
     <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/f1betting/F1API/python_on_push_master.yml?label=Build&branch=main">
-    <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/f1betting/F1API/action_docker_publish.yml?label=Docker&branch=main">
-
+    <img alt="Docker version" src="https://img.shields.io/docker/v/nieko3/f1api/latest?label=Docker%20version">
   </p>
 </div>
 
