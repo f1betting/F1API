@@ -16,7 +16,6 @@ jobs:
       sonar: ${{ secrets.SONAR_TOKEN }}
 
   deploy:
-    runs-on: ubuntu-latest
     needs: [ testing, linting, sonar ]
     uses: ./.github/workflows/action_cloud_run_deploy.yml
     secrets: inherit
