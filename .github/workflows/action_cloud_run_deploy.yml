@@ -1,0 +1,18 @@
+on: workflow_call
+
+jobs:
+  permissions:
+    contents: 'read'
+    id-token: 'write'
+  deploy:
+    steps:
+      - uses: 'actions/checkout@v3'
+
+      - uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: {{ SECRETS.GOOGLE_ACCOUNT_CREDENTIALS }}
+
+      - uses: 'google-github-actions/deploy-cloudrun@v1'
+        with:
+          image: 'nieko3/f1api:latest'
+          service: {{ SECRETS.GOOGLE_PROJECT_ID }}
