@@ -5,9 +5,9 @@
     "description": "An easier way to use the [ergast.com](https://ergast.com/mrd/) F1 API, with correct types!",
     "license": {
       "name": "MIT",
-      "url": "https://github.com/niek-o/F1API/blob/main/LICENSE.md"
+      "url": "https://github.com/f1betting/F1API/blob/main/LICENSE.md"
     },
-    "version": "1.10.0",
+    "version": "1.10.3",
     "x-logo": {
       "url": "https://upload.wikimedia.org/wikipedia/commons/f/f2/New_era_F1_logo.png"
     }
