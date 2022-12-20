@@ -15,7 +15,3 @@ jobs:
       github: ${{ secrets.GITHUB_TOKEN }}
       sonar: ${{ secrets.SONAR_TOKEN }}
 
-  deploy:
-    needs: [ testing, linting, sonar ]
-    uses: ./.github/workflows/action_cloud_run_deploy.yml
-    secrets: inherit

@@ -23,7 +23,6 @@ jobs:
     uses: ./.github/workflows/action_docker_publish.yml
     secrets: inherit
 
-
   deploy:
     needs: [ testing, linting, sonar, docker ]
     uses: ./.github/workflows/action_cloud_run_deploy.yml
